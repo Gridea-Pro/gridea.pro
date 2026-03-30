@@ -1,58 +1,78 @@
-# Gridea Pro — Official Website
+<p align="center">
+  <img src="appicon.png" alt="Gridea Pro" width="128">
+</p>
 
-Static site built with [Astro 5](https://astro.build/) + [Starlight](https://starlight.astro.build/) for documentation, deployed on [Vercel](https://vercel.com/).
+<h1 align="center">Gridea Pro</h1>
 
-## Quick Start
+<p align="center">
+  <strong>一个简洁的开源跨平台桌面端静态博客写作客户端</strong>
+</p>
 
-```bash
-# Install dependencies
-npm install
+<p align="center">
+  <a href="https://gridea.pro">官网</a> &nbsp;|&nbsp;
+  <a href="https://gridea.pro/docs/">文档</a> &nbsp;|&nbsp;
+  <a href="https://gridea.pro/download/">下载</a> &nbsp;|&nbsp;
+  <a href="https://gridea.pro/themes/">主题</a> &nbsp;|&nbsp;
+  <a href="https://gridea.pro/changelog/">更新日志</a>
+</p>
 
-# Start dev server (http://localhost:4321)
-npm run dev
+---
 
-# Production build
-npm run build
+此仓库是 **Gridea Pro** 官方网站的源代码。Gridea Pro 是 [Gridea](https://github.com/getgridea/gridea) 的下一代版本 —— 一个在 GitHub 上获得 10,000+ Stars 的桌面端静态博客写作客户端。
 
-# Preview production build locally
-npm run preview
-```
+## 功能特性
 
-## Project Structure
+- 内置 Markdown 编辑器，所见即所得
+- 多主题支持，一键切换
+- 一键部署到 GitHub Pages、Vercel、Netlify 等平台
+- 文章、闪念、分类、标签、评论管理
+- 支持 **macOS** · **Windows** · **Linux** 三大平台
+
+## 项目结构
 
 ```
 gridea.pro/
-├── public/                  # Static assets (favicon, images)
-├── src/
-│   ├── assets/
-│   │   └── styles/
-│   │       ├── global.css               # Shared design tokens & reset
-│   │       └── starlight-overrides.css   # Starlight theme overrides
-│   ├── components/
-│   │   ├── Header.astro     # Site-wide navigation bar
-│   │   └── Footer.astro     # Site-wide footer
-│   ├── content/
-│   │   └── docs/            # Starlight documentation (Markdown/MDX)
-│   ├── layouts/
-│   │   └── BaseLayout.astro # Shell layout for marketing pages
-│   └── pages/
-│       └── index.astro      # Homepage
-├── astro.config.mjs         # Astro + Starlight + Vercel config
-├── package.json
-└── tsconfig.json
+├── css/
+│   ├── base.css              # 公共 CSS 变量与重置样式
+│   ├── index.css              # 首页样式
+│   ├── download.css           # 下载页样式
+│   ├── themes.css             # 主题画廊样式
+│   ├── changelog.css          # 更新日志样式
+│   └── docs.css               # 文档页样式
+├── js/
+│   ├── reveal.js              # 滚动动画
+│   ├── os-detect.js           # 下载页系统检测
+│   ├── filter-tabs.js         # 主题筛选交互
+│   ├── changelog.js           # 更新日志折叠与筛选
+│   └── docs-nav.js            # 文档侧边栏与目录导航
+├── index.html                 # 首页
+├── download.html              # 下载
+├── themes.html                # 主题画廊
+├── changelog.html             # 更新日志
+├── docs.html                  # 使用文档
+└── appicon.png                # 应用图标
 ```
 
-## Key Design Decisions
+## 本地开发
 
-- **Marketing pages** (`/`, `/themes/`, `/download/`, `/changelog/`) use `BaseLayout.astro` with the shared Header/Footer components.
-- **Documentation** (`/docs/*`) is powered by Starlight, which provides its own layout, sidebar, search, and i18n. Starlight's theme colors are overridden in `starlight-overrides.css` to match the warm cream/amber palette from the V2 design.
-- **Color scheme**: warm cream backgrounds (`#FAFAF8`, `#F5F3F0`) with amber accent (`#D4870E`) — extracted from the V2 HTML pages.
-- **Fonts**: Plus Jakarta Sans (display), Figtree (body), JetBrains Mono (code).
+纯静态网站，无需构建工具，克隆后直接在浏览器中打开即可：
 
-## Deployment
+```bash
+git clone https://github.com/Gridea-Pro/gridea.pro.git
+cd gridea.pro
+open index.html
+```
 
-Configured for Vercel static adapter. Connect the repo to Vercel and it will build automatically.
+## 参与贡献
 
-## License
+欢迎通过 [Issues](https://github.com/Gridea-Pro/gridea.pro/issues) 反馈问题或提交 Pull Request。
 
-GPL-3.0
+## 开源协议
+
+本项目基于 [GPL-3.0](https://www.gnu.org/licenses/gpl-3.0.html) 协议开源。
+
+---
+
+<p align="center">
+  &copy; 2026 Gridea Pro Contributors
+</p>

@@ -17,6 +17,7 @@ export default defineConfig({
       },
       components: {
         Header: './src/components/DocsHeader.astro',
+        Head: './src/components/DocsHead.astro',
         ThemeProvider: './src/components/DocsThemeProvider.astro',
         ThemeSelect: './src/components/DocsThemeProvider.astro',
       },

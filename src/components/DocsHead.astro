@@ -1,0 +1,22 @@
+---
+const { head, entry } = Astro.locals.starlightRoute;
+const title = entry.data.title;
+const description = entry.data.description || 'Gridea Pro 使用文档与主题开发指南。';
+const url = new URL(Astro.url.pathname, 'https://gridea.pro').href;
+
+const jsonLd = JSON.stringify({
+  "@context": "https://schema.org",
+  "@type": "TechArticle",
+  "name": `${title} — Gridea Pro 文档`,
+  "description": description,
+  "url": url,
+  "isPartOf": {
+    "@type": "WebSite",
+    "name": "Gridea Pro",
+    "url": "https://gridea.pro/"
+  }
+});
+---
+
+{head.map(({ tag: Tag, attrs, content }) => <Tag {...attrs} set:html={content} />)}
+<script type="application/ld+json" set:html={jsonLd} />
