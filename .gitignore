@@ -6,6 +6,7 @@ dist/
 
 # dependencies
 node_modules/
+gridea.pro/
 
 # logs
 npm-debug.log*
@@ -28,3 +29,4 @@ pnpm-debug.log*
 
 # Vercel
 .vercel/
+gridea.pro/
