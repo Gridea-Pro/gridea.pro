@@ -13,7 +13,7 @@ export default defineConfig({
       title: 'Gridea Pro',
       favicon: '/favicon.ico',
       logo: {
-        src: './src/assets/appicon.png',
+        src: './public/appicon.png',
         replacesTitle: false,
       },
       components: {

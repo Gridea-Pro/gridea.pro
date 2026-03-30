@@ -1,5 +1,5 @@
 <p align="center">
-  <img src="appicon.png" alt="Gridea Pro" width="128">
+  <img src="public/appicon.png" alt="Gridea Pro" width="128">
 </p>
 
 <h1 align="center">Gridea Pro</h1>
