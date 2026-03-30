@@ -1,4 +1,5 @@
 ---
+import MobileMenu from '../components/MobileMenu.astro';
 ---
 <!DOCTYPE html>
 <html lang="zh-CN">
@@ -150,7 +151,7 @@ a{color:inherit;text-decoration:none}
 .fade-in{opacity:0;animation:fadeUp .5s ease forwards}
 .fade-in-d1{animation-delay:.05s}.fade-in-d2{animation-delay:.1s}.fade-in-d3{animation-delay:.15s}.fade-in-d4{animation-delay:.2s}.fade-in-d5{animation-delay:.25s}.fade-in-d6{animation-delay:.3s}
 @media(max-width:900px){.theme-grid{grid-template-columns:repeat(2,1fr);gap:20px}.create-inner{grid-template-columns:1fr;gap:40px}.footer-grid{grid-template-columns:1fr 1fr;gap:32px}h1{font-size:36px}h2{font-size:26px}}
-@media(max-width:600px){.theme-grid{grid-template-columns:1fr}.footer-grid{grid-template-columns:1fr;gap:28px}.header-nav{display:none}.page-header{padding-top:110px;padding-bottom:40px}h1{font-size:30px}.filter-bar{overflow-x:auto;-webkit-overflow-scrolling:touch}.filter-tab{white-space:nowrap;padding:10px 14px;font-size:13px}.create-section{padding:48px 0;margin-top:48px}}
+@media(max-width:600px){.theme-grid{grid-template-columns:1fr}.footer-grid{grid-template-columns:1fr;gap:28px}.header-nav{display:none}.btn-download-sm{display:none}.mobile-menu-btn{display:flex}.page-header{padding-top:110px;padding-bottom:40px}h1{font-size:30px}.filter-bar{overflow-x:auto;-webkit-overflow-scrolling:touch}.filter-tab{white-space:nowrap;padding:10px 14px;font-size:13px}.create-section{padding:48px 0;margin-top:48px}}
 </style>
 </head>
 <body>
@@ -166,9 +167,18 @@ a{color:inherit;text-decoration:none}
       <a href="/changelog/">更新日志</a>
       <a href="https://github.com/Gridea-Pro/gridea-pro" class="github-link" target="_blank" rel="noopener"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 2C6.477 2 2 6.484 2 12.017c0 4.425 2.865 8.18 6.839 9.504.5.092.682-.217.682-.483 0-.237-.008-.868-.013-1.703-2.782.605-3.369-1.343-3.369-1.343-.454-1.158-1.11-1.466-1.11-1.466-.908-.62.069-.608.069-.608 1.003.07 1.531 1.032 1.531 1.032.892 1.53 2.341 1.088 2.91.832.092-.647.35-1.088.636-1.338-2.22-.253-4.555-1.113-4.555-4.951 0-1.093.39-1.988 1.029-2.688-.103-.253-.446-1.272.098-2.65 0 0 .84-.27 2.75 1.026A9.564 9.564 0 0112 6.844c.85.004 1.705.115 2.504.337 1.909-1.296 2.747-1.027 2.747-1.027.546 1.379.202 2.398.1 2.651.64.7 1.028 1.595 1.028 2.688 0 3.848-2.339 4.695-4.566 4.943.359.309.678.92.678 1.855 0 1.338-.012 2.419-.012 2.747 0 .268.18.58.688.482A10.019 10.019 0 0022 12.017C22 6.484 17.522 2 12 2z"/></svg></a>
     </nav>
-    <div class="header-actions"><a href="/download/" class="btn-download-sm">下载</a></div>
+    <div class="header-actions">
+      <a href="/download/" class="btn-download-sm">下载</a>
+      <button class="mobile-menu-btn" id="menuToggle" aria-label="Menu" aria-expanded="false">
+        <span class="hamburger-line"></span>
+        <span class="hamburger-line"></span>
+        <span class="hamburger-line"></span>
+      </button>
+    </div>
   </div>
 </header>
+
+<MobileMenu />
 
 <main>
   <section class="page-header">
