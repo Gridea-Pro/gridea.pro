@@ -11,6 +11,7 @@ export default defineConfig({
   integrations: [
     starlight({
       title: 'Gridea Pro',
+      favicon: '/favicon.ico',
       logo: {
         src: './src/assets/appicon.png',
         replacesTitle: false,
