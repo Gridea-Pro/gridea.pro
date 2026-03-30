@@ -1,0 +1,363 @@
+---
+---
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<link rel="icon" href="/favicon.ico">
+<title>Gridea Pro — 简洁的桌面端静态博客写作客户端</title>
+<meta name="description" content="Gridea Pro 是一个简洁的桌面端静态博客写作客户端。内置编辑器、多主题支持、一键部署——让你专注于内容本身。">
+<meta name="keywords" content="Gridea Pro,静态博客,博客客户端,Markdown编辑器,GitHub Pages,博客写作,开源,桌面应用">
+<link rel="canonical" href="https://gridea.pro/">
+<meta property="og:type" content="website">
+<meta property="og:title" content="Gridea Pro — 简洁的桌面端静态博客写作客户端">
+<meta property="og:description" content="Gridea Pro 是一个简洁的桌面端静态博客写作客户端。内置编辑器、多主题支持、一键部署——让你专注于内容本身。">
+<meta property="og:url" content="https://gridea.pro/">
+<meta property="og:image" content="https://gridea.pro/appicon.png">
+<meta property="og:site_name" content="Gridea Pro">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Gridea Pro — 简洁的桌面端静态博客写作客户端">
+<meta name="twitter:description" content="Gridea Pro 是一个简洁的桌面端静态博客写作客户端。内置编辑器、多主题支持、一键部署——让你专注于内容本身。">
+<meta name="twitter:image" content="https://gridea.pro/appicon.png">
+<script type="application/ld+json" set:html={JSON.stringify({"@context":"https://schema.org","@type":"SoftwareApplication","name":"Gridea Pro","description":"一个简洁的桌面端静态博客写作客户端。内置编辑器、多主题支持、一键部署——让你专注于内容本身。","url":"https://gridea.pro/","image":"https://gridea.pro/appicon.png","applicationCategory":"DeveloperApplication","operatingSystem":"macOS, Windows, Linux","offers":{"@type":"Offer","price":"0","priceCurrency":"CNY"},"author":{"@type":"Organization","name":"Gridea Pro Contributors","url":"https://github.com/Gridea-Pro"},"license":"https://www.gnu.org/licenses/gpl-3.0.html"})}></script>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@500;600;700;800&family=Figtree:wght@400;500;600&family=JetBrains+Mono:wght@400&display=swap" rel="stylesheet">
+<style is:global>
+*,*::before,*::after{margin:0;padding:0;box-sizing:border-box}
+:root{--white:#FFFFFF;--bg:#FFFFFF;--bg-alt:#FAFAF8;--bg-subtle:#F5F3F0;--text-primary:#1A1A1A;--text-body:#37352F;--text-secondary:#6B6B6B;--text-muted:#9B9B9B;--accent:#D4870E;--accent-hover:#B87308;--accent-light:#FDF4E3;--accent-medium:#F5C748;--border:#E8E8E6;--border-dark:#D4D4D2;--code-bg:#F7F6F3;--sidebar-width:260px;--toc-width:200px}
+a{text-decoration:none;color:inherit}
+html{scroll-behavior:smooth;-webkit-font-smoothing:antialiased;-moz-osx-font-smoothing:grayscale;text-rendering:optimizeLegibility}
+body{font-family:'Figtree',-apple-system,sans-serif;font-size:16px;font-weight:400;line-height:1.7;color:var(--text-body);background:var(--bg);overflow-x:hidden}
+img,svg{display:block}button{border:none;background:none;cursor:pointer;font-family:inherit}
+.container{max-width:1140px;margin:0 auto;padding:0 24px}
+h1,h2,h3{font-family:'Plus Jakarta Sans',sans-serif;color:var(--text-primary)}
+h1{font-size:56px;font-weight:800;line-height:1.1;letter-spacing:-0.03em}
+h2{font-size:40px;font-weight:700;line-height:1.2;letter-spacing:-0.02em}
+h3{font-size:24px;font-weight:600;line-height:1.3;letter-spacing:-0.01em}
+.reveal{opacity:0;transform:translateY(20px);transition:opacity .7s cubic-bezier(.23,1,.32,1),transform .7s cubic-bezier(.23,1,.32,1)}
+.reveal.visible{opacity:1;transform:translateY(0)}
+.reveal-d1{transition-delay:.08s}.reveal-d2{transition-delay:.16s}.reveal-d3{transition-delay:.24s}.reveal-d4{transition-delay:.32s}
+.header{position:fixed;top:0;left:0;right:0;height:60px;background:rgba(255,255,255,.85);backdrop-filter:blur(12px);-webkit-backdrop-filter:blur(12px);border-bottom:1px solid var(--border);z-index:1000;display:flex;align-items:center}
+.header .container{display:flex;align-items:center;justify-content:space-between;width:100%}
+.header-logo{display:flex;align-items:center;gap:10px;flex-shrink:0}
+.header-logo-mark{width:36px;height:36px;flex-shrink:0}
+.header-logo-text{font-family:'Plus Jakarta Sans',sans-serif;font-size:18px;font-weight:700;color:var(--text-primary);letter-spacing:-0.01em}
+.header-nav{display:flex;align-items:center;gap:32px}
+.header-nav a{font-size:14px;font-weight:500;color:var(--text-secondary);transition:color .2s ease}
+.header-nav a:hover{color:var(--text-primary)}
+.header-actions{display:flex;align-items:center;gap:16px;flex-shrink:0}
+.btn-download-header{background:var(--text-primary);color:var(--white);padding:6px 16px;border-radius:6px;font-size:13px;font-weight:600;transition:background .2s ease}
+.btn-download-header:hover{background:#333}
+.header-github{display:flex;align-items:center;color:var(--text-secondary);transition:color .2s ease}
+.header-github:hover{color:var(--text-primary)}
+.header-github svg{width:20px;height:20px}
+.mobile-menu-btn{display:none;width:32px;height:32px;align-items:center;justify-content:center;color:var(--text-primary)}
+.mobile-menu-btn svg{width:20px;height:20px}
+.hero{padding-top:220px;padding-bottom:120px;background:var(--bg);position:relative}
+.hero .container{display:grid;grid-template-columns:1fr .85fr;gap:64px;align-items:center}
+.hero-content{position:relative;z-index:2}
+.hero h1{margin-bottom:24px;max-width:520px}
+.hero-subtitle{font-size:18px;line-height:1.7;color:var(--text-secondary);max-width:480px;margin-bottom:40px}
+.hero-buttons{display:flex;align-items:center;gap:12px;margin-bottom:20px}
+.btn-primary{display:inline-flex;align-items:center;gap:8px;background:var(--accent);color:var(--white);padding:12px 28px;border-radius:8px;font-size:15px;font-weight:600;transition:background .2s ease,transform .15s ease}
+.btn-primary:hover{background:var(--accent-hover)}.btn-primary:active{transform:scale(.98)}
+.btn-secondary{display:inline-flex;align-items:center;gap:8px;background:transparent;color:var(--text-primary);padding:12px 28px;border-radius:8px;font-size:15px;font-weight:600;border:1px solid var(--border-dark);transition:background .2s ease,border-color .2s ease}
+.btn-secondary:hover{background:var(--bg-subtle);border-color:var(--text-muted)}
+.hero-platforms{font-size:13px;color:var(--text-muted);letter-spacing:.01em}
+.hero-visual{position:relative}
+.editor-mockup{background:var(--white);border:1px solid var(--border);border-radius:12px;overflow:hidden;box-shadow:0 1px 3px rgba(0,0,0,.04),0 8px 32px rgba(0,0,0,.06);transform:rotate(1.5deg);position:relative}
+.editor-titlebar{display:flex;align-items:center;padding:12px 16px;background:var(--bg-subtle);border-bottom:1px solid var(--border);gap:8px}
+.editor-dots{display:flex;gap:6px}
+.editor-dot{width:10px;height:10px;border-radius:50%;background:var(--border-dark)}
+.editor-dot:nth-child(1){background:#FF6059}.editor-dot:nth-child(2){background:#FFBE2F}.editor-dot:nth-child(3){background:#2ACB42}
+.editor-title-text{flex:1;text-align:center;font-size:12px;color:var(--text-muted);font-weight:500}
+.editor-body{display:grid;grid-template-columns:180px 1fr;min-height:320px}
+.editor-sidebar{background:var(--bg-alt);border-right:1px solid var(--border);padding:16px 0}
+.editor-sidebar-title{font-size:11px;font-weight:600;color:var(--text-muted);text-transform:uppercase;letter-spacing:.06em;padding:0 16px;margin-bottom:12px}
+.editor-sidebar-item{padding:8px 16px;font-size:13px;color:var(--text-secondary);cursor:default;border-left:2px solid transparent;transition:background .15s}
+.editor-sidebar-item.active{background:var(--white);color:var(--text-primary);font-weight:500;border-left-color:var(--accent)}
+.editor-sidebar-item-date{font-size:11px;color:var(--text-muted);margin-top:2px;font-family:'JetBrains Mono',monospace}
+.editor-content{padding:24px;background:var(--white)}
+.editor-content-toolbar{display:flex;gap:4px;padding-bottom:16px;border-bottom:1px solid var(--border);margin-bottom:20px}
+.toolbar-btn{width:28px;height:28px;display:flex;align-items:center;justify-content:center;border-radius:4px;color:var(--text-muted);font-size:13px;font-weight:700;font-family:'Plus Jakarta Sans',sans-serif}
+.toolbar-divider{width:1px;background:var(--border);margin:4px 6px}
+.editor-text h4{font-family:'Plus Jakarta Sans',sans-serif;font-size:18px;font-weight:700;color:var(--text-primary);margin-bottom:12px;letter-spacing:-0.01em}
+.editor-text p{font-size:14px;line-height:1.8;color:var(--text-secondary);margin-bottom:10px}
+.editor-text .code-inline{font-family:'JetBrains Mono',monospace;font-size:12px;background:var(--bg-subtle);padding:2px 6px;border-radius:4px;color:var(--accent-hover)}
+.proof-bar{background:var(--bg-alt);padding:32px 0;border-top:1px solid var(--border);border-bottom:1px solid var(--border)}
+.proof-bar .container{display:flex;align-items:center;justify-content:center;gap:0}
+.proof-item{display:flex;align-items:center;gap:8px;padding:0 40px;font-size:14px;font-weight:500;color:var(--text-secondary)}
+.proof-item:not(:last-child){border-right:1px solid var(--border-dark)}
+.proof-item strong{color:var(--text-primary);font-weight:600}
+.features{padding:120px 0;background:var(--bg)}
+.features-header{margin-bottom:80px}
+.section-label{font-size:13px;font-weight:600;color:var(--accent);text-transform:uppercase;letter-spacing:.08em;margin-bottom:16px}
+.features-header h2{margin-bottom:16px;max-width:540px}
+.features-header p{font-size:17px;color:var(--text-secondary);max-width:540px;line-height:1.7}
+.feature-row{display:grid;grid-template-columns:1fr 1fr;gap:80px;align-items:center;margin-bottom:100px}
+.feature-row:last-child{margin-bottom:0}
+.feature-row.reverse .feature-text{order:2}.feature-row.reverse .feature-visual{order:1}
+.feature-number{font-family:'Plus Jakarta Sans',sans-serif;font-size:64px;font-weight:800;color:var(--bg-subtle);line-height:1;margin-bottom:16px;letter-spacing:-0.03em;user-select:none}
+.feature-text h3{margin-bottom:16px}
+.feature-text p{font-size:16px;line-height:1.7;color:var(--text-secondary);max-width:440px}
+.feature-editor-mock{background:var(--white);border:1px solid var(--border);border-radius:10px;overflow:hidden}
+.feature-editor-bar{display:flex;align-items:center;padding:10px 14px;background:var(--bg-subtle);border-bottom:1px solid var(--border);gap:6px}
+.feat-dot{width:8px;height:8px;border-radius:50%;background:var(--border-dark)}
+.feature-editor-body{padding:20px}
+.feat-toolbar{display:flex;gap:3px;margin-bottom:16px;padding-bottom:12px;border-bottom:1px solid var(--border)}
+.feat-tool{padding:4px 10px;font-size:12px;font-weight:600;color:var(--text-muted);border-radius:4px;font-family:'Plus Jakarta Sans',sans-serif}
+.feat-tool.active{background:var(--bg-subtle);color:var(--text-primary)}
+.feat-line-h{height:12px;width:60%;background:var(--text-primary);border-radius:3px;margin-bottom:14px;opacity:.12}
+.feat-line-p{height:7px;background:var(--border);border-radius:3px;margin-bottom:7px}
+.feat-line-p:nth-child(2){width:95%}.feat-line-p:nth-child(3){width:88%}.feat-line-p:nth-child(4){width:72%}
+.feat-line-code{background:var(--bg-subtle);border:1px solid var(--border);border-radius:6px;padding:12px 14px;margin-top:12px}
+.feat-line-code-line{height:6px;background:var(--border-dark);border-radius:3px;margin-bottom:6px;opacity:.6}
+.feat-line-code-line:nth-child(1){width:70%}.feat-line-code-line:nth-child(2){width:55%}.feat-line-code-line:nth-child(3){width:80%}.feat-line-code-line:last-child{margin-bottom:0}
+.feature-themes-mock{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+.theme-card{background:var(--white);border:1px solid var(--border);border-radius:10px;overflow:hidden;transition:border-color .2s}
+.theme-card:hover{border-color:var(--border-dark)}
+.theme-card-preview{height:100px;position:relative}
+.theme-card:nth-child(1) .theme-card-preview{background:#F8F8F6}
+.theme-card:nth-child(2) .theme-card-preview{background:#1A1A1A}
+.theme-card:nth-child(3) .theme-card-preview{background:#F0EDE6}
+.theme-card:nth-child(4) .theme-card-preview{background:#E8EDE6}
+.theme-card-preview-lines{padding:16px}
+.theme-preview-line{height:5px;border-radius:3px;margin-bottom:6px}
+.theme-card:nth-child(1) .theme-preview-line{background:#D4D4D2}
+.theme-card:nth-child(2) .theme-preview-line{background:rgba(255,255,255,.15)}
+.theme-card:nth-child(3) .theme-preview-line{background:#C8C2B6}
+.theme-card:nth-child(4) .theme-preview-line{background:#B8C2B6}
+.theme-preview-line:nth-child(1){width:50%;height:8px;margin-bottom:10px}
+.theme-preview-line:nth-child(2){width:90%}.theme-preview-line:nth-child(3){width:75%}.theme-preview-line:nth-child(4){width:60%}
+.theme-card-info{padding:10px 14px;border-top:1px solid var(--border)}
+.theme-card-name{font-size:13px;font-weight:600;color:var(--text-primary)}
+.theme-card-engine{font-size:11px;color:var(--text-muted);margin-top:2px;font-family:'JetBrains Mono',monospace}
+.feature-deploy-mock{background:var(--white);border:1px solid var(--border);border-radius:10px;overflow:hidden}
+.deploy-bar{display:flex;align-items:center;padding:10px 14px;background:var(--bg-subtle);border-bottom:1px solid var(--border);gap:6px}
+.deploy-body{padding:24px}
+.deploy-step{display:flex;align-items:flex-start;gap:14px;margin-bottom:20px;position:relative}
+.deploy-step:last-child{margin-bottom:0}
+.deploy-step:not(:last-child)::after{content:'';position:absolute;left:13px;top:28px;bottom:-18px;width:1px;background:var(--border)}
+.deploy-step-icon{width:26px;height:26px;border-radius:50%;display:flex;align-items:center;justify-content:center;flex-shrink:0;font-size:12px;font-weight:700;position:relative;z-index:1}
+.deploy-step-icon.done{background:#E8F5E8;color:#2D8A2D}
+.deploy-step-icon.active{background:var(--accent-light);color:var(--accent)}
+.deploy-step-content{flex:1;padding-top:3px}
+.deploy-step-title{font-size:14px;font-weight:600;color:var(--text-primary);margin-bottom:2px}
+.deploy-step-desc{font-size:12px;color:var(--text-muted)}
+.deploy-step-url{font-size:12px;font-family:'JetBrains Mono',monospace;color:var(--accent);margin-top:4px}
+.comparison{padding:120px 0;background:var(--bg-alt)}
+.comparison-header{margin-bottom:48px}
+.comparison-header h2{margin-bottom:12px}
+.comparison-header p{font-size:17px;color:var(--text-secondary);max-width:540px;line-height:1.7}
+.comparison-table-wrap{max-width:840px;overflow-x:auto}
+.comparison-table{width:100%;border-collapse:collapse;font-size:14px}
+.comparison-table thead th{padding:14px 24px;text-align:left;font-family:'Plus Jakarta Sans',sans-serif;font-size:13px;font-weight:600;color:var(--text-muted);border-bottom:1px solid var(--border-dark);white-space:nowrap}
+.comparison-table thead th:first-child{padding-left:0}
+.comparison-table thead th.highlight{color:var(--text-primary)}
+.comparison-table tbody td{padding:14px 24px;border-bottom:1px solid var(--border);color:var(--text-secondary);font-weight:400}
+.comparison-table tbody td:first-child{padding-left:0;color:var(--text-primary);font-weight:500}
+.comparison-table tbody td.highlight{background:rgba(212,135,14,.04);color:var(--text-primary);font-weight:500}
+.comparison-table .check{color:var(--text-primary)}.comparison-table .dash{color:var(--text-muted)}
+.comparison-note{margin-top:32px;font-size:14px;color:var(--text-muted);max-width:640px;line-height:1.7}
+.legacy{padding:100px 0;background:var(--bg)}
+.legacy-content{max-width:640px}
+.legacy-content h2{margin-bottom:24px}
+.legacy-content p{font-size:17px;line-height:1.8;color:var(--text-secondary);margin-bottom:16px}
+.legacy-content p:last-of-type{margin-bottom:24px}
+.legacy-link{display:inline-flex;align-items:center;gap:6px;font-size:15px;font-weight:500;color:var(--accent);transition:color .2s}
+.legacy-link:hover{color:var(--accent-hover)}
+.legacy-link svg{width:16px;height:16px;transition:transform .2s}
+.legacy-link:hover svg{transform:translateX(3px)}
+.cta{padding:80px 0;background:var(--accent-light);border-top:1px solid #E8D5B0;border-bottom:1px solid #E8D5B0;text-align:center}
+.cta h2{margin-bottom:12px;font-size:32px}
+.cta p{font-size:17px;color:var(--text-secondary);margin-bottom:32px;max-width:480px;margin-left:auto;margin-right:auto;line-height:1.7}
+.footer{background:var(--bg-alt);border-top:1px solid var(--border);padding:64px 0 32px}
+.footer-grid{display:grid;grid-template-columns:1.4fr 1fr 1fr 1fr;gap:48px;margin-bottom:48px}
+.footer-brand-desc{font-size:14px;color:var(--text-muted);line-height:1.7;margin-top:16px;max-width:260px}
+.footer-col-title{font-family:'Plus Jakarta Sans',sans-serif;font-size:13px;font-weight:700;color:var(--text-primary);margin-bottom:16px;letter-spacing:.01em}
+.footer-links{list-style:none}.footer-links li{margin-bottom:10px}
+.footer-links a{font-size:14px;color:var(--text-secondary);transition:color .2s}.footer-links a:hover{color:var(--text-primary)}
+.footer-bottom{padding-top:24px;border-top:1px solid var(--border);font-size:13px;color:var(--text-muted);text-align:center}
+@media(max-width:1024px){.hero .container{grid-template-columns:1fr;gap:48px}.hero{padding-top:160px;padding-bottom:80px}.hero-visual{max-width:560px}.editor-mockup{transform:none}.feature-row{grid-template-columns:1fr;gap:40px}.feature-row.reverse .feature-text,.feature-row.reverse .feature-visual{order:unset}.footer-grid{grid-template-columns:1fr 1fr;gap:32px}}
+@media(max-width:768px){h1{font-size:36px}h2{font-size:28px}h3{font-size:20px}.hero{padding-top:140px;padding-bottom:64px}.hero-subtitle{font-size:16px}.features,.comparison{padding:80px 0}.feature-row{margin-bottom:64px}.feature-number{font-size:48px}.features-header{margin-bottom:56px}.proof-bar .container{flex-wrap:wrap;gap:16px;justify-content:center}.proof-item{padding:8px 20px;border-right:none!important;font-size:13px}.header-nav{display:none}.mobile-menu-btn{display:flex}.comparison-table thead th,.comparison-table tbody td{padding:12px 16px;font-size:13px}.footer-grid{grid-template-columns:1fr;gap:32px}.editor-body{grid-template-columns:1fr}.editor-sidebar{display:none}.hero-buttons{flex-direction:column;align-items:flex-start}.cta h2{font-size:26px}.legacy{padding:80px 0}}
+@media(max-width:480px){h1{font-size:32px}h2{font-size:26px}.container{padding:0 20px}.hero{padding-top:120px}.feature-themes-mock{grid-template-columns:1fr}}
+</style>
+</head>
+<body>
+
+<header class="header">
+  <div class="container">
+    <a href="/" class="header-logo">
+      <img src="/appicon.png" alt="Gridea Pro" class="header-logo-mark">
+      <span class="header-logo-text">Gridea Pro</span>
+    </a>
+    <nav class="header-nav">
+      <a href="/docs/">文档</a>
+      <a href="/themes/">主题</a>
+      <a href="/changelog/">更新日志</a>
+      <a href="https://github.com/gridea/gridea-pro" class="header-github" aria-label="GitHub" target="_blank" rel="noopener">
+        <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 2C6.477 2 2 6.484 2 12.017c0 4.425 2.865 8.18 6.839 9.504.5.092.682-.217.682-.483 0-.237-.008-.868-.013-1.703-2.782.605-3.369-1.343-3.369-1.343-.454-1.158-1.11-1.466-1.11-1.466-.908-.62.069-.608.069-.608 1.003.07 1.531 1.032 1.531 1.032.892 1.53 2.341 1.088 2.91.832.092-.647.35-1.088.636-1.338-2.22-.253-4.555-1.113-4.555-4.951 0-1.093.39-1.988 1.029-2.688-.103-.253-.446-1.272.098-2.65 0 0 .84-.27 2.75 1.026A9.564 9.564 0 0112 6.844c.85.004 1.705.115 2.504.337 1.909-1.296 2.747-1.027 2.747-1.027.546 1.379.202 2.398.1 2.651.64.7 1.028 1.595 1.028 2.688 0 3.848-2.339 4.695-4.566 4.943.359.309.678.92.678 1.855 0 1.338-.012 2.419-.012 2.747 0 .268.18.58.688.482A10.019 10.019 0 0022 12.017C22 6.484 17.522 2 12 2z"/></svg>
+      </a>
+    </nav>
+    <div class="header-actions">
+      <a href="/download/" class="btn-download-header">下载</a>
+      <button class="mobile-menu-btn" aria-label="Menu">
+        <svg viewBox="0 0 20 20" fill="currentColor"><path fill-rule="evenodd" d="M3 5a1 1 0 011-1h12a1 1 0 110 2H4a1 1 0 01-1-1zm0 5a1 1 0 011-1h12a1 1 0 110 2H4a1 1 0 01-1-1zm0 5a1 1 0 011-1h12a1 1 0 110 2H4a1 1 0 01-1-1z" clip-rule="evenodd"/></svg>
+      </button>
+    </div>
+  </div>
+</header>
+
+<section class="hero">
+  <div class="container">
+    <div class="hero-content">
+      <h1 class="reveal reveal-d1">写作，应该是<br>简单而美好的</h1>
+      <p class="hero-subtitle reveal reveal-d2">Gridea Pro 是一个简洁的静态博客写作客户端。支持文章、闪念、分类、标签、评论管理 &mdash;&mdash; 让你专注于内容创作本身。</p>
+      <div class="hero-buttons reveal reveal-d3">
+        <a href="/download/" class="btn-primary">
+          <svg width="16" height="16" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M8 2v8m0 0l-3-3m3 3l3-3M3 13h10"/></svg>
+          免费下载
+        </a>
+        <a href="/docs/" class="btn-secondary">查看文档</a>
+      </div>
+      <p class="hero-platforms reveal reveal-d4">支持 macOS · Windows · Linux</p>
+    </div>
+    <div class="hero-visual reveal reveal-d2">
+      <div class="editor-mockup">
+        <div class="editor-titlebar">
+          <div class="editor-dots"><span class="editor-dot"></span><span class="editor-dot"></span><span class="editor-dot"></span></div>
+          <span class="editor-title-text">Gridea Pro — 我的博客</span>
+        </div>
+        <div class="editor-body">
+          <div class="editor-sidebar">
+            <div class="editor-sidebar-title">Posts</div>
+            <div class="editor-sidebar-item active">关于写作的意义<div class="editor-sidebar-item-date">2026-03-12</div></div>
+            <div class="editor-sidebar-item">春天的第一篇<div class="editor-sidebar-item-date">2026-03-08</div></div>
+            <div class="editor-sidebar-item">Hello Gridea Pro<div class="editor-sidebar-item-date">2026-03-01</div></div>
+          </div>
+          <div class="editor-content">
+            <div class="editor-content-toolbar">
+              <span class="toolbar-btn">B</span>
+              <span class="toolbar-btn" style="font-style:italic">I</span>
+              <span class="toolbar-btn" style="text-decoration:underline;font-weight:400">U</span>
+              <span class="toolbar-divider"></span>
+              <span class="toolbar-btn" style="font-weight:400">H1</span>
+              <span class="toolbar-btn" style="font-weight:400">H2</span>
+              <span class="toolbar-divider"></span>
+              <span class="toolbar-btn" style="font-weight:400;font-size:15px">"</span>
+              <span class="toolbar-btn" style="font-weight:400;font-family:'JetBrains Mono',monospace;font-size:11px">&lt;/&gt;</span>
+            </div>
+            <div class="editor-text">
+              <h4>关于写作的意义</h4>
+              <p>写作是一种思考方式。当你把想法写下来的时候，模糊的念头就变成了清晰的表达。</p>
+              <p>用 <span class="code-inline">Markdown</span> 写作，让格式变得简单，让思维保持流畅。</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="proof-bar">
+  <div class="container">
+    <div class="proof-item"><strong>10,000+</strong> GitHub Stars</div>
+    <div class="proof-item">基于 Gridea 完全升级重构</div>
+    <div class="proof-item">三大平台支持</div>
+    <div class="proof-item">GPL-3.0 永久开源免费</div>
+  </div>
+</section>
+
+<section class="features">
+  <div class="container">
+    <div class="features-header reveal">
+      <div class="section-label">功能特性</div>
+      <h2>为写作者精心打造的<br>每一个细节</h2>
+      <p>不需要难用的命令行，不需要繁琐的配置文件。打开 Gridea Pro，即刻开始写作。让创作回归纯粹，让表达自由流淌。</p>
+    </div>
+    <div class="feature-row reveal">
+      <div class="feature-text"><div class="feature-number">01</div><h3>所见即所得的 Markdown 编辑器</h3><p>内置的编辑器让你在书写 Markdown 的同时即时预览效果。支持代码高亮、数学公式、图片拖拽上传，以及你熟悉的所有快捷键。流畅的写作体验，零学习成本。</p></div>
+      <div class="feature-visual"><div class="feature-editor-mock"><div class="feature-editor-bar"><span class="feat-dot"></span><span class="feat-dot"></span><span class="feat-dot"></span></div><div class="feature-editor-body"><div class="feat-toolbar"><span class="feat-tool active">编辑</span><span class="feat-tool">预览</span><span class="feat-tool">分屏</span></div><div class="feat-line-h"></div><div class="feat-line-p"></div><div class="feat-line-p"></div><div class="feat-line-p"></div><div class="feat-line-p" style="width:45%"></div><div class="feat-line-code"><div class="feat-line-code-line"></div><div class="feat-line-code-line"></div><div class="feat-line-code-line"></div></div></div></div></div>
+    </div>
+    <div class="feature-row reverse reveal">
+      <div class="feature-text"><div class="feature-number">02</div><h3>灵活的多引擎主题系统</h3><p>同时支持 Jinja2、Go Templates 和 EJS 三种模板引擎。选择你喜欢的主题，或者用熟悉的语法创造自己的。主题画廊持续更新，每一个都经过精心设计。</p></div>
+      <div class="feature-visual"><div class="feature-themes-mock">
+        <div class="theme-card"><div class="theme-card-preview"><div class="theme-card-preview-lines"><div class="theme-preview-line"></div><div class="theme-preview-line"></div><div class="theme-preview-line"></div><div class="theme-preview-line"></div></div></div><div class="theme-card-info"><div class="theme-card-name">Paper</div><div class="theme-card-engine">jinja2</div></div></div>
+        <div class="theme-card"><div class="theme-card-preview"><div class="theme-card-preview-lines"><div class="theme-preview-line"></div><div class="theme-preview-line"></div><div class="theme-preview-line"></div><div class="theme-preview-line"></div></div></div><div class="theme-card-info"><div class="theme-card-name">Obsidian</div><div class="theme-card-engine">go-template</div></div></div>
+        <div class="theme-card"><div class="theme-card-preview"><div class="theme-card-preview-lines"><div class="theme-preview-line"></div><div class="theme-preview-line"></div><div class="theme-preview-line"></div><div class="theme-preview-line"></div></div></div><div class="theme-card-info"><div class="theme-card-name">Kraft</div><div class="theme-card-engine">ejs</div></div></div>
+        <div class="theme-card"><div class="theme-card-preview"><div class="theme-card-preview-lines"><div class="theme-preview-line"></div><div class="theme-preview-line"></div><div class="theme-preview-line"></div><div class="theme-preview-line"></div></div></div><div class="theme-card-info"><div class="theme-card-name">Garden</div><div class="theme-card-engine">jinja2</div></div></div>
+      </div></div>
+    </div>
+    <div class="feature-row reveal">
+      <div class="feature-text"><div class="feature-number">03</div><h3>一键部署到全球</h3><p>写完文章，点击一下就能发布。支持 GitHub Pages、Vercel、Netlify 等主流平台。你的博客将以静态页面的形式部署，加载极快，安全可靠。</p></div>
+      <div class="feature-visual"><div class="feature-deploy-mock"><div class="deploy-bar"><span class="feat-dot"></span><span class="feat-dot"></span><span class="feat-dot"></span></div><div class="deploy-body">
+        <div class="deploy-step"><div class="deploy-step-icon done"><svg width="12" height="12" viewBox="0 0 12 12" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="2 6 5 9 10 3"/></svg></div><div class="deploy-step-content"><div class="deploy-step-title">构建静态文件</div><div class="deploy-step-desc">已生成 23 个页面，耗时 328.26 ms</div></div></div>
+        <div class="deploy-step"><div class="deploy-step-icon done"><svg width="12" height="12" viewBox="0 0 12 12" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="2 6 5 9 10 3"/></svg></div><div class="deploy-step-content"><div class="deploy-step-title">推送至 GitHub</div><div class="deploy-step-desc">commit: update 3 posts</div></div></div>
+        <div class="deploy-step"><div class="deploy-step-icon active"><svg width="12" height="12" viewBox="0 0 12 12" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="6" cy="6" r="2"/></svg></div><div class="deploy-step-content"><div class="deploy-step-title">部署完成</div><div class="deploy-step-url">https://yourname.github.io</div></div></div>
+      </div></div></div>
+    </div>
+  </div>
+</section>
+
+<section class="comparison">
+  <div class="container">
+    <div class="comparison-header reveal"><h2>和其他工具相比</h2><p>每个工具都有自己的适用场景。这里是一个简要的对比，帮助你了解 Gridea Pro 的定位。</p></div>
+    <div class="comparison-table-wrap reveal">
+      <table class="comparison-table">
+        <thead><tr><th>功能</th><th class="highlight">Gridea Pro</th><th>Hugo</th><th>Hexo</th></tr></thead>
+        <tbody>
+          <tr><td>图形界面</td><td class="highlight"><span class="check">&#10003;</span></td><td><span class="dash">&mdash;</span></td><td><span class="dash">&mdash;</span></td></tr>
+          <tr><td>内置编辑器</td><td class="highlight"><span class="check">&#10003;</span></td><td><span class="dash">&mdash;</span></td><td><span class="dash">&mdash;</span></td></tr>
+          <tr><td>多主题引擎</td><td class="highlight"><span class="check">&#10003;</span> Jinja2 / Go / EJS</td><td>Go Templates</td><td>EJS / Pug</td></tr>
+          <tr><td>一键部署</td><td class="highlight"><span class="check">&#10003;</span></td><td><span class="dash">&mdash;</span> 需 CLI</td><td><span class="dash">&mdash;</span> 需 CLI</td></tr>
+          <tr><td>学习成本</td><td class="highlight">低</td><td>中高</td><td>中</td></tr>
+          <tr><td>开源协议</td><td class="highlight">GPL-3.0</td><td>Apache-2.0</td><td>MIT</td></tr>
+        </tbody>
+      </table>
+    </div>
+    <p class="comparison-note reveal">Hugo 和 Hexo 是优秀的 CLI 工具。Gridea Pro 的不同在于，它为不想碰命令行的写作者而生。</p>
+  </div>
+</section>
+
+<section class="legacy">
+  <div class="container">
+    <div class="legacy-content reveal">
+      <h2>站在巨人的肩膀上</h2>
+      <p><strong>Gridea</strong> 是一个了不起的项目。它在 GitHub 上获得了超过 10,000 颗星，帮助了无数人建立自己的博客。</p>
+      <p>四年前，它停止了更新，但它所代表的理念——让写作和发布变得简单——从未过时。</p>
+      <p>Gridea Pro 是对这份遗产的延续。我们在原有理念的基础上，用现代技术进行了完整重构：全新的编辑器、多模板引擎支持、更稳定的部署能力。</p>
+      <p>致敬原作者 <strong>@EryouHao</strong> 的开创性工作。</p>
+      <a href="https://github.com/getgridea/gridea" class="legacy-link" target="_blank" rel="noopener">访问 Gridea 原始仓库 <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M6 3h7v7"/><path d="M13 3L6 10"/></svg></a>
+    </div>
+  </div>
+</section>
+
+<section class="cta" id="download">
+  <div class="container">
+    <div class="reveal">
+      <h2>开始你的写作之旅</h2>
+      <p>下载 Gridea Pro，几分钟内即可拥有一个属于你自己的博客。</p>
+      <a href="/download/" class="btn-primary"><svg width="16" height="16" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M8 2v8m0 0l-3-3m3 3l3-3M3 13h10"/></svg> 免费下载</a>
+    </div>
+  </div>
+</section>
+
+<footer class="footer">
+  <div class="container">
+    <div class="footer-grid">
+      <div><a href="/" class="header-logo"><img src="/appicon.png" alt="Gridea Pro" class="header-logo-mark"><span class="header-logo-text">Gridea Pro</span></a><p class="footer-brand-desc">一个简洁的桌面端静态博客写作客户端</p></div>
+      <div><div class="footer-col-title">产品</div><ul class="footer-links"><li><a href="#">功能特性</a></li><li><a href="/themes/">主题画廊</a></li><li><a href="/download/">下载</a></li><li><a href="/changelog/">更新日志</a></li></ul></div>
+      <div><div class="footer-col-title">资源</div><ul class="footer-links"><li><a href="/docs/">使用文档</a></li><li><a href="#">主题开发</a></li><li><a href="#">迁移指南</a></li><li><a href="#">常见问题</a></li></ul></div>
+      <div><div class="footer-col-title">社区</div><ul class="footer-links"><li><a href="https://github.com/gridea/gridea-pro" target="_blank" rel="noopener">GitHub</a></li><li><a href="#">Discussions</a></li><li><a href="#">反馈建议</a></li></ul></div>
+    </div>
+    <div class="footer-bottom">&copy; 2026 Gridea Pro Contributors. Open source under GPL-3.0.</div>
+  </div>
+</footer>
+
+<script is:inline>
+(function(){var reveals=document.querySelectorAll('.reveal');function checkReveal(){var wh=window.innerHeight;for(var i=0;i<reveals.length;i++){if(reveals[i].getBoundingClientRect().top<wh-60){reveals[i].classList.add('visible')}}}checkReveal();var ticking=false;window.addEventListener('scroll',function(){if(!ticking){window.requestAnimationFrame(function(){checkReveal();ticking=false});ticking=true}},{passive:true})})();
+</script>
+</body>
+</html>

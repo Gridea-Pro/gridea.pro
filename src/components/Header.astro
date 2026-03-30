@@ -1,0 +1,253 @@
+---
+/**
+ * Header / Navigation bar
+ * Extracted from V2 index.html — fixed top bar with glassmorphism backdrop,
+ * logo mark (amber square), nav links, download button, GitHub icon, mobile toggle.
+ */
+
+interface Props {
+  /** Highlight the active nav link by path segment */
+  currentPath?: string;
+}
+
+const { currentPath = '' } = Astro.props;
+
+const navLinks = [
+  { href: '/',           label: '首页' },
+  { href: '/themes/',    label: '主题' },
+  { href: '/docs/',      label: '文档' },
+  { href: '/download/',  label: '下载' },
+  { href: '/changelog/', label: '更新日志' },
+];
+---
+
+<header class="header">
+  <div class="container">
+    <!-- Logo -->
+    <a href="/" class="header-logo">
+      <span class="header-logo-mark"></span>
+      <span class="header-logo-text">Gridea Pro</span>
+    </a>
+
+    <!-- Desktop nav -->
+    <nav class="header-nav">
+      {navLinks.map((link) => (
+        <a
+          href={link.href}
+          class:list={[{ active: currentPath === link.href }]}
+        >
+          {link.label}
+        </a>
+      ))}
+    </nav>
+
+    <!-- Actions -->
+    <div class="header-actions">
+      <a href="/download/" class="btn-download-header">下载</a>
+
+      <a
+        href="https://github.com/gridea/gridea-pro"
+        class="header-github"
+        aria-label="GitHub"
+        target="_blank"
+        rel="noopener noreferrer"
+      >
+        <svg viewBox="0 0 24 24" fill="currentColor">
+          <path d="M12 2C6.477 2 2 6.484 2 12.017c0 4.425 2.865 8.18 6.839 9.504.5.092.682-.217.682-.483 0-.237-.008-.868-.013-1.703-2.782.605-3.369-1.343-3.369-1.343-.454-1.158-1.11-1.466-1.11-1.466-.908-.62.069-.608.069-.608 1.003.07 1.531 1.032 1.531 1.032.892 1.53 2.341 1.088 2.91.832.092-.647.35-1.088.636-1.338-2.22-.253-4.555-1.113-4.555-4.951 0-1.093.39-1.988 1.029-2.688-.103-.253-.446-1.272.098-2.65 0 0 .84-.27 2.75 1.026A9.564 9.564 0 0112 6.844c.85.004 1.705.115 2.504.337 1.909-1.296 2.747-1.027 2.747-1.027.546 1.379.202 2.398.1 2.651.64.7 1.028 1.595 1.028 2.688 0 3.848-2.339 4.695-4.566 4.943.359.309.678.92.678 1.855 0 1.338-.012 2.419-.012 2.747 0 .268.18.58.688.482A10.019 10.019 0 0022 12.017C22 6.484 17.522 2 12 2z"/>
+        </svg>
+      </a>
+
+      <!-- Mobile menu toggle -->
+      <button class="mobile-menu-btn" aria-label="Menu" id="mobileMenuBtn">
+        <svg viewBox="0 0 20 20" fill="currentColor">
+          <path fill-rule="evenodd" d="M3 5a1 1 0 011-1h12a1 1 0 110 2H4a1 1 0 01-1-1zm0 5a1 1 0 011-1h12a1 1 0 110 2H4a1 1 0 01-1-1zm0 5a1 1 0 011-1h12a1 1 0 110 2H4a1 1 0 01-1-1z" clip-rule="evenodd"/>
+        </svg>
+      </button>
+    </div>
+  </div>
+
+  <!-- Mobile slide-down nav -->
+  <nav class="mobile-nav" id="mobileNav">
+    {navLinks.map((link) => (
+      <a href={link.href}>{link.label}</a>
+    ))}
+  </nav>
+</header>
+
+<style>
+  /* ---- Fixed header with glassmorphism ---- */
+  .header {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: var(--header-height, 60px);
+    background: rgba(255, 255, 255, 0.85);
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+    border-bottom: 1px solid var(--border, #E8E8E6);
+    z-index: 1000;
+    display: flex;
+    align-items: center;
+  }
+
+  .header .container {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    width: 100%;
+    max-width: var(--container-max, 1140px);
+    margin: 0 auto;
+    padding: 0 24px;
+  }
+
+  /* ---- Logo ---- */
+  .header-logo {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    flex-shrink: 0;
+  }
+
+  .header-logo-mark {
+    width: 6px;
+    height: 6px;
+    background: var(--accent, #D4870E);
+    border-radius: 2px;
+    flex-shrink: 0;
+  }
+
+  .header-logo-text {
+    font-family: var(--font-display, 'Plus Jakarta Sans', sans-serif);
+    font-size: 18px;
+    font-weight: 700;
+    color: var(--text-primary, #1A1A1A);
+    letter-spacing: -0.01em;
+  }
+
+  /* ---- Desktop nav ---- */
+  .header-nav {
+    display: flex;
+    align-items: center;
+    gap: 32px;
+  }
+
+  .header-nav a {
+    font-size: 14px;
+    font-weight: 500;
+    color: var(--text-secondary, #6B6B6B);
+    transition: color 0.2s ease;
+  }
+
+  .header-nav a:hover,
+  .header-nav a.active {
+    color: var(--text-primary, #1A1A1A);
+  }
+
+  /* ---- Actions ---- */
+  .header-actions {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+    flex-shrink: 0;
+  }
+
+  .btn-download-header {
+    background: var(--text-primary, #1A1A1A);
+    color: var(--white, #FFFFFF);
+    padding: 6px 16px;
+    border-radius: 6px;
+    font-size: 13px;
+    font-weight: 600;
+    transition: background 0.2s ease;
+  }
+
+  .btn-download-header:hover {
+    background: #333;
+  }
+
+  .header-github {
+    display: flex;
+    align-items: center;
+    color: var(--text-secondary, #6B6B6B);
+    transition: color 0.2s ease;
+  }
+
+  .header-github:hover {
+    color: var(--text-primary, #1A1A1A);
+  }
+
+  .header-github svg {
+    width: 20px;
+    height: 20px;
+  }
+
+  /* ---- Mobile toggle ---- */
+  .mobile-menu-btn {
+    display: none;
+    width: 32px;
+    height: 32px;
+    align-items: center;
+    justify-content: center;
+    color: var(--text-primary, #1A1A1A);
+  }
+
+  .mobile-menu-btn svg {
+    width: 20px;
+    height: 20px;
+  }
+
+  /* ---- Mobile nav panel ---- */
+  .mobile-nav {
+    display: none;
+    flex-direction: column;
+    gap: 0;
+    background: var(--white, #FFFFFF);
+    border-bottom: 1px solid var(--border, #E8E8E6);
+    position: absolute;
+    top: 100%;
+    left: 0;
+    right: 0;
+    padding: 8px 0;
+  }
+
+  .mobile-nav a {
+    padding: 12px 24px;
+    font-size: 15px;
+    font-weight: 500;
+    color: var(--text-secondary, #6B6B6B);
+    transition: background 0.15s ease;
+  }
+
+  .mobile-nav a:hover {
+    background: var(--bg-subtle, #F5F3F0);
+    color: var(--text-primary, #1A1A1A);
+  }
+
+  .mobile-nav.open {
+    display: flex;
+  }
+
+  /* ---- Responsive ---- */
+  @media (max-width: 768px) {
+    .header-nav {
+      display: none;
+    }
+
+    .mobile-menu-btn {
+      display: flex;
+    }
+  }
+</style>
+
+<script>
+  document.addEventListener('astro:page-load', () => {
+    const btn = document.getElementById('mobileMenuBtn');
+    const nav = document.getElementById('mobileNav');
+    if (btn && nav) {
+      btn.addEventListener('click', () => {
+        nav.classList.toggle('open');
+      });
+    }
+  });
+</script>

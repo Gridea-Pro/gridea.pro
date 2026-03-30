@@ -1,0 +1,187 @@
+---
+/**
+ * Footer
+ * Extracted from V2 index.html — 4-column grid with brand, product, resources, community links.
+ */
+
+const currentYear = new Date().getFullYear();
+
+const productLinks = [
+  { href: '/#features', label: '功能特性' },
+  { href: '/themes/',    label: '主题画廊' },
+  { href: '/download/',  label: '下载' },
+  { href: '/changelog/', label: '更新日志' },
+];
+
+const resourceLinks = [
+  { href: '/docs/',                             label: '使用文档' },
+  { href: '/docs/theme-development/overview/',  label: '主题开发' },
+  { href: '/docs/getting-started/installation/', label: '迁移指南' },
+  { href: '/docs/faq/',                         label: '常见问题' },
+];
+
+const communityLinks = [
+  { href: 'https://github.com/gridea/gridea-pro',              label: 'GitHub',      external: true },
+  { href: 'https://github.com/gridea/gridea-pro/discussions',  label: 'Discussions', external: true },
+  { href: 'https://github.com/gridea/gridea-pro/issues',       label: '反馈建议',     external: true },
+];
+---
+
+<footer class="footer">
+  <div class="container">
+    <div class="footer-grid">
+      <!-- Brand -->
+      <div>
+        <a href="/" class="footer-logo">
+          <span class="footer-logo-mark"></span>
+          <span class="footer-logo-text">Gridea Pro</span>
+        </a>
+        <p class="footer-brand-desc">一个简洁的桌面端静态博客写作客户端</p>
+      </div>
+
+      <!-- Product -->
+      <div>
+        <div class="footer-col-title">产品</div>
+        <ul class="footer-links">
+          {productLinks.map((link) => (
+            <li><a href={link.href}>{link.label}</a></li>
+          ))}
+        </ul>
+      </div>
+
+      <!-- Resources -->
+      <div>
+        <div class="footer-col-title">资源</div>
+        <ul class="footer-links">
+          {resourceLinks.map((link) => (
+            <li><a href={link.href}>{link.label}</a></li>
+          ))}
+        </ul>
+      </div>
+
+      <!-- Community -->
+      <div>
+        <div class="footer-col-title">社区</div>
+        <ul class="footer-links">
+          {communityLinks.map((link) => (
+            <li>
+              <a
+                href={link.href}
+                {...(link.external ? { target: '_blank', rel: 'noopener noreferrer' } : {})}
+              >
+                {link.label}
+              </a>
+            </li>
+          ))}
+        </ul>
+      </div>
+    </div>
+
+    <div class="footer-bottom">
+      &copy; {currentYear} Gridea Pro Contributors. Open source under GPL-3.0.
+    </div>
+  </div>
+</footer>
+
+<style>
+  .footer {
+    background: var(--bg-alt, #FAFAF8);
+    border-top: 1px solid var(--border, #E8E8E6);
+    padding: 64px 0 32px;
+  }
+
+  .footer .container {
+    max-width: var(--container-max, 1140px);
+    margin: 0 auto;
+    padding: 0 24px;
+  }
+
+  .footer-grid {
+    display: grid;
+    grid-template-columns: 1.4fr 1fr 1fr 1fr;
+    gap: 48px;
+    margin-bottom: 48px;
+  }
+
+  /* ---- Logo in footer ---- */
+  .footer-logo {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+  }
+
+  .footer-logo-mark {
+    width: 6px;
+    height: 6px;
+    background: var(--accent, #D4870E);
+    border-radius: 2px;
+    flex-shrink: 0;
+  }
+
+  .footer-logo-text {
+    font-family: var(--font-display, 'Plus Jakarta Sans', sans-serif);
+    font-size: 18px;
+    font-weight: 700;
+    color: var(--text-primary, #1A1A1A);
+    letter-spacing: -0.01em;
+  }
+
+  .footer-brand-desc {
+    font-size: 14px;
+    color: var(--text-muted, #9B9B9B);
+    line-height: 1.7;
+    margin-top: 16px;
+    max-width: 260px;
+  }
+
+  /* ---- Columns ---- */
+  .footer-col-title {
+    font-family: var(--font-display, 'Plus Jakarta Sans', sans-serif);
+    font-size: 13px;
+    font-weight: 700;
+    color: var(--text-primary, #1A1A1A);
+    margin-bottom: 16px;
+    letter-spacing: 0.01em;
+  }
+
+  .footer-links {
+    list-style: none;
+  }
+
+  .footer-links li {
+    margin-bottom: 10px;
+  }
+
+  .footer-links a {
+    font-size: 14px;
+    color: var(--text-secondary, #6B6B6B);
+    transition: color 0.2s;
+  }
+
+  .footer-links a:hover {
+    color: var(--text-primary, #1A1A1A);
+  }
+
+  /* ---- Bottom bar ---- */
+  .footer-bottom {
+    padding-top: 24px;
+    border-top: 1px solid var(--border, #E8E8E6);
+    font-size: 13px;
+    color: var(--text-muted, #9B9B9B);
+  }
+
+  /* ---- Responsive ---- */
+  @media (max-width: 1024px) {
+    .footer-grid {
+      grid-template-columns: 1fr 1fr;
+      gap: 32px;
+    }
+  }
+
+  @media (max-width: 768px) {
+    .footer-grid {
+      grid-template-columns: 1fr;
+      gap: 32px;
+    }
+  }
+</style>

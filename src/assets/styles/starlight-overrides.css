@@ -1,0 +1,450 @@
+/* ============================================
+   Force warm cream/amber palette on all themes
+   Fonts loaded via Starlight head config
+   ============================================ */
+html:root,
+html:root[data-theme="light"],
+html:root[data-theme="dark"] {
+  --sl-color-white: #1A1A1A;
+  --sl-color-gray-1: #37352F;
+  --sl-color-gray-2: #6B6B6B;
+  --sl-color-gray-3: #9B9B9B;
+  --sl-color-gray-4: #D4D4D2;
+  --sl-color-gray-5: #E8E8E6;
+  --sl-color-gray-6: #F5F3F0;
+  --sl-color-gray-7: #FAFAF8;
+  --sl-color-black: #FFFFFF;
+
+  --sl-color-accent-low: #FDF4E3;
+  --sl-color-accent: #D4870E;
+  --sl-color-accent-high: #B87308;
+
+  --sl-color-text: #37352F;
+  --sl-color-text-accent: #D4870E;
+  --sl-color-text-invert: #FFFFFF;
+
+  --sl-color-bg: #FFFFFF;
+  --sl-color-bg-nav: rgba(255, 255, 255, 0.85);
+  --sl-color-bg-sidebar: #FAFAF8;
+  --sl-color-bg-inline-code: #F7F6F3;
+  --sl-color-bg-accent: #D4870E;
+
+  --sl-color-hairline-light: #E8E8E6;
+  --sl-color-hairline: #E8E8E6;
+  --sl-color-hairline-shade: #E8E8E6;
+
+  --sl-color-backdrop-overlay: hsla(0, 0%, 0%, 0.3);
+  --sl-shadow-sm: 0 1px 1px hsla(0, 0%, 0%, .06), 0 2px 1px hsla(0, 0%, 0%, .06);
+  --sl-shadow-md: 0 8px 4px hsla(0, 0%, 0%, .03), 0 3px 2px hsla(0, 0%, 0%, .06);
+  --sl-shadow-lg: 0 16px 6px hsla(0, 0%, 0%, .03), 0 4px 4px hsla(0, 0%, 0%, .16);
+
+  --sl-font: 'Figtree', -apple-system, BlinkMacSystemFont, sans-serif;
+  --sl-font-system-mono: 'JetBrains Mono', ui-monospace, monospace;
+  --sl-sidebar-width: 260px;
+  --sl-content-width: 860px;
+
+  /* Force light-mode semantic colors for asides/callouts */
+  --sl-color-blue-high: hsl(234, 80%, 30%);
+  --sl-color-blue: hsl(234, 90%, 60%);
+  --sl-color-blue-low: hsl(234, 88%, 90%);
+  --sl-color-green-high: hsl(101, 80%, 22%);
+  --sl-color-green: hsl(101, 90%, 46%);
+  --sl-color-green-low: hsl(101, 85%, 90%);
+  --sl-color-orange-high: hsl(41, 80%, 25%);
+  --sl-color-orange: hsl(41, 90%, 60%);
+  --sl-color-orange-low: hsl(41, 90%, 88%);
+  --sl-color-purple-high: hsl(281, 90%, 30%);
+  --sl-color-purple: hsl(281, 90%, 60%);
+  --sl-color-purple-low: hsl(281, 80%, 90%);
+  --sl-color-red-high: hsl(339, 80%, 30%);
+  --sl-color-red: hsl(339, 90%, 60%);
+  --sl-color-red-low: hsl(339, 80%, 90%);
+}
+
+html {
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  text-rendering: optimizeLegibility;
+}
+
+/* ===================== HEADER ===================== */
+header.header {
+  background: rgba(255, 255, 255, 0.85) !important;
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+}
+
+.site-title img {
+  width: 36px !important;
+  height: 36px !important;
+}
+
+.site-title {
+  font-family: 'Plus Jakarta Sans', sans-serif !important;
+  font-size: 18px !important;
+  font-weight: 700 !important;
+  color: #1A1A1A !important;
+  letter-spacing: -0.01em !important;
+  gap: 10px !important;
+}
+
+/* ===================== LEFT SIDEBAR ===================== */
+.sidebar-pane {
+  background: #FAFAF8 !important;
+}
+
+.sidebar-content {
+  padding: 24px 0 0 !important;
+  --sl-sidebar-item-padding-inline: 0.75rem;
+}
+
+html:root {
+  --sl-sidebar-pad-x: 1.25rem;
+}
+
+.sidebar-pane::-webkit-scrollbar { width: 4px; }
+.sidebar-pane::-webkit-scrollbar-track { background: transparent; }
+.sidebar-pane::-webkit-scrollbar-thumb { background: #D4D4D2; border-radius: 2px; }
+
+.sidebar-content .large {
+  font-family: 'Figtree', sans-serif !important;
+  font-size: 12px !important;
+  font-weight: 600 !important;
+  color: #9B9B9B !important;
+  letter-spacing: 0.05em !important;
+  text-transform: uppercase !important;
+}
+
+.sidebar-content summary {
+  padding: 8px var(--sl-sidebar-pad-x) !important;
+}
+
+.sidebar-content summary .caret {
+  color: #9B9B9B !important;
+  --sl-icon-size: 20px !important;
+}
+
+.sidebar-content .top-level > li + li {
+  margin-top: 0.75rem !important;
+}
+
+.sidebar-content a {
+  font-family: 'Figtree', sans-serif !important;
+  font-size: 14px !important;
+  font-weight: 400 !important;
+  color: #6B6B6B !important;
+  border-radius: 6px !important;
+  padding: 7px 12px !important;
+  border-left: 2px solid transparent !important;
+  transition: color 0.12s ease, background 0.12s ease !important;
+  line-height: 1.4 !important;
+}
+
+.sidebar-content a:hover,
+.sidebar-content a:focus {
+  color: #1A1A1A !important;
+  background: #F5F3F0 !important;
+}
+
+.sidebar-content a[aria-current="page"],
+.sidebar-content a[aria-current="page"]:hover,
+.sidebar-content a[aria-current="page"]:focus {
+  color: #D4870E !important;
+  background-color: #FDF4E3 !important;
+  border-left: 2px solid #D4870E !important;
+  font-weight: 500 !important;
+}
+
+/* ===================== RIGHT TOC ===================== */
+/* Title: "本页内容" — match reference "目录" style */
+.right-sidebar-panel h2 {
+  font-family: 'Figtree', sans-serif !important;
+  font-size: 12px !important;
+  font-weight: 600 !important;
+  color: #9B9B9B !important;
+  text-transform: uppercase !important;
+  letter-spacing: 0.05em !important;
+  margin-bottom: 16px !important;
+  text-align: left !important;
+}
+
+/* TOC links — left aligned, with left border on active */
+starlight-toc a,
+.right-sidebar-panel a {
+  font-family: 'Figtree', sans-serif !important;
+  font-size: 13px !important;
+  color: #9B9B9B !important;
+  padding: 5px 0 5px 12px !important;
+  border-radius: 0 !important;
+  border-left: 2px solid transparent !important;
+  transition: color 0.12s ease, border-color 0.12s ease !important;
+  display: block !important;
+  text-align: left !important;
+  line-height: 1.5 !important;
+}
+
+starlight-toc a:hover,
+.right-sidebar-panel a:hover {
+  color: #1A1A1A !important;
+}
+
+starlight-toc a[aria-current="true"],
+.right-sidebar-panel a[aria-current="true"] {
+  color: #D4870E !important;
+  border-left: 2px solid #D4870E !important;
+}
+
+/* Nested TOC items (h3 under h2) — indent */
+.right-sidebar-panel ul ul a {
+  padding-left: 24px !important;
+}
+
+/* ===================== CONTENT AREA ===================== */
+/* Headings */
+.sl-markdown-content h1,
+.sl-markdown-content h2,
+.sl-markdown-content h3,
+.sl-markdown-content h4 {
+  font-family: 'Plus Jakarta Sans', sans-serif !important;
+}
+
+.sl-markdown-content h1 {
+  font-size: 36px !important;
+  font-weight: 700 !important;
+  line-height: 1.2 !important;
+  letter-spacing: -0.02em !important;
+  color: #1A1A1A !important;
+  margin-bottom: 16px !important;
+  padding-bottom: 16px !important;
+  border-bottom: 1px solid #E8E8E6 !important;
+}
+
+.sl-markdown-content h2 {
+  font-size: 24px !important;
+  font-weight: 600 !important;
+  line-height: 1.3 !important;
+  letter-spacing: -0.01em !important;
+  color: #1A1A1A !important;
+  margin-top: 48px !important;
+  margin-bottom: 16px !important;
+  scroll-margin-top: 80px;
+}
+
+.sl-markdown-content h3 {
+  font-size: 18px !important;
+  font-weight: 600 !important;
+  line-height: 1.4 !important;
+  color: #1A1A1A !important;
+  margin-top: 32px !important;
+  margin-bottom: 12px !important;
+}
+
+/* Body text */
+.sl-markdown-content p {
+  font-family: 'Figtree', sans-serif;
+  font-size: 16px;
+  line-height: 1.7;
+  color: #37352F;
+  margin-bottom: 16px;
+}
+
+/* Links */
+.sl-markdown-content a {
+  color: #D4870E !important;
+  transition: color 0.12s ease;
+}
+.sl-markdown-content a:hover {
+  color: #B87308 !important;
+  text-decoration: underline;
+}
+
+/* Inline code */
+.sl-markdown-content :not(pre) > code {
+  font-family: 'JetBrains Mono', monospace !important;
+  font-size: 14px !important;
+  background: #F7F6F3 !important;
+  padding: 2px 6px !important;
+  border-radius: 4px !important;
+  color: #1A1A1A !important;
+  border: none !important;
+}
+
+/* ===================== CODE BLOCKS ===================== */
+/* Force ALL expressive-code to use light theme regardless of data-theme */
+:root .expressive-code,
+:root[data-theme="dark"] .expressive-code,
+:root[data-theme="dark"] .expressive-code[data-theme="dark"] {
+  --ec-codeBg: #f6f7f9 !important;
+  --ec-codeFg: #403f53 !important;
+  --ec-codeSelBg: #e0e0e0 !important;
+  --ec-gtrFg: #788b94 !important;
+  --ec-gtrBrdCol: #788b9433 !important;
+  --ec-gtrHlFg: #403f53c4 !important;
+  --ec-uiSelBg: #d3e8f8 !important;
+  --ec-uiSelFg: #403f53 !important;
+  --ec-focusBrd: #93a1a1 !important;
+  --ec-sbThumbCol: #0000001a !important;
+  --ec-sbThumbHoverCol: #0000005c !important;
+  --ec-brdCol: #E8E8E6 !important;
+  --ec-frm-shdCol: #d9d9d9 !important;
+  --ec-frm-frameBoxShdCssVal: none !important;
+  --ec-frm-edActTabBg: #FAFAF8 !important;
+  --ec-frm-edActTabIndTopCol: #D4870E !important;
+  --ec-frm-edTabBarBg: #F5F3F0 !important;
+  --ec-frm-edBg: #FAFAF8 !important;
+  --ec-frm-trmTtbBg: #F5F3F0 !important;
+  --ec-frm-trmBg: #FAFAF8 !important;
+  --ec-frm-trmTtbDotsFg: #D4D4D2 !important;
+  --ec-frm-tooltipSuccessBg: #078662 !important;
+  --ec-tm-markBg: #0000001a !important;
+  --ec-tm-markBrdCol: #00000055 !important;
+  --ec-tm-insBg: #8ec77d99 !important;
+  --ec-tm-delBg: #ff9c8e99 !important;
+}
+
+/* Force syntax tokens to use --1 (light) colors instead of --0 (dark) */
+:root .expressive-code .ec-line span[style^="--"],
+:root[data-theme="dark"] .expressive-code .ec-line span[style^="--"] {
+  color: var(--1, inherit) !important;
+  background-color: var(--1bg, transparent) !important;
+  font-style: var(--1fs, inherit) !important;
+  font-weight: var(--1fw, inherit) !important;
+  text-decoration: var(--1td, inherit) !important;
+}
+
+.expressive-code .frame {
+  box-shadow: none !important;
+  border-radius: 8px !important;
+  border: 1px solid #E8E8E6 !important;
+}
+
+.expressive-code pre {
+  background: #f6f7f9 !important;
+  border: none !important;
+}
+
+.expressive-code .frame .header {
+  background: #F5F3F0 !important;
+  border-bottom: 1px solid #E8E8E6 !important;
+}
+
+/* ===================== ASIDES / CALLOUTS ===================== */
+/* Force light-mode aside backgrounds */
+.starlight-aside {
+  background: #FAFAF8 !important;
+  border-color: var(--sl-color-asides-border) !important;
+  color: #37352F !important;
+}
+
+.starlight-aside--tip {
+  --sl-color-asides-text-accent: hsl(281, 90%, 30%) !important;
+  --sl-color-asides-border: hsl(281, 90%, 60%) !important;
+  background: hsl(281, 80%, 96%) !important;
+}
+
+.starlight-aside--note {
+  --sl-color-asides-text-accent: hsl(234, 80%, 30%) !important;
+  --sl-color-asides-border: hsl(234, 90%, 60%) !important;
+  background: hsl(234, 88%, 96%) !important;
+}
+
+.starlight-aside--caution {
+  --sl-color-asides-text-accent: hsl(41, 80%, 25%) !important;
+  --sl-color-asides-border: hsl(41, 90%, 60%) !important;
+  background: hsl(41, 90%, 95%) !important;
+}
+
+.starlight-aside--danger {
+  --sl-color-asides-text-accent: hsl(339, 80%, 30%) !important;
+  --sl-color-asides-border: hsl(339, 90%, 60%) !important;
+  background: hsl(339, 80%, 96%) !important;
+}
+
+.starlight-aside__title {
+  color: var(--sl-color-asides-text-accent) !important;
+}
+
+.starlight-aside__content {
+  color: #37352F !important;
+}
+
+.starlight-aside__content a {
+  color: #D4870E !important;
+}
+
+/* ===================== TABLES ===================== */
+.sl-markdown-content table {
+  width: 100%;
+  border-collapse: collapse;
+  margin-bottom: 24px;
+  font-size: 15px;
+}
+
+.sl-markdown-content table th {
+  font-family: 'Figtree', sans-serif;
+  font-weight: 600;
+  font-size: 13px;
+  text-align: left;
+  color: #6B6B6B;
+  background: #FAFAF8;
+  padding: 12px 16px;
+  border: 1px solid #E8E8E6;
+}
+
+.sl-markdown-content table td {
+  font-family: 'Figtree', sans-serif;
+  padding: 12px 16px;
+  border: 1px solid #E8E8E6;
+  color: #37352F;
+}
+
+/* ===================== BREADCRUMBS ===================== */
+nav[aria-label="Breadcrumb"],
+.breadcrumbs {
+  font-family: 'Figtree', sans-serif !important;
+  font-size: 14px !important;
+  color: #9B9B9B !important;
+}
+
+nav[aria-label="Breadcrumb"] a,
+.breadcrumbs a {
+  color: #9B9B9B !important;
+  text-decoration: none !important;
+}
+
+nav[aria-label="Breadcrumb"] a:hover,
+.breadcrumbs a:hover {
+  color: #6B6B6B !important;
+}
+
+nav[aria-label="Breadcrumb"] li::before,
+.breadcrumbs .sep {
+  color: #D4D4D2 !important;
+}
+
+/* ===================== PAGINATION ===================== */
+.pagination-links a {
+  font-family: 'Figtree', sans-serif !important;
+  border-color: #E8E8E6 !important;
+}
+
+.pagination-links a:hover {
+  border-color: #D4870E !important;
+}
+
+.pagination-links .link-title {
+  font-size: 15px !important;
+  font-weight: 600 !important;
+  color: #1A1A1A !important;
+}
+
+.pagination-links a:hover .link-title {
+  color: #D4870E !important;
+}
+
+/* ===================== RESPONSIVE ===================== */
+@media (max-width: 768px) {
+  .sl-markdown-content h1 { font-size: 28px !important; }
+  .sl-markdown-content h2 { font-size: 20px !important; margin-top: 36px !important; }
+  .sl-markdown-content h3 { font-size: 17px !important; }
+}

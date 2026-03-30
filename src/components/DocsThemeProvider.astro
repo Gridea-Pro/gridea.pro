@@ -1,0 +1,12 @@
+---
+// Force light theme — no dark mode for docs pages
+---
+
+<script is:inline>
+	window.StarlightThemeProvider = (() => {
+		document.documentElement.dataset.theme = 'light';
+		return {
+			updatePickers() {},
+		};
+	})();
+</script>
