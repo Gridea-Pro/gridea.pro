@@ -39,7 +39,7 @@ export default defineConfig({
         },
       },
       social: [
-        { icon: 'github', label: 'GitHub', href: 'https://github.com/gridea/gridea-pro' },
+        { icon: 'github', label: 'GitHub', href: 'https://github.com/Gridea-Pro/gridea-pro' },
       ],
       customCss: [
         './src/assets/styles/starlight-overrides.css',
