@@ -5,6 +5,10 @@
 ---
 
 <div class="mobile-overlay" id="mobileOverlay">
+  <button class="mobile-overlay-close" id="mobileOverlayClose" aria-label="关闭菜单">
+    <span class="close-line"></span>
+    <span class="close-line"></span>
+  </button>
   <nav class="mobile-overlay-nav">
     <a href="/docs/">文档</a>
     <a href="/themes/">主题</a>
@@ -41,18 +45,44 @@
   transition: transform 0.3s ease, opacity 0.3s ease;
 }
 
-/* ── Hamburger → X animation (2-line) ── */
-.mobile-menu-btn.is-open .hamburger-line:nth-child(1) {
-  transform: translateY(3.75px) rotate(45deg);
+/* ── Overlay close button ── */
+.mobile-overlay-close {
+  position: absolute;
+  top: 14px;
+  right: 24px;
+  width: 32px;
+  height: 32px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+  gap: 0;
+  background: none;
+  border: none;
+  cursor: pointer;
+  z-index: 10;
 }
 
-.mobile-menu-btn.is-open .hamburger-line:nth-child(2) {
-  transform: translateY(-3.75px) rotate(-45deg);
+.close-line {
+  display: block;
+  width: 16px;
+  height: 1.5px;
+  background: #1A1A1A;
+  border-radius: 2px;
 }
 
-/* ── Header above overlay when menu open ── */
-.header.menu-open {
-  z-index: 1060;
+.close-line:nth-child(1) {
+  transform: translateY(0.75px) rotate(45deg);
+}
+
+.close-line:nth-child(2) {
+  transform: translateY(-0.75px) rotate(-45deg);
+}
+
+@media (max-width: 480px) {
+  .mobile-overlay-close {
+    right: 20px;
+  }
 }
 
 /* ── Fullscreen overlay ── */
@@ -131,24 +161,34 @@
 (function () {
   var btn = document.getElementById('menuToggle');
   var overlay = document.getElementById('mobileOverlay');
-  var header = btn ? btn.closest('header') || btn.closest('.header') : null;
+  var closeBtn = document.getElementById('mobileOverlayClose');
   if (!btn || !overlay) return;
+
+  function openMenu() {
+    btn.classList.add('is-open');
+    overlay.classList.add('is-open');
+    btn.setAttribute('aria-expanded', 'true');
+    document.body.style.overflow = 'hidden';
+  }
 
   function closeMenu() {
     btn.classList.remove('is-open');
     overlay.classList.remove('is-open');
-    if (header) header.classList.remove('menu-open');
     btn.setAttribute('aria-expanded', 'false');
     document.body.style.overflow = '';
   }
 
   btn.addEventListener('click', function () {
-    var open = btn.classList.toggle('is-open');
-    overlay.classList.toggle('is-open');
-    if (header) header.classList.toggle('menu-open');
-    btn.setAttribute('aria-expanded', open);
-    document.body.style.overflow = open ? 'hidden' : '';
+    if (overlay.classList.contains('is-open')) {
+      closeMenu();
+    } else {
+      openMenu();
+    }
   });
+
+  if (closeBtn) {
+    closeBtn.addEventListener('click', closeMenu);
+  }
 
   overlay.addEventListener('click', function (e) {
     if (e.target === overlay || e.target.tagName === 'A') {
