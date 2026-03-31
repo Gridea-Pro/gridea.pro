@@ -59,9 +59,8 @@ const navLinks = [
 
       <!-- Mobile menu toggle -->
       <button class="mobile-menu-btn" aria-label="Menu" id="mobileMenuBtn">
-        <svg viewBox="0 0 20 20" fill="currentColor">
-          <path fill-rule="evenodd" d="M3 5a1 1 0 011-1h12a1 1 0 110 2H4a1 1 0 01-1-1zm0 5a1 1 0 011-1h12a1 1 0 110 2H4a1 1 0 01-1-1zm0 5a1 1 0 011-1h12a1 1 0 110 2H4a1 1 0 01-1-1z" clip-rule="evenodd"/>
-        </svg>
+        <span class="hamburger-line" style="display:block;width:16px;height:1.5px"></span>
+        <span class="hamburger-line" style="display:block;width:16px;height:1.5px"></span>
       </button>
     </div>
   </div>
@@ -189,12 +188,17 @@ const navLinks = [
     height: 32px;
     align-items: center;
     justify-content: center;
-    color: var(--text-primary, #1A1A1A);
+    flex-direction: column;
+    gap: 6px;
+    padding: 4px;
+    background: none;
+    border: none;
+    cursor: pointer;
   }
 
-  .mobile-menu-btn svg {
-    width: 20px;
-    height: 20px;
+  .hamburger-line {
+    background: var(--text-primary, #1A1A1A);
+    border-radius: 2px;
   }
 
   /* ---- Mobile nav panel ---- */
