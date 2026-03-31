@@ -442,6 +442,50 @@ nav[aria-label="Breadcrumb"] li::before,
   color: #D4870E !important;
 }
 
+/* ===================== MOBILE MENU BUTTON ===================== */
+/* Override Starlight's 3-line hamburger with 2-line minimal style */
+starlight-menu-button button {
+  background-color: transparent !important;
+  box-shadow: none !important;
+  color: #1A1A1A !important;
+  width: 32px !important;
+  height: 32px !important;
+  padding: 0 !important;
+  display: flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  flex-direction: column !important;
+  gap: 6px !important;
+}
+
+starlight-menu-button button .open-menu,
+starlight-menu-button button .close-menu {
+  display: none !important;
+}
+
+starlight-menu-button button::before,
+starlight-menu-button button::after {
+  content: "";
+  display: block;
+  width: 16px;
+  height: 1.5px;
+  background: #1A1A1A;
+  border-radius: 2px;
+  transition: transform 0.3s ease;
+}
+
+starlight-menu-button[aria-expanded="true"] button {
+  background-color: transparent !important;
+}
+
+starlight-menu-button[aria-expanded="true"] button::before {
+  transform: translateY(3.75px) rotate(45deg);
+}
+
+starlight-menu-button[aria-expanded="true"] button::after {
+  transform: translateY(-3.75px) rotate(-45deg);
+}
+
 /* ===================== RESPONSIVE ===================== */
 @media (max-width: 768px) {
   .sl-markdown-content h1 { font-size: 28px !important; }
