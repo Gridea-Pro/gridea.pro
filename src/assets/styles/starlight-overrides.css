@@ -40,6 +40,7 @@ html:root[data-theme="dark"] {
 
   --sl-font: 'Figtree', -apple-system, BlinkMacSystemFont, sans-serif;
   --sl-font-system-mono: 'JetBrains Mono', ui-monospace, monospace;
+  --sl-nav-height: 60px;
   --sl-sidebar-width: 260px;
   --sl-content-width: 860px;
 
@@ -456,6 +457,9 @@ starlight-menu-button button {
   justify-content: center !important;
   flex-direction: column !important;
   gap: 6px !important;
+  /* Align with marketing pages: header 60px, button 32px, centered = 14px top */
+  top: 14px !important;
+  inset-inline-end: 24px !important;
 }
 
 starlight-menu-button button .open-menu,
