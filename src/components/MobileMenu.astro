@@ -5,9 +5,6 @@
 ---
 
 <div class="mobile-overlay" id="mobileOverlay">
-  <button class="mobile-overlay-close" id="mobileOverlayClose" aria-label="关闭菜单">
-    <svg width="20" height="20" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"><line x1="4" y1="4" x2="16" y2="16"/><line x1="16" y1="4" x2="4" y2="16"/></svg>
-  </button>
   <nav class="mobile-overlay-nav">
     <a href="/docs/">文档</a>
     <a href="/themes/">主题</a>
@@ -44,27 +41,18 @@
   transition: transform 0.3s ease, opacity 0.3s ease;
 }
 
-/* ── Overlay close button ── */
-.mobile-overlay-close {
-  position: absolute;
-  top: 10px;
-  right: 20px;
-  width: 40px;
-  height: 40px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  background: none;
-  border: none;
-  cursor: pointer;
-  color: #1A1A1A;
-  z-index: 10;
-  border-radius: 50%;
-  transition: background 0.2s ease;
+/* ── Hamburger → X animation (2-line) ── */
+.mobile-menu-btn.is-open .hamburger-line:nth-child(1) {
+  transform: translateY(3.75px) rotate(45deg);
 }
 
-.mobile-overlay-close:hover {
-  background: rgba(0, 0, 0, 0.05);
+.mobile-menu-btn.is-open .hamburger-line:nth-child(2) {
+  transform: translateY(-3.75px) rotate(-45deg);
+}
+
+/* ── Header above overlay when menu open ── */
+.header.menu-open {
+  z-index: 1060;
 }
 
 /* ── Fullscreen overlay ── */
@@ -143,12 +131,13 @@
 (function () {
   var btn = document.getElementById('menuToggle');
   var overlay = document.getElementById('mobileOverlay');
-  var closeBtn = document.getElementById('mobileOverlayClose');
+  var header = btn ? btn.closest('header') || btn.closest('.header') : null;
   if (!btn || !overlay) return;
 
   function closeMenu() {
     btn.classList.remove('is-open');
     overlay.classList.remove('is-open');
+    if (header) header.classList.remove('menu-open');
     btn.setAttribute('aria-expanded', 'false');
     document.body.style.overflow = '';
   }
@@ -156,13 +145,10 @@
   btn.addEventListener('click', function () {
     var open = btn.classList.toggle('is-open');
     overlay.classList.toggle('is-open');
+    if (header) header.classList.toggle('menu-open');
     btn.setAttribute('aria-expanded', open);
     document.body.style.overflow = open ? 'hidden' : '';
   });
-
-  if (closeBtn) {
-    closeBtn.addEventListener('click', closeMenu);
-  }
 
   overlay.addEventListener('click', function (e) {
     if (e.target === overlay || e.target.tagName === 'A') {
