@@ -53,6 +53,7 @@ export default defineConfig({
             { label: '配置', translations: { en: 'Configuration' }, slug: 'docs/getting-started/configuration' },
             { label: '第一篇文章', translations: { en: 'First Post' }, slug: 'docs/getting-started/first-post' },
             { label: '发布部署', translations: { en: 'Publishing' }, slug: 'docs/getting-started/deployment' },
+            { label: '从 Gridea 迁移', translations: { en: 'Migrating from Gridea' }, slug: 'docs/getting-started/migration' },
           ],
         },
         {
