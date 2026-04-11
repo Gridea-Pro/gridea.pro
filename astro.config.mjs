@@ -13,7 +13,7 @@ export default defineConfig({
       title: 'Gridea Pro',
       favicon: '/favicon.ico',
       logo: {
-        src: './public/appicon.png',
+        src: './public/gridea-pro.png',
         replacesTitle: false,
       },
       components: {
@@ -56,6 +56,21 @@ export default defineConfig({
           ],
         },
         {
+          label: '功能指南',
+          translations: { en: 'Feature Guide' },
+          items: [
+            { label: '概述', translations: { en: 'Overview' }, slug: 'docs/features' },
+            { label: '闪念笔记', translations: { en: 'Memos' }, slug: 'docs/features/memos' },
+            { label: '标签与分类', translations: { en: 'Tags & Categories' }, slug: 'docs/features/tags-categories' },
+            { label: '评论系统', translations: { en: 'Comments' }, slug: 'docs/features/comments' },
+            { label: '友情链接', translations: { en: 'Friend Links' }, slug: 'docs/features/links' },
+            { label: 'AI 助手', translations: { en: 'AI Assistant' }, slug: 'docs/features/ai-assistant' },
+            { label: 'SEO 设置', translations: { en: 'SEO Settings' }, slug: 'docs/features/seo' },
+            { label: 'PWA 配置', translations: { en: 'PWA' }, slug: 'docs/features/pwa' },
+            { label: 'CDN 与图片管理', translations: { en: 'CDN & Media' }, slug: 'docs/features/cdn-media' },
+          ],
+        },
+        {
           label: '主题开发',
           translations: { en: 'Theme Development' },
           items: [
@@ -74,6 +89,9 @@ export default defineConfig({
             { label: 'GitHub Pages', slug: 'docs/deployment/github-pages' },
             { label: 'Vercel', slug: 'docs/deployment/vercel' },
             { label: 'Netlify', slug: 'docs/deployment/netlify' },
+            { label: 'Gitee Pages', slug: 'docs/deployment/gitee' },
+            { label: 'Coding Pages', slug: 'docs/deployment/coding' },
+            { label: 'SFTP / FTP', slug: 'docs/deployment/sftp' },
             { label: '自定义服务器', translations: { en: 'Custom Server' }, slug: 'docs/deployment/custom-server' },
           ],
         },
