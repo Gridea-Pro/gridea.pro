@@ -87,6 +87,7 @@ export default defineConfig({
           label: '部署',
           translations: { en: 'Deployment' },
           items: [
+            { label: 'OAuth 授权总览', translations: { en: 'OAuth Overview' }, slug: 'docs/deployment/oauth' },
             { label: 'GitHub Pages', slug: 'docs/deployment/github-pages' },
             { label: 'Vercel', slug: 'docs/deployment/vercel' },
             { label: 'Netlify', slug: 'docs/deployment/netlify' },
