@@ -11,7 +11,7 @@ export const THEMES_REPO_URL = 'https://github.com/Gridea-Pro/gridea-pro-themes'
 export const AUTHOR_BLOG = 'https://are.ink/';
 export const AUTHOR_ABOUT = 'https://are.ink/post/about/';
 export const AUTHOR_GITHUB = 'https://github.com/Tespera';
-export const CONTACT_EMAIL = 'hi@gridea.pro';
+export const CONTACT_EMAIL = 'tespera@foxmail.com';
 export const OG_IMAGE = `${SITE_URL}/appicon.png`;
 
 export type Lang = 'zh-CN' | 'en';

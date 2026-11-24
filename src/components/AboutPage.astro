@@ -19,12 +19,19 @@ const first = releases[releases.length - 1];
 const stable = await getLatestStable();
 const pre = await getLatestPrerelease();
 
-const articles = [
-  ['https://are.ink/post/why-i-revived-gridea/', '我为什么复活了 Gridea'],
-  ['https://are.ink/post/gridea-pro-backend-architecture-deep-dive/', 'Gridea Pro 后端架构深度解析'],
+/** 作者在博客发表的 Gridea Pro 相关文章，标题与博客原文一致。 */
+const presetArticles = [
+  ['https://are.ink/post/hello-gridea-pro/', '念念不忘，必有回响 —— Gridea Pro，我们回来了'],
+  ['https://are.ink/post/quick-start/', 'Gridea Pro 完全上手指南 —— 从写作到发布，一篇搞定'],
+  ['https://are.ink/post/why-i-revived-gridea/', '我为什么复活了 Gridea —— 每个想写点什么的人，都值得一个更简单的开始'],
+  ['https://are.ink/post/why-we-write/', '都 2026 年了，我们为什么还要写博客'],
+  ['https://are.ink/post/indie-blog-is-not-dead/', '独立博客没有死，正在死的是平庸的博客'],
+];
+const designArticles = [
+  ['https://are.ink/post/gridea-pro-backend-architecture-deep-dive/', 'Gridea Pro 后端架构深度解析：一个桌面端静态博客系统的工程哲学'],
   ['https://are.ink/post/gridea-pro-mcp-design-philosophy/', 'Gridea Pro MCP 的设计理念与技术取舍'],
   ['https://are.ink/post/gridea-pro-cdn/', '从零实现 CDN 图床：Gridea Pro 如何让图片管理彻底自动化'],
-  ['https://are.ink/post/gridea-pro-vs-hexo-vs-hugo/', 'Gridea Pro vs Hexo vs Hugo 深度对比'],
+  ['https://are.ink/post/gridea-pro-vs-hexo-vs-hugo/', 'Gridea Pro vs Hexo vs Hugo — 深度对比分析报告'],
   ['https://are.ink/post/migrating-from-gridea-to-gridea-pro/', '从 Gridea 迁移到 Gridea Pro：零风险完整指南'],
 ];
 
@@ -149,14 +156,16 @@ const aboutNode = {
       {en ? (
         <p>Eliauk on the web: <a href={AUTHOR_GITHUB} rel="noopener">GitHub @Tespera</a> · <a href={AUTHOR_BLOG} rel="noopener">Blog: Shu'er (are.ink)</a></p>
       ) : (
-        <>
-          <p>作者主页：<a href={AUTHOR_GITHUB} rel="noopener">GitHub @Tespera</a> · <a href={AUTHOR_BLOG} rel="noopener">博客「述尔」（are.ink）</a></p>
-          <p>Gridea Pro 的设计与实现记录：</p>
-          <ul class="about-links">
-            {articles.map(([href, title]) => <li><a href={href} rel="noopener">{title}</a></li>)}
-          </ul>
-        </>
+        <p>作者主页：<a href={AUTHOR_GITHUB} rel="noopener">GitHub @Tespera</a> · <a href={AUTHOR_BLOG} rel="noopener">博客「述尔」（are.ink）</a></p>
       )}
+      <h3 class="about-subhead">{en ? 'Articles bundled with the app (in Chinese)' : '随客户端预置的文章'}</h3>
+      <ul class="about-links">
+        {presetArticles.map(([href, title]) => <li><a href={href} rel="noopener" lang="zh-CN">{title}</a></li>)}
+      </ul>
+      <h3 class="about-subhead">{en ? 'Design and implementation notes (in Chinese)' : '设计与实现记录'}</h3>
+      <ul class="about-links">
+        {designArticles.map(([href, title]) => <li><a href={href} rel="noopener" lang="zh-CN">{title}</a></li>)}
+      </ul>
     </div>
 
     <div class="about-section">
