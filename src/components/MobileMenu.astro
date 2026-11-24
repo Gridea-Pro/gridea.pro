@@ -2,8 +2,8 @@
 // Apple-style fullscreen overlay mobile menu
 // Usage: add <MobileMenu /> after </header> in any page
 // Requires: a <button id="menuToggle"> in the header
-interface Props { lang?: 'zh-CN' | 'en' }
-const { lang = 'zh-CN' } = Astro.props;
+interface Props { lang?: 'zh-CN' | 'en'; switchHref?: string }
+const { lang = 'zh-CN', switchHref } = Astro.props;
 const en = lang === 'en';
 ---
 
@@ -18,6 +18,7 @@ const en = lang === 'en';
     <a href="/changelog/">{en ? 'Changelog' : '更新日志'}</a>
     <a href={en ? '/en/about/' : '/about/'}>{en ? 'About' : '关于'}</a>
     <a href="https://github.com/Gridea-Pro/gridea-pro" target="_blank" rel="noopener">GitHub</a>
+    {switchHref && <a href={switchHref} hreflang={en ? 'zh-CN' : 'en'} lang={en ? 'zh-CN' : 'en'}>{en ? '简体中文' : 'English'}</a>}
     <a href="/download/" class="mobile-overlay-download">{en ? 'Download' : '免费下载'}</a>
   </nav>
 </div>

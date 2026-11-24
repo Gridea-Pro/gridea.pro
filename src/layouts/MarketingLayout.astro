@@ -5,6 +5,7 @@
 import '../styles/marketing.css';
 import SiteHead from '../components/SiteHead.astro';
 import MobileMenu from '../components/MobileMenu.astro';
+import LangSwitch from '../components/LangSwitch.astro';
 import { STATEMENT, REPO_URL, AUTHOR_BLOG, type Lang } from '../data/site';
 
 interface Props {
@@ -25,7 +26,7 @@ const otherLang = en ? alternates?.['zh-CN'] : alternates?.en;
 
 const t = en
   ? {
-      docs: 'Docs', themes: 'Themes', changelog: 'Changelog', download: 'Download', menu: 'Menu',
+      docs: 'Docs', themes: 'Themes', changelog: 'Changelog', aboutNav: 'About', download: 'Download', menu: 'Menu',
       tagline: 'An open-source desktop client for writing static blogs.',
       product: 'Product', resources: 'Resources', about: 'About',
       productLinks: [['/docs/features/', 'Features'], ['/themes/', 'Themes'], ['/download/', 'Download'], ['/changelog/', 'Changelog']],
@@ -34,7 +35,7 @@ const t = en
       switchLabel: '简体中文',
     }
   : {
-      docs: '文档', themes: '主题', changelog: '更新日志', download: '下载', menu: '菜单',
+      docs: '文档', themes: '主题', changelog: '更新日志', aboutNav: '关于', download: '下载', menu: '菜单',
       tagline: '开源的桌面端静态博客写作客户端',
       product: '产品', resources: '资源', about: '关于',
       productLinks: [['/docs/features/', '功能介绍'], ['/themes/', '主题画廊'], ['/download/', '下载'], ['/changelog/', '更新日志']],
@@ -43,6 +44,8 @@ const t = en
       switchLabel: 'English',
     };
 const external = (href: string) => href.startsWith('http');
+const aboutPath = en ? '/en/about/' : '/about/';
+const switchHref = otherLang ?? (en ? '/' : '/en/');
 ---
 <!DOCTYPE html>
 <html lang={lang}>
@@ -64,11 +67,13 @@ const external = (href: string) => href.startsWith('http');
       <a href="/docs/">{t.docs}</a>
       <a href="/themes/">{t.themes}</a>
       <a href="/changelog/">{t.changelog}</a>
+      <a href={aboutPath} aria-current={props.path === aboutPath ? 'page' : undefined}>{t.aboutNav}</a>
       <a href={REPO_URL} class="header-github" aria-label="GitHub" target="_blank" rel="noopener">
         <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 2C6.477 2 2 6.484 2 12.017c0 4.425 2.865 8.18 6.839 9.504.5.092.682-.217.682-.483 0-.237-.008-.868-.013-1.703-2.782.605-3.369-1.343-3.369-1.343-.454-1.158-1.11-1.466-1.11-1.466-.908-.62.069-.608.069-.608 1.003.07 1.531 1.032 1.531 1.032.892 1.53 2.341 1.088 2.91.832.092-.647.35-1.088.636-1.338-2.22-.253-4.555-1.113-4.555-4.951 0-1.093.39-1.988 1.029-2.688-.103-.253-.446-1.272.098-2.65 0 0 .84-.27 2.75 1.026A9.564 9.564 0 0112 6.844c.85.004 1.705.115 2.504.337 1.909-1.296 2.747-1.027 2.747-1.027.546 1.379.202 2.398.1 2.651.64.7 1.028 1.595 1.028 2.688 0 3.848-2.339 4.695-4.566 4.943.359.309.678.92.678 1.855 0 1.338-.012 2.419-.012 2.747 0 .268.18.58.688.482A10.019 10.019 0 0022 12.017C22 6.484 17.522 2 12 2z"/></svg>
       </a>
     </nav>
     <div class="header-actions">
+      <LangSwitch href={switchHref} to={en ? 'zh-CN' : 'en'} />
       <a href="/download/" class="btn-download-header">{t.download}</a>
       <button class="mobile-menu-btn" id="menuToggle" aria-label={t.menu} aria-expanded="false">
         <span class="hamburger-line" style="display:block;width:16px;height:1.5px"></span>
@@ -78,7 +83,7 @@ const external = (href: string) => href.startsWith('http');
   </div>
 </header>
 
-<MobileMenu lang={lang} />
+<MobileMenu lang={lang} switchHref={switchHref} />
 
 <slot />
 
