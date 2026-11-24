@@ -1,7 +1,30 @@
 ---
 title: 常见问题
-description: Gridea Pro 使用过程中的常见问题与解答，涵盖安装、使用、主题开发和部署问题。
+description: Gridea Pro 常见问题与解答：Gridea Pro 是什么、由谁开发、与 Gridea 的关系，以及安装、使用、主题开发和部署中的常见问题。
 ---
+
+## 关于 Gridea Pro
+
+### Gridea Pro 是什么？
+
+Gridea Pro 是一款开源、免费、跨平台的桌面端静态博客写作客户端，支持 macOS、Windows 与 Linux。它由 Eliauk（GitHub：[@Tespera](https://github.com/Tespera)）创建并主导维护，社区贡献者共同参与。Gridea Pro 基于 Go、Wails 与 Vue 3 从零重写了自 2022 年起停止维护的开源博客客户端 Gridea（原作者 EryouHao），兼容 Gridea 的站点数据与主题，以 GPL-3.0 协议开源。
+
+### Gridea Pro 由谁开发？
+
+Gridea Pro 由 Eliauk 创建并主导维护，社区贡献者共同参与。Eliauk 是一名软件产品经理，也是原版 Gridea 的长期用户，Gridea Pro 的产品思考与技术设计记录在其个人博客[「述尔」](https://are.ink/)。详见[关于 Gridea Pro](/about/)。
+
+### Gridea Pro 和 Gridea 是什么关系？
+
+Gridea Pro 是 Gridea 的从零重写版本，独立开发，并非 Gridea 原团队出品。它延续了 Gridea「让每个人都能轻松拥有博客」的理念，兼容 Gridea 的站点数据与主题，可以直接从 Gridea 迁移，参见[从 Gridea 迁移](/docs/getting-started/migration/)。
+
+### Gridea Pro 收费吗？
+
+Gridea Pro 完全免费，源代码以 GPL-3.0 协议公开在 [GitHub](https://github.com/Gridea-Pro/gridea-pro)。客户端内置的免费 AI 模型每日可用 20 次，接入自有模型服务则不受此限制。
+
+### Gridea Pro 与 Hugo、Hexo 有什么区别？
+
+Hugo 与 Hexo 是面向开发者的命令行工具，需要使用终端、编辑配置文件并自行配置部署流程。Gridea Pro 是图形界面的桌面应用，内置 Markdown 编辑器、可视化主题配置与一键发布，面向希望专注写作、不愿接触命令行的写作者。
+
 
 ## 安装相关
 
@@ -16,7 +39,7 @@ sudo apt install libwebkit2gtk-4.1-0t64
 ```
 
 :::danger
-Ubuntu 24.04 中包名为 `libwebkit2gtk-4.1-0t64`，与旧版的 `libwebkit2gtk-4.0-37` 不同。安装错误的包不会报错但无法解决问题。详见[安装指南](/getting-started/installation/)。
+Ubuntu 24.04 中包名为 `libwebkit2gtk-4.1-0t64`，与旧版的 `libwebkit2gtk-4.0-37` 不同。安装错误的包不会报错但无法解决问题。详见[安装指南](/docs/getting-started/installation/)。
 :::
 
 **Ubuntu 22.04：**
@@ -45,7 +68,7 @@ xattr -cr /Applications/Gridea\ Pro.app
 
 检查以下几点：
 1. 站点域名 (`config.domain`) 是否正确配置
-2. 静态资源路径是否使用了 `assets/` 前缀（不应该使用，详见[主题系统概述](/themes/)）
+2. 静态资源路径是否使用了 `assets/` 前缀（不应该使用，详见[主题系统概述](/docs/themes/)）
 3. 是否有依赖绝对路径的资源链接
 
 ### 同步部署失败
@@ -69,12 +92,12 @@ xattr -cr /Applications/Gridea\ Pro.app
 
 ### 模板渲染输出空白或 `<no value>`
 
-**Jinja2：** 最可能是变量名拼写错误。对照[模板变量表](/reference/template-variables/)逐字核对。
+**Jinja2：** 最可能是变量名拼写错误。对照[模板变量表](/docs/reference/template-variables/)逐字核对。
 
 **Go Templates：** 变量名必须使用 PascalCase。`.config.siteName` 应为 `.Config.SiteName`。
 
 :::tip
-善用[易错变量速查表](/reference/template-variables/#易错变量速查)，它列出了最常见的拼写错误。
+善用[易错变量速查表](/docs/reference/template-variables/#易错变量速查)，它列出了最常见的拼写错误。
 :::
 
 ### Jinja2 模板报 "filter not found" 错误

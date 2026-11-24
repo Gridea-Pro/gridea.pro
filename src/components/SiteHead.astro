@@ -1,0 +1,47 @@
+---
+/**
+ * 营销页面共用的 <head> 元信息：标题、描述、规范网址、语言对应关系、社交分享卡片、结构化数据。
+ * 规范网址统一使用不带 www 的 https://gridea.pro。
+ */
+import { SITE_URL, OG_IMAGE, baseGraph, type Lang } from '../data/site';
+
+interface Props {
+  lang: Lang;
+  title: string;
+  description: string;
+  /** 本页路径，以 / 开头、以 / 结尾，例如 /download/ */
+  path: string;
+  /** 本页在另一种语言下的路径（若存在），用于 hreflang */
+  alternates?: Partial<Record<Lang, string>>;
+  /** 追加到基础结构化数据图中的节点 */
+  graph?: Record<string, unknown>[];
+  ogType?: 'website' | 'article';
+}
+
+const { lang, title, description, path, alternates, graph = [], ogType = 'website' } = Astro.props;
+const canonical = SITE_URL + path;
+const jsonLd = JSON.stringify({ '@context': 'https://schema.org', '@graph': [...baseGraph(), ...graph] });
+const hreflangs = alternates ? Object.entries(alternates).filter(([, p]) => p) : [];
+---
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<link rel="icon" href="/favicon.ico">
+<title>{title}</title>
+<meta name="description" content={description}>
+<meta name="author" content="Eliauk">
+<link rel="canonical" href={canonical}>
+{hreflangs.map(([l, p]) => <link rel="alternate" hreflang={l} href={SITE_URL + p}>)}
+{hreflangs.length > 0 && <link rel="alternate" hreflang="x-default" href={SITE_URL + (alternates?.['zh-CN'] ?? path)}>}
+<meta property="og:type" content={ogType}>
+<meta property="og:site_name" content="Gridea Pro">
+<meta property="og:locale" content={lang === 'en' ? 'en_US' : 'zh_CN'}>
+<meta property="og:title" content={title}>
+<meta property="og:description" content={description}>
+<meta property="og:url" content={canonical}>
+<meta property="og:image" content={OG_IMAGE}>
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content={title}>
+<meta name="twitter:description" content={description}>
+<meta name="twitter:image" content={OG_IMAGE}>
+<link rel="alternate" type="text/plain" href="/llms.txt" title="llms.txt">
+<script type="application/ld+json" set:html={jsonLd} />

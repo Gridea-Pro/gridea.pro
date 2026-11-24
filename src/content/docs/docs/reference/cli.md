@@ -73,7 +73,7 @@ gridea build && gridea deploy
 ```
 
 :::caution
-`deploy` 命令需要在 Gridea 数据目录中已配置好远程仓库信息。首次使用前请先在 GUI 中完成[远程仓库配置](/getting-started/configuration/)。
+`deploy` 命令需要在 Gridea 数据目录中已配置好远程仓库信息。首次使用前请先在 GUI 中完成[远程仓库配置](/docs/getting-started/configuration/)。
 :::
 
 ### gridea new

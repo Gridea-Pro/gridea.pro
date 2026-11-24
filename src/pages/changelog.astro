@@ -1,27 +1,26 @@
 ---
 import MobileMenu from '../components/MobileMenu.astro';
+import SiteHead from '../components/SiteHead.astro';
+import { createMarkdownProcessor } from '@astrojs/markdown-remark';
+import { SITE_URL, WEBSITE_ID, SOFTWARE_ID, STATEMENT, softwareNode } from '../data/site';
+import { getReleases, getLatestStable, version, formatDate, formatSize } from '../data/releases';
+
+const releases = await getReleases();
+const stable = await getLatestStable();
+const md = await createMarkdownProcessor({ syntaxHighlight: false });
+const entries = await Promise.all(releases.map(async (r, idx) => ({
+  r,
+  idx,
+  html: r.body?.trim() ? (await md.render(r.body)).code : '',
+})));
+const title = 'Gridea Pro 更新日志 — 版本发布记录';
+const description = `Gridea Pro 各版本的发布记录：新功能、改进与问题修复。当前正式版 v${version(stable)}，共 ${releases.length} 个版本。`;
+const pageNode = { '@type': 'WebPage', '@id': `${SITE_URL}/changelog/#webpage`, url: `${SITE_URL}/changelog/`, name: title, inLanguage: 'zh-CN', isPartOf: { '@id': WEBSITE_ID }, about: { '@id': SOFTWARE_ID } };
 ---
 <!DOCTYPE html>
 <html lang="zh-CN">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<link rel="icon" href="/favicon.ico">
-<title>更新日志 — Gridea Pro</title>
-<meta name="description" content="Gridea Pro 更新日志与版本发布记录。了解每个版本的新功能、改进和修复。">
-<meta name="keywords" content="Gridea Pro更新日志,版本发布,changelog,新功能,修复">
-<link rel="canonical" href="https://gridea.pro/changelog.html">
-<meta property="og:type" content="website">
-<meta property="og:title" content="更新日志 — Gridea Pro">
-<meta property="og:description" content="Gridea Pro 更新日志与版本发布记录。了解每个版本的新功能、改进和修复。">
-<meta property="og:url" content="https://gridea.pro/changelog.html">
-<meta property="og:image" content="https://gridea.pro/appicon.png">
-<meta property="og:site_name" content="Gridea Pro">
-<meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="更新日志 — Gridea Pro">
-<meta name="twitter:description" content="Gridea Pro 更新日志与版本发布记录。了解每个版本的新功能、改进和修复。">
-<meta name="twitter:image" content="https://gridea.pro/appicon.png">
-<script type="application/ld+json" set:html={JSON.stringify({"@context":"https://schema.org","@type":"WebPage","name":"更新日志 — Gridea Pro","description":"Gridea Pro 更新日志与版本发布记录。了解每个版本的新功能、改进和修复。","url":"https://gridea.pro/changelog.html","isPartOf":{"@type":"WebSite","name":"Gridea Pro","url":"https://gridea.pro/"}})}></script>
+<SiteHead lang="zh-CN" title={title} description={description} path="/changelog/" graph={[softwareNode("zh-CN", version(stable)), pageNode]} />
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Figtree:wght@400;500;600&family=JetBrains+Mono&family=Plus+Jakarta+Sans:wght@500;600;700;800&display=swap" rel="stylesheet">
@@ -95,6 +94,22 @@ body{font-family:"Figtree",sans-serif;font-weight:400;font-size:16px;line-height
 .footer-bottom{border-top:1px solid var(--border);padding-top:24px;font-size:13px;color:var(--text-muted);text-align:center}
 @media(max-width:768px){.header-nav{display:none}.btn-download{display:none}.mobile-menu-btn{display:flex}.page-header{padding-top:110px;padding-bottom:32px}.page-header h1{font-size:32px}.page-header .subtitle{font-size:16px}.timeline{padding-left:0}.timeline::before{display:none}.timeline-dot{display:none}.timeline-date{position:static;width:auto;text-align:left;margin-bottom:8px}.timeline-entry{padding-bottom:40px;padding-left:0;border-left:none;border-bottom:1px solid var(--border);margin-bottom:0}.timeline-entry:last-child{border-bottom:none}.footer-grid{grid-template-columns:1fr;gap:32px}.collapsible-toggle{display:block;margin-left:0;margin-top:8px}}
 @media(max-width:480px){.header-inner{padding:0 16px}.page-header{padding-left:16px;padding-right:16px}.page-header h1{font-size:28px}.filters{padding-left:16px;padding-right:16px}.timeline-container{padding:32px 16px 64px}.footer-inner{padding:0 16px}}
+.page-header .subtitle a{color:var(--accent)}
+.badge-pre{display:inline-block;font-size:11px;font-weight:600;padding:2px 8px;border-radius:999px;background:var(--bg-subtle);color:var(--text-secondary);margin-left:6px}
+.timeline-title a{color:inherit}.timeline-title a:hover{color:var(--accent)}
+h2.timeline-title{font-size:20px;line-height:1.4}
+.release-notes{font-size:14.5px;line-height:1.8;color:var(--text-body);margin:12px 0 4px;overflow-wrap:anywhere}
+.release-notes h1,.release-notes h2,.release-notes h3,.release-notes h4{font-family:'Plus Jakarta Sans',sans-serif;color:var(--text-primary);margin:20px 0 8px;line-height:1.4}
+.release-notes h1,.release-notes h2{font-size:17px}.release-notes h3{font-size:15.5px}.release-notes h4{font-size:14.5px}
+.release-notes p{margin:8px 0}.release-notes ul,.release-notes ol{padding-left:20px;margin:8px 0}.release-notes li{margin:4px 0}
+.release-notes blockquote{border-left:3px solid var(--accent-medium);background:var(--accent-light);padding:8px 14px;margin:12px 0;border-radius:0 6px 6px 0}
+.release-notes code{font-family:'JetBrains Mono',monospace;font-size:12.5px;background:var(--bg-subtle);padding:1px 5px;border-radius:4px}
+.release-notes pre{background:var(--bg-subtle);padding:12px;border-radius:8px;overflow-x:auto;margin:10px 0}.release-notes pre code{background:none;padding:0}
+.release-notes a{color:var(--accent)}.release-notes hr{border:none;border-top:1px solid var(--border);margin:16px 0}
+.release-notes table{border-collapse:collapse;margin:10px 0;font-size:13.5px;display:block;overflow-x:auto}.release-notes th,.release-notes td{border:1px solid var(--border);padding:6px 10px;text-align:left}
+.release-notes img{max-width:100%;height:auto}
+.release-details{margin:10px 0}.release-details summary{cursor:pointer;font-size:14px;color:var(--text-secondary)}.release-details summary:hover{color:var(--accent)}
+.file-list a.file-name{color:var(--text-body)}.file-list a.file-name:hover{color:var(--accent)}
 </style>
 </head>
 <body>
@@ -122,7 +137,7 @@ body{font-family:"Figtree",sans-serif;font-weight:400;font-size:16px;line-height
 <section class="page-header">
   <span class="label">更新日志</span>
   <h1>版本历史</h1>
-  <p class="subtitle">每一次更新，都是为了更好的写作体验。</p>
+  <p class="subtitle">Gridea Pro 各版本的新功能、改进与问题修复。版本数据同步自 <a href="https://github.com/Gridea-Pro/gridea-pro/releases" rel="noopener">GitHub Releases</a>。</p>
 </section>
 
 <div class="filters">
@@ -133,107 +148,46 @@ body{font-family:"Figtree",sans-serif;font-weight:400;font-size:16px;line-height
 
 <div class="timeline-container">
   <div class="timeline">
-
-    <div class="timeline-entry" data-type="stable">
-      <div class="timeline-date">2026-03-15</div>
-      <div class="timeline-dot latest"></div>
-      <div class="timeline-content">
-        <div class="version-badges"><span class="version-badge">v1.0.0</span><span class="badge-latest">最新</span></div>
-        <h3 class="timeline-title">Gridea Pro v1.0.0 — 全新重构，正式发布</h3>
-        <div class="release-section">
-          <h4><span class="emoji">✨</span> 新功能</h4>
-          <ul>
-            <li>全新 Go + Wails v2 架构，启动速度提升 3 倍</li>
-            <li>内置 Markdown 编辑器，支持实时预览</li>
-            <li>多模板引擎支持：Jinja2、Go Templates、EJS</li>
-            <li>一键部署到 GitHub Pages 和 Vercel</li>
-            <li>主题系统：支持自定义主题和在线主题画廊</li>
-            <li>自动生成 Sitemap 和 Atom Feed</li>
-            <li>跨平台支持：macOS、Windows、Linux</li>
-          </ul>
-        </div>
-        <div class="download-row">
-          <a href="/download/" class="download-link">下载安装包 →</a>
-          <button class="collapsible-toggle" onclick="toggleCollapsible(this)">查看所有下载 ▾</button>
-          <div class="collapsible-content">
-            <ul class="file-list">
-              <li><span class="file-name">Gridea-Pro-1.0.0-mac-arm64.dmg</span><span class="file-size">68.2 MB</span></li>
-              <li><span class="file-name">Gridea-Pro-1.0.0-mac-x64.dmg</span><span class="file-size">71.4 MB</span></li>
-              <li><span class="file-name">Gridea-Pro-1.0.0-win-x64.exe</span><span class="file-size">64.8 MB</span></li>
-              <li><span class="file-name">Gridea-Pro-1.0.0-linux-amd64.deb</span><span class="file-size">62.1 MB</span></li>
-              <li><span class="file-name">Gridea-Pro-1.0.0-linux-amd64.rpm</span><span class="file-size">62.3 MB</span></li>
-            </ul>
+    {entries.map(({ r, idx, html }) => (
+      <article class="timeline-entry" data-type={r.prerelease ? 'beta' : 'stable'} id={r.tag_name}>
+        <div class="timeline-date"><time datetime={r.published_at}>{formatDate(r.published_at)}</time></div>
+        <div class:list={['timeline-dot', { latest: r.tag_name === stable.tag_name }]}></div>
+        <div class="timeline-content">
+          <div class="version-badges">
+            <span class="version-badge">{r.tag_name}</span>
+            {r.tag_name === stable.tag_name && <span class="badge-latest">最新正式版</span>}
+            {r.prerelease && <span class="badge-pre">测试版</span>}
+          </div>
+          <h2 class="timeline-title"><a href={`#${r.tag_name}`}>{r.name || `Gridea Pro ${r.tag_name}`}</a></h2>
+          {html && (idx < 3
+            ? <div class="release-notes" set:html={html} />
+            : <details class="release-details"><summary>查看版本说明</summary><div class="release-notes" set:html={html} /></details>)}
+          <div class="download-row">
+            <a href={r.html_url} class="download-link" rel="noopener">在 GitHub 查看 →</a>
+            {r.assets.length > 0 && <>
+              <button class="collapsible-toggle" onclick="toggleCollapsible(this)">查看所有下载 ▾</button>
+              <div class="collapsible-content">
+                <ul class="file-list">
+                  {r.assets.map((a) => <li><a class="file-name" href={a.browser_download_url} rel="noopener">{a.name}</a><span class="file-size">{formatSize(a.size)}</span></li>)}
+                </ul>
+              </div>
+            </>}
           </div>
         </div>
-      </div>
-    </div>
-
-    <div class="timeline-entry" data-type="beta">
-      <div class="timeline-date">2026-03-01</div>
-      <div class="timeline-dot"></div>
-      <div class="timeline-content">
-        <div class="version-badges"><span class="version-badge">v1.0.0-beta.2</span></div>
-        <h3 class="timeline-title">Gridea Pro v1.0.0-beta.2 — 功能增强与问题修复</h3>
-        <div class="release-section">
-          <h4><span class="emoji">✨</span> 新功能</h4>
-          <ul><li>新增静态分页功能</li><li>新增 RSS/Atom Feed 配置选项</li></ul>
-        </div>
-        <div class="release-section">
-          <h4><span class="emoji">🐛</span> 修复</h4>
-          <ul><li>修复 Sitemap 中文 URL 编码问题</li><li>修复 CDATA 双转义问题</li></ul>
-        </div>
-        <div class="download-row">
-          <a href="/download/" class="download-link">下载安装包 →</a>
-          <button class="collapsible-toggle" onclick="toggleCollapsible(this)">查看所有下载 ▾</button>
-          <div class="collapsible-content">
-            <ul class="file-list">
-              <li><span class="file-name">Gridea-Pro-1.0.0-beta.2-mac-arm64.dmg</span><span class="file-size">67.9 MB</span></li>
-              <li><span class="file-name">Gridea-Pro-1.0.0-beta.2-mac-x64.dmg</span><span class="file-size">70.8 MB</span></li>
-              <li><span class="file-name">Gridea-Pro-1.0.0-beta.2-win-x64.exe</span><span class="file-size">64.1 MB</span></li>
-              <li><span class="file-name">Gridea-Pro-1.0.0-beta.2-linux-amd64.deb</span><span class="file-size">61.7 MB</span></li>
-            </ul>
-          </div>
-        </div>
-      </div>
-    </div>
-
-    <div class="timeline-entry" data-type="beta">
-      <div class="timeline-date">2026-02-15</div>
-      <div class="timeline-dot"></div>
-      <div class="timeline-content">
-        <div class="version-badges"><span class="version-badge">v1.0.0-beta.1</span></div>
-        <h3 class="timeline-title">Gridea Pro v1.0.0-beta.1 — 首个公开测试版</h3>
-        <div class="release-section">
-          <h4><span class="emoji">✨</span> 新功能</h4>
-          <ul><li>首个公开测试版本</li><li>基础编辑器功能</li><li>GitHub Pages 部署支持</li></ul>
-        </div>
-        <div class="download-row">
-          <a href="/download/" class="download-link">下载安装包 →</a>
-          <button class="collapsible-toggle" onclick="toggleCollapsible(this)">查看所有下载 ▾</button>
-          <div class="collapsible-content">
-            <ul class="file-list">
-              <li><span class="file-name">Gridea-Pro-1.0.0-beta.1-mac-arm64.dmg</span><span class="file-size">66.3 MB</span></li>
-              <li><span class="file-name">Gridea-Pro-1.0.0-beta.1-mac-x64.dmg</span><span class="file-size">69.5 MB</span></li>
-              <li><span class="file-name">Gridea-Pro-1.0.0-beta.1-win-x64.exe</span><span class="file-size">63.2 MB</span></li>
-              <li><span class="file-name">Gridea-Pro-1.0.0-beta.1-linux-amd64.deb</span><span class="file-size">60.8 MB</span></li>
-            </ul>
-          </div>
-        </div>
-      </div>
-    </div>
-
+      </article>
+    ))}
   </div>
 </div>
 
 <footer class="site-footer">
   <div class="footer-inner">
     <div class="footer-grid">
-      <div class="footer-brand"><div class="brand-title"><img src="/appicon.png" alt="Gridea Pro" class="fmark"> Gridea Pro</div><p class="brand-desc">一个简洁的桌面端静态博客写作客户端</p></div>
+      <div class="footer-brand"><div class="brand-title"><img src="/appicon.png" alt="Gridea Pro" class="fmark"> Gridea Pro</div><p class="brand-desc">开源的桌面端静态博客写作客户端</p></div>
       <div class="footer-col"><h4>产品</h4><ul><li><a href="/docs/features/">功能特性</a></li><li><a href="/themes/">主题画廊</a></li><li><a href="/download/">下载</a></li><li><a href="/changelog/">更新日志</a></li></ul></div>
       <div class="footer-col"><h4>资源</h4><ul><li><a href="/docs/">使用文档</a></li><li><a href="/docs/themes/">主题开发</a></li><li><a href="/docs/getting-started/migration/">迁移指南</a></li><li><a href="/docs/faq/">常见问题</a></li></ul></div>
-      <div class="footer-col"><h4>社区</h4><ul><li><a href="https://github.com/Gridea-Pro/gridea-pro" target="_blank" rel="noopener">GitHub</a></li><li><a href="https://github.com/Gridea-Pro/gridea-pro/discussions" target="_blank" rel="noopener">Discussions</a></li><li><a href="https://github.com/Gridea-Pro/gridea-pro/issues" target="_blank" rel="noopener">反馈建议</a></li><li><a href="https://are.ink/" target="_blank" rel="noopener">作者博客</a></li></ul></div>
+      <div class="footer-col"><h4>社区</h4><ul><li><a href="https://github.com/Gridea-Pro/gridea-pro" target="_blank" rel="noopener">GitHub</a></li><li><a href="https://github.com/Gridea-Pro/gridea-pro/discussions" target="_blank" rel="noopener">Discussions</a></li><li><a href="https://github.com/Gridea-Pro/gridea-pro/issues" target="_blank" rel="noopener">反馈建议</a></li><li><a href="/about/">关于 Gridea Pro</a></li><li><a href="https://are.ink/" target="_blank" rel="noopener">作者博客</a></li></ul></div>
     </div>
-    <div class="footer-bottom">&copy; 2026 Gridea Pro Contributors. Open source under GPL-3.0.</div>
+    <div class="footer-bottom">{STATEMENT["zh-CN"].copyright}</div>
   </div>
 </footer>
 

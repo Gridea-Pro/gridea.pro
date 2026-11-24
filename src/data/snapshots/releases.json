@@ -1,0 +1,938 @@
+[
+ {
+  "tag_name": "v1.3.0-beta.2",
+  "name": "Gridea Pro v1.3.0-beta.2",
+  "published_at": "2026-09-16T10:00:04Z",
+  "prerelease": true,
+  "draft": false,
+  "html_url": "https://github.com/Gridea-Pro/gridea-pro/releases/tag/v1.3.0-beta.2",
+  "body": "> 🧪 **本版本是 v1.3.0 的第二个 beta**，接着 beta.1 继续迭代。这一版专注补齐**分类**——此前分类建了也没有对应的页面，前台点不进去。欢迎重点试用分类和分类封面。\r\n\r\n---\r\n\r\n## 🎉 亮点速览\r\n\r\n1. **分类终于有了自己的页面** — 每个分类都有独立的文章列表页，并新增了「所有分类」总览页。此前分类在后台能建、能给文章挂，但前台没有任何页面可以点进去。\r\n2. **分类支持封面图** — 在分类管理里给分类配一张封面，会显示在总览页和分类页上。封面存在站点目录里，换主题不会丢，自动压缩成 WebP，开了 CDN 也会走加速。\r\n3. **flavor 主题的分类页重新设计** — 分类页用整幅封面大图开场，总览页是封面网格。没配封面的分类有专门设计的降级形态，不会塌。\r\n4. **分类地址不再限制小写** — 此前只要地址里有大写字母就存不下去，导致历史分类（尤其是 AI 通过 MCP 建的）完全无法编辑。\r\n\r\n---\r\n\r\n## ✨ 新功能\r\n\r\n#### 分类\r\n\r\n- **分类文章页**：每个分类有独立页面，支持分页。\r\n- **分类总览页**：新增 `/categories/`，列出全部分类及各自篇数，与已有的标签总览页对等。\r\n- **分类封面**：分类管理的编辑面板新增封面上传，分类列表的卡片上会显示封面缩略图。通过 MCP 建分类时也可以指定封面。\r\n- **分类地址路径可配置**：与文章、标签的地址路径设置对齐。\r\n- **分类页进入站点地图**：分类总览页和每个分类页都会被搜索引擎收录。\r\n- **菜单新增「分类」预设入口**：在菜单管理的链接下拉里直接选。\r\n\r\n#### 主题\r\n\r\n- **8 个内置主题补齐分类模板**：simple、notes、fly、amore、amore-jinja2、inotes、letters、flavor 都能正常显示分类页，文章页也会显示所属分类并可点击。\r\n- **第三方主题自动兜底**：主题若没有提供分类页模板，会自动借用它的标签页样式来渲染，保证分类功能不会整体失效，同时在界面上给出提示。\r\n- **内置主题可以增量更新**：新版本给内置主题新增的模板文件，会在启动时补进已有站点。你自己改过的文件一律不覆盖，你整个删掉的主题也不会被装回来。\r\n\r\n---\r\n\r\n## ⚠️ 调整\r\n\r\n- **分类与标签的地址规则放宽为允许大写字母**。原先只允许小写，但防止两个地址相互覆盖靠的是「地址查重不区分大小写」这条规则，它一直独立生效；禁用大写拦不住真实故障，反而让历史数据无法编辑。带空格、`#`、`/`、中文等会破坏链接的字符仍然会被拦下。\r\n- **只有你真的改动了地址时才校验格式**。仅修改描述、封面等其他字段时不再检查地址——历史数据里不合规的地址不应该连带锁死整条记录的编辑。\r\n\r\n---\r\n\r\n## 🐛 BUG 修复\r\n\r\n#### 分类\r\n\r\n- 修复分类描述在前台完全不显示的问题（填了也不会出现，且不报错）。\r\n- 修复分类地址含大写时无法保存，导致大量历史分类无法编辑的问题。\r\n- 修复文章页里的分类链接不跟随「分类地址路径」设置，改了设置后链接指向错误地址。\r\n- 修复分类编辑面板里的地址前缀提示写死为 `/category/`，改过设置后显示的仍是旧值。\r\n\r\n#### 主题与渲染\r\n\r\n- 修复主题使用 `.jinja2` / `.j2` 扩展名时，分类页兜底机制完全失效；以及混用扩展名时把已存在的模板误判为缺失。\r\n- 修复 flavor 主题的分类总览页在浅色模式下出现整片深色色块。\r\n- 修复主题分类模板出错时，按分类数量重复弹出提示（有多少分类弹多少条），且提示中的原因是写死的，与真实错误不符。\r\n- 修复标签链接在特定地址设置下会生成多一个斜杠的坏链接。\r\n\r\n#### 其他\r\n\r\n- 修复菜单管理中「标签」预设链接指向 `/tag/`（实际总览页在 `/tags/`），照着添加会得到一个 404 的菜单项。\r\n- 修复通过 MCP 无法清除分类封面（只能替换不能移除），与界面能力不一致。\r\n- 地址路径设置增加合法性校验，避免异常取值让生成的页面文件落到站点目录之外。\r\n\r\n---\r\n\r\n## 📝 已知问题\r\n\r\n- 主题设置里的「分类 / 文章 / 标签 URL 路径 → 简洁」选项当前不生效，选择后地址不会变化。将在后续版本统一处理。\r\n- 内置主题**已有文件的改进**（而非新增文件）目前仍不会同步到老站点，需要手动删除对应主题后重新获取。这一块的更新策略将单独规划。\r\n\r\n---\r\n\r\n## ❤️ 贡献者\r\n\r\n感谢本次版本的所有贡献者：\r\n\r\n- @Tespera\r\n\r\n欢迎为 Gridea Pro 提交代码、主题或翻译 — 任何 Issue / PR 都可能成为下一个 Release 的一部分。\r\n\r\n---\r\n\r\n**Full Changelog**: https://github.com/Gridea-Pro/gridea-pro/compare/v1.3.0-beta.1...v1.3.0-beta.2",
+  "assets": [
+   {
+    "name": "Gridea.Pro_v1.3.0-beta.2_linux_amd64.AppImage",
+    "size": 34305216,
+    "browser_download_url": "https://github.com/Gridea-Pro/gridea-pro/releases/download/v1.3.0-beta.2/Gridea.Pro_v1.3.0-beta.2_linux_amd64.AppImage"
+   },
+   {
+    "name": "Gridea.Pro_v1.3.0-beta.2_linux_amd64.deb",
+    "size": 34566008,
+    "browser_download_url": "https://github.com/Gridea-Pro/gridea-pro/releases/download/v1.3.0-beta.2/Gridea.Pro_v1.3.0-beta.2_linux_amd64.deb"
+   },
+   {
+    "name": "Gridea.Pro_v1.3.0-beta.2_linux_amd64.rpm",
+    "size": 34528041,
+    "browser_download_url": "https://github.com/Gridea-Pro/gridea-pro/releases/download/v1.3.0-beta.2/Gridea.Pro_v1.3.0-beta.2_linux_amd64.rpm"
+   },
+   {
+    "name": "Gridea.Pro_v1.3.0-beta.2_macos_amd64.dmg",
+    "size": 32403367,
+    "browser_download_url": "https://github.com/Gridea-Pro/gridea-pro/releases/download/v1.3.0-beta.2/Gridea.Pro_v1.3.0-beta.2_macos_amd64.dmg"
+   },
+   {
+    "name": "Gridea.Pro_v1.3.0-beta.2_macos_amd64.zip",
+    "size": 32447385,
+    "browser_download_url": "https://github.com/Gridea-Pro/gridea-pro/releases/download/v1.3.0-beta.2/Gridea.Pro_v1.3.0-beta.2_macos_amd64.zip"
+   },
+   {
+    "name": "Gridea.Pro_v1.3.0-beta.2_macos_arm64.dmg",
+    "size": 30371848,
+    "browser_download_url": "https://github.com/Gridea-Pro/gridea-pro/releases/download/v1.3.0-beta.2/Gridea.Pro_v1.3.0-beta.2_macos_arm64.dmg"
+   },
+   {
+    "name": "Gridea.Pro_v1.3.0-beta.2_macos_arm64.zip",
+    "size": 30343992,
+    "browser_download_url": "https://github.com/Gridea-Pro/gridea-pro/releases/download/v1.3.0-beta.2/Gridea.Pro_v1.3.0-beta.2_macos_arm64.zip"
+   },
+   {
+    "name": "Gridea.Pro_v1.3.0-beta.2_windows_amd64_portable.exe",
+    "size": 50598912,
+    "browser_download_url": "https://github.com/Gridea-Pro/gridea-pro/releases/download/v1.3.0-beta.2/Gridea.Pro_v1.3.0-beta.2_windows_amd64_portable.exe"
+   },
+   {
+    "name": "Gridea.Pro_v1.3.0-beta.2_windows_amd64_setup.exe",
+    "size": 28005324,
+    "browser_download_url": "https://github.com/Gridea-Pro/gridea-pro/releases/download/v1.3.0-beta.2/Gridea.Pro_v1.3.0-beta.2_windows_amd64_setup.exe"
+   },
+   {
+    "name": "Gridea.Pro_v1.3.0-beta.2_windows_arm64_portable.exe",
+    "size": 48153600,
+    "browser_download_url": "https://github.com/Gridea-Pro/gridea-pro/releases/download/v1.3.0-beta.2/Gridea.Pro_v1.3.0-beta.2_windows_arm64_portable.exe"
+   },
+   {
+    "name": "Gridea.Pro_v1.3.0-beta.2_windows_arm64_setup.exe",
+    "size": 26179191,
+    "browser_download_url": "https://github.com/Gridea-Pro/gridea-pro/releases/download/v1.3.0-beta.2/Gridea.Pro_v1.3.0-beta.2_windows_arm64_setup.exe"
+   },
+   {
+    "name": "SHA256SUMS",
+    "size": 1220,
+    "browser_download_url": "https://github.com/Gridea-Pro/gridea-pro/releases/download/v1.3.0-beta.2/SHA256SUMS"
+   }
+  ]
+ },
+ {
+  "tag_name": "v1.3.0-beta.1",
+  "name": "Gridea Pro v1.3.0-beta.1",
+  "published_at": "2026-09-15T06:19:56Z",
+  "prerelease": true,
+  "draft": false,
+  "html_url": "https://github.com/Gridea-Pro/gridea-pro/releases/tag/v1.3.0-beta.1",
+  "body": "> 🧪 **本版本是 v1.3.0 的 beta 预览版**，自 v1.2.2 累计 43 个提交，先发 beta 收集反馈，将持续迭代 beta 版本。没问题后再发正式版。编辑器和界面配色都是整体重做，欢迎重点试用这两块。\r\n\r\n---\r\n\r\n## 🎉 亮点速览\r\n\r\n1. **全新所见即所得编辑器** — 基于 TipTap 原生重建，替换原来的 Monaco。支持斜杠命令、气泡菜单、拖拽排序、图片拖拽缩放、Mermaid 图表、数学公式、脚注、折叠块都能直接在正文里编辑。\r\n2. **源码模式升级为 CodeMirror** — 工具栏在源码模式下同样可用，双栏模式两侧同步滚动。\r\n3. **界面配色体系重做** — 外观（纯白 / 纸张 / 玻璃）× 强调色（九色）自由组合，深浅色模式全覆盖。\r\n4. **正文字号与字体可自定义** — 行距、段距、标题字阶按比例联动，冷启动不再闪白、闪版。\r\n5. **AI 摘要** — 一键生成文章摘要，可编辑后插入文首。\r\n6. **SFTP / FTP 部署改为原地增量同步** — 只传变化的文件，修复 Docker 挂载目录部署后 403 的问题。\r\n\r\n---\r\n\r\n## ✨ 新功能\r\n\r\n#### 编辑器\r\n- **TipTap 所见即所得编辑器**：输入 `/` 唤出块类型菜单，选中文字弹出气泡菜单，拖拽手柄调整段落顺序。\r\n- **图片体系**：拖拽调整大小、编辑弹窗、左中右对齐、点击放大预览。\r\n- **富内容块**：Mermaid 图表、KaTeX 数学公式、脚注、折叠详情块、代码块语言选择，均可在正文中直接编辑。\r\n- **行内 AI 续写** 与 **AI 摘要**：摘要在工具栏「···」菜单内，生成后可编辑，一键插入文首并自动补摘要分隔符。\r\n- **颜色 / 字号 / 标题字号** 工具栏控件；对齐按钮，对齐信息与 Markdown 往返不丢失。\r\n- **快捷键面板**、**表情面板**（搜索 + 分类 + 最近使用）、表格菜单。\r\n- **Markdown 方言扩展**：`==高亮==`、`^上标^`、`~下标~` 前后端全链路支持；新增智能引号转换。\r\n- **源码模式**：CodeMirror 编辑器，链接、图片、表情、AI 润色等工具栏功能在源码模式下同样可用。\r\n- **字数统计与阅读时长**：移动到标题下的元信息行。\r\n\r\n#### 界面与外观\r\n- **配色体系重做**：「外观 × 强调色」二维组合替代原来的 6 套固定主题，旧设置自动迁移；深色模式下每一套配色单独设计，不再是浅色的简单反转。\r\n- **正文字号与字体自定义**：偏好设置中可选 14–20 号字号与多款中文字体，行距、段距、标题字阶按比例联动。\r\n- **代码高亮跟随主题配色，**此前深色模式下代码块没有高亮。\r\n\r\n#### 部署与图片\r\n- **SFTP / FTP 原地增量同步**：未变化的文件跳过上传；删除只针对自己上传过的文件，手动放置的 CNAME、.well-known 等不受影响。（#139）\r\n- **上传图片自动压缩并转换为 WebP**。（#130，PR #132）\r\n\r\n---\r\n\r\n## ⚠️ 调整\r\n\r\n- 编辑器由 Monaco 替换为 TipTap（富文本）+ CodeMirror（源码）。原有的隐形快捷键入口和右侧浮动图标列移除，功能全部收进顶部工具栏。\r\n- 旧的 6 套主题设置会自动迁移为对应的「外观 + 强调色」组合，无需手动重设。\r\n\r\n---\r\n\r\n## 🐛 BUG 修复\r\n\r\n#### 编辑器\r\n- 修复文章标题字号小于正文一级标题的问题。\r\n- 修复有序列表序号缺失、任务列表复选框与光标缺失；占位符提示收敛为打字机式提示。\r\n- 修复插入图片后源码侧变空的问题（空段落序列化死循环）。\r\n- 修复快捷键面板透明、Emoji 面板分类不准与上下键导航失效等问题。\r\n\r\n#### 部署\r\n- 增量同步加固：删除失败不再误报成功、部署清单路径越界防护、清单原子写入、上传失败自动重传、清理上次中断残留的半成品文件。\r\n- 修复更新文章时封面源路径与目标路径为同一文件导致图片被清空、以及源文件被误删的问题。（#127，PR #128）\r\n\r\n#### 稳定性与安全\r\n- 修复 Windows 上含 KaTeX 公式的文章在点击预览 / 切换主题时崩溃的问题。（#129）\r\n- 修复 KaTeX 块级公式多行内容丢失。\r\n- 一轮安全与容错审计修复：编辑器 XSS 防护、切换站点时的并发数据竞争、构建目录文件误删、序列化容错等。\r\n- 新增全局错误边界，启动期异常有明确提示而不是白屏。\r\n\r\n---\r\n\r\n## ❤️ 贡献者\r\n\r\n感谢本次版本的所有贡献者：\r\n\r\n- @Tespera\r\n- @Bcy2020\r\n\r\n欢迎为 Gridea Pro 提交代码、主题或翻译 — 任何 Issue / PR 都可能成为下一个 Release 的一部分。\r\n\r\n---\r\n\r\n**Full Changelog**: https://github.com/Gridea-Pro/gridea-pro/compare/v1.2.2...v1.3.0-beta.1\r\n",
+  "assets": [
+   {
+    "name": "Gridea.Pro_v1.3.0-beta.1_linux_amd64.AppImage",
+    "size": 34297024,
+    "browser_download_url": "https://github.com/Gridea-Pro/gridea-pro/releases/download/v1.3.0-beta.1/Gridea.Pro_v1.3.0-beta.1_linux_amd64.AppImage"
+   },
+   {
+    "name": "Gridea.Pro_v1.3.0-beta.1_linux_amd64.deb",
+    "size": 34553120,
+    "browser_download_url": "https://github.com/Gridea-Pro/gridea-pro/releases/download/v1.3.0-beta.1/Gridea.Pro_v1.3.0-beta.1_linux_amd64.deb"
+   },
+   {
+    "name": "Gridea.Pro_v1.3.0-beta.1_linux_amd64.rpm",
+    "size": 34526506,
+    "browser_download_url": "https://github.com/Gridea-Pro/gridea-pro/releases/download/v1.3.0-beta.1/Gridea.Pro_v1.3.0-beta.1_linux_amd64.rpm"
+   },
+   {
+    "name": "Gridea.Pro_v1.3.0-beta.1_macos_amd64.dmg",
+    "size": 32382433,
+    "browser_download_url": "https://github.com/Gridea-Pro/gridea-pro/releases/download/v1.3.0-beta.1/Gridea.Pro_v1.3.0-beta.1_macos_amd64.dmg"
+   },
+   {
+    "name": "Gridea.Pro_v1.3.0-beta.1_macos_amd64.zip",
+    "size": 32437122,
+    "browser_download_url": "https://github.com/Gridea-Pro/gridea-pro/releases/download/v1.3.0-beta.1/Gridea.Pro_v1.3.0-beta.1_macos_amd64.zip"
+   },
+   {
+    "name": "Gridea.Pro_v1.3.0-beta.1_macos_arm64.dmg",
+    "size": 30355167,
+    "browser_download_url": "https://github.com/Gridea-Pro/gridea-pro/releases/download/v1.3.0-beta.1/Gridea.Pro_v1.3.0-beta.1_macos_arm64.dmg"
+   },
+   {
+    "name": "Gridea.Pro_v1.3.0-beta.1_macos_arm64.zip",
+    "size": 30321546,
+    "browser_download_url": "https://github.com/Gridea-Pro/gridea-pro/releases/download/v1.3.0-beta.1/Gridea.Pro_v1.3.0-beta.1_macos_arm64.zip"
+   },
+   {
+    "name": "Gridea.Pro_v1.3.0-beta.1_windows_amd64_portable.exe",
+    "size": 50547712,
+    "browser_download_url": "https://github.com/Gridea-Pro/gridea-pro/releases/download/v1.3.0-beta.1/Gridea.Pro_v1.3.0-beta.1_windows_amd64_portable.exe"
+   },
+   {
+    "name": "Gridea.Pro_v1.3.0-beta.1_windows_amd64_setup.exe",
+    "size": 27991653,
+    "browser_download_url": "https://github.com/Gridea-Pro/gridea-pro/releases/download/v1.3.0-beta.1/Gridea.Pro_v1.3.0-beta.1_windows_amd64_setup.exe"
+   },
+   {
+    "name": "Gridea.Pro_v1.3.0-beta.1_windows_arm64_portable.exe",
+    "size": 48104960,
+    "browser_download_url": "https://github.com/Gridea-Pro/gridea-pro/releases/download/v1.3.0-beta.1/Gridea.Pro_v1.3.0-beta.1_windows_arm64_portable.exe"
+   },
+   {
+    "name": "Gridea.Pro_v1.3.0-beta.1_windows_arm64_setup.exe",
+    "size": 26167116,
+    "browser_download_url": "https://github.com/Gridea-Pro/gridea-pro/releases/download/v1.3.0-beta.1/Gridea.Pro_v1.3.0-beta.1_windows_arm64_setup.exe"
+   },
+   {
+    "name": "SHA256SUMS",
+    "size": 1220,
+    "browser_download_url": "https://github.com/Gridea-Pro/gridea-pro/releases/download/v1.3.0-beta.1/SHA256SUMS"
+   }
+  ]
+ },
+ {
+  "tag_name": "v1.2.2",
+  "name": "Gridea Pro v1.2.2",
+  "published_at": "2026-06-04T07:41:31Z",
+  "prerelease": false,
+  "draft": false,
+  "html_url": "https://github.com/Gridea-Pro/gridea-pro/releases/tag/v1.2.2",
+  "body": "\r\n## ✨ 新功能\r\n\r\n- **支持多平台同时部署**：点一次「发布」，站点自动推送到所有已启用的平台。（PR #111）\r\n- **新增 S.EE 图床功能**：开启后在编辑器插入图片会自动上传到图床并以外链插入正文，不增加站点体积；内置图片浏览器，支持浏览、翻页、点击复制外链、删除图床图片（PR #111）\r\n- **支持导出站点 ZIP**：配置页右上角新增「导出」按钮，点击即重新渲染整站并打包为 zip，默认文件名「博客标题-日期.zip」，方便备份或手动部署到任意托管（#111 / #114）\r\n\r\n---\r\n\r\n## ⚠️ 调整\r\n\r\n- **移除 Gitee Pages 部署平台**：Gitee Pages 免费服务已停止、付费版已关闭个人购买入口，本版起从平台列表移除；已有本地配置不受影响，其他平台正常使用\r\n\r\n---\r\n\r\n## 🐛 BUG 修复\r\n\r\n#### 应用\r\n- 进一步修复偶发的「启动后主窗口不显示」：窗口显示改由系统在页面就绪后触发，不再依赖前端加载时序\r\n\r\n#### MCP\r\n- 修复 `delete_post` 返回成功但未真正删除、`update_post` 可能改错文件的问题：所有 post 工具的 `filename` 参数统一规范化（带不带 `.md` 都能正确命中），并在数据层一并加固（#117 / #118 / #119 / #122，PR #120）\r\n- 统一 4 个 post 工具的文件名参数为 `filename`（#123）；修正 README 的 MCP 配置示例（独立 `gridea-pro-mcp` 程序与 `SOURCE_DIR`），并补充「响应需按 JSON-RPC id 匹配」的说明\r\n\r\n---\r\n\r\n## ❤️ 贡献者\r\n\r\n感谢本次版本的所有贡献者：\r\n\r\n- @Tespera\r\n- @baozishu\r\n- @gkd2323c\r\n\r\n欢迎为 Gridea Pro 提交代码、主题或翻译 — 任何 Issue / PR 都可能成为下一个 Release 的一部分。\r\n\r\n---\r\n\r\n**Full Changelog**: https://github.com/Gridea-Pro/gridea-pro/compare/v1.2.1...v1.2.2\r\n",
+  "assets": [
+   {
+    "name": "Gridea.Pro_v1.2.2_linux_amd64.AppImage",
+    "size": 34530496,
+    "browser_download_url": "https://github.com/Gridea-Pro/gridea-pro/releases/download/v1.2.2/Gridea.Pro_v1.2.2_linux_amd64.AppImage"
+   },
+   {
+    "name": "Gridea.Pro_v1.2.2_linux_amd64.deb",
+    "size": 34712314,
+    "browser_download_url": "https://github.com/Gridea-Pro/gridea-pro/releases/download/v1.2.2/Gridea.Pro_v1.2.2_linux_amd64.deb"
+   },
+   {
+    "name": "Gridea.Pro_v1.2.2_linux_amd64.rpm",
+    "size": 34660435,
+    "browser_download_url": "https://github.com/Gridea-Pro/gridea-pro/releases/download/v1.2.2/Gridea.Pro_v1.2.2_linux_amd64.rpm"
+   },
+   {
+    "name": "Gridea.Pro_v1.2.2_macos_amd64.dmg",
+    "size": 32785894,
+    "browser_download_url": "https://github.com/Gridea-Pro/gridea-pro/releases/download/v1.2.2/Gridea.Pro_v1.2.2_macos_amd64.dmg"
+   },
+   {
+    "name": "Gridea.Pro_v1.2.2_macos_amd64.zip",
+    "size": 32822130,
+    "browser_download_url": "https://github.com/Gridea-Pro/gridea-pro/releases/download/v1.2.2/Gridea.Pro_v1.2.2_macos_amd64.zip"
+   },
+   {
+    "name": "Gridea.Pro_v1.2.2_macos_arm64.dmg",
+    "size": 31135585,
+    "browser_download_url": "https://github.com/Gridea-Pro/gridea-pro/releases/download/v1.2.2/Gridea.Pro_v1.2.2_macos_arm64.dmg"
+   },
+   {
+    "name": "Gridea.Pro_v1.2.2_macos_arm64.zip",
+    "size": 31130640,
+    "browser_download_url": "https://github.com/Gridea-Pro/gridea-pro/releases/download/v1.2.2/Gridea.Pro_v1.2.2_macos_arm64.zip"
+   },
+   {
+    "name": "Gridea.Pro_v1.2.2_windows_amd64_portable.exe",
+    "size": 59290624,
+    "browser_download_url": "https://github.com/Gridea-Pro/gridea-pro/releases/download/v1.2.2/Gridea.Pro_v1.2.2_windows_amd64_portable.exe"
+   },
+   {
+    "name": "Gridea.Pro_v1.2.2_windows_amd64_setup.exe",
+    "size": 27787021,
+    "browser_download_url": "https://github.com/Gridea-Pro/gridea-pro/releases/download/v1.2.2/Gridea.Pro_v1.2.2_windows_amd64_setup.exe"
+   },
+   {
+    "name": "Gridea.Pro_v1.2.2_windows_arm64_portable.exe",
+    "size": 57016320,
+    "browser_download_url": "https://github.com/Gridea-Pro/gridea-pro/releases/download/v1.2.2/Gridea.Pro_v1.2.2_windows_arm64_portable.exe"
+   },
+   {
+    "name": "Gridea.Pro_v1.2.2_windows_arm64_setup.exe",
+    "size": 26137274,
+    "browser_download_url": "https://github.com/Gridea-Pro/gridea-pro/releases/download/v1.2.2/Gridea.Pro_v1.2.2_windows_arm64_setup.exe"
+   },
+   {
+    "name": "SHA256SUMS",
+    "size": 1143,
+    "browser_download_url": "https://github.com/Gridea-Pro/gridea-pro/releases/download/v1.2.2/SHA256SUMS"
+   }
+  ]
+ },
+ {
+  "tag_name": "v1.2.1",
+  "name": "Gridea Pro v1.2.1",
+  "published_at": "2026-05-22T11:01:48Z",
+  "prerelease": false,
+  "draft": false,
+  "html_url": "https://github.com/Gridea-Pro/gridea-pro/releases/tag/v1.2.1",
+  "body": "## ✨ 新功能\r\n\r\n- **数学公式渲染**：新增 KaTeX 公式渲染开关，所有主题（含第三方）开箱即用，默认开启；同时修复部分场景下公式渲染异常（#108）\r\n\r\n---\r\n\r\n## 🐛 BUG 修复\r\n\r\n#### 更新与下载\r\n- 下载失败弹窗按错误原因显示文案（网络超时、GitHub 不可用、连接被拦截等），不再展示长下载链接\r\n\r\n#### 闪念\r\n- 修复部署后博客闪念页顺序与编辑器列表不一致的问题\r\n- 修复闪念时间字段保存格式不统一的问题\r\n\r\n#### 主题\r\n- 修复 flavor 主题页面初次加载时短暂出现的双图标闪烁和布局抖动\r\n- 切换主题后若新主题没有原选中的配置分组，自动回到第一项，不再出现右侧空白\r\n\r\n---\r\n\r\n## ❤️ 欢迎参与贡献\r\n\r\n欢迎为 Gridea Pro 提交代码、主题或翻译 — 任何 Issue / PR 都可能成为下一个 Release 的一部分。\r\n\r\n---\r\n\r\n**Full Changelog**: https://github.com/Gridea-Pro/gridea-pro/compare/v1.2.0...v1.2.1\r\n",
+  "assets": [
+   {
+    "name": "Gridea.Pro_v1.2.1_linux_amd64.AppImage",
+    "size": 34518208,
+    "browser_download_url": "https://github.com/Gridea-Pro/gridea-pro/releases/download/v1.2.1/Gridea.Pro_v1.2.1_linux_amd64.AppImage"
+   },
+   {
+    "name": "Gridea.Pro_v1.2.1_linux_amd64.deb",
+    "size": 34690288,
+    "browser_download_url": "https://github.com/Gridea-Pro/gridea-pro/releases/download/v1.2.1/Gridea.Pro_v1.2.1_linux_amd64.deb"
+   },
+   {
+    "name": "Gridea.Pro_v1.2.1_linux_amd64.rpm",
+    "size": 34629657,
+    "browser_download_url": "https://github.com/Gridea-Pro/gridea-pro/releases/download/v1.2.1/Gridea.Pro_v1.2.1_linux_amd64.rpm"
+   },
+   {
+    "name": "Gridea.Pro_v1.2.1_macos_amd64.dmg",
+    "size": 32771350,
+    "browser_download_url": "https://github.com/Gridea-Pro/gridea-pro/releases/download/v1.2.1/Gridea.Pro_v1.2.1_macos_amd64.dmg"
+   },
+   {
+    "name": "Gridea.Pro_v1.2.1_macos_amd64.zip",
+    "size": 32796888,
+    "browser_download_url": "https://github.com/Gridea-Pro/gridea-pro/releases/download/v1.2.1/Gridea.Pro_v1.2.1_macos_amd64.zip"
+   },
+   {
+    "name": "Gridea.Pro_v1.2.1_macos_arm64.dmg",
+    "size": 31108332,
+    "browser_download_url": "https://github.com/Gridea-Pro/gridea-pro/releases/download/v1.2.1/Gridea.Pro_v1.2.1_macos_arm64.dmg"
+   },
+   {
+    "name": "Gridea.Pro_v1.2.1_macos_arm64.zip",
+    "size": 31106734,
+    "browser_download_url": "https://github.com/Gridea-Pro/gridea-pro/releases/download/v1.2.1/Gridea.Pro_v1.2.1_macos_arm64.zip"
+   },
+   {
+    "name": "Gridea.Pro_v1.2.1_windows_amd64_portable.exe",
+    "size": 59186688,
+    "browser_download_url": "https://github.com/Gridea-Pro/gridea-pro/releases/download/v1.2.1/Gridea.Pro_v1.2.1_windows_amd64_portable.exe"
+   },
+   {
+    "name": "Gridea.Pro_v1.2.1_windows_amd64_setup.exe",
+    "size": 27760314,
+    "browser_download_url": "https://github.com/Gridea-Pro/gridea-pro/releases/download/v1.2.1/Gridea.Pro_v1.2.1_windows_amd64_setup.exe"
+   },
+   {
+    "name": "Gridea.Pro_v1.2.1_windows_arm64_portable.exe",
+    "size": 56916480,
+    "browser_download_url": "https://github.com/Gridea-Pro/gridea-pro/releases/download/v1.2.1/Gridea.Pro_v1.2.1_windows_arm64_portable.exe"
+   },
+   {
+    "name": "Gridea.Pro_v1.2.1_windows_arm64_setup.exe",
+    "size": 26114947,
+    "browser_download_url": "https://github.com/Gridea-Pro/gridea-pro/releases/download/v1.2.1/Gridea.Pro_v1.2.1_windows_arm64_setup.exe"
+   },
+   {
+    "name": "SHA256SUMS",
+    "size": 1143,
+    "browser_download_url": "https://github.com/Gridea-Pro/gridea-pro/releases/download/v1.2.1/SHA256SUMS"
+   }
+  ]
+ },
+ {
+  "tag_name": "v1.2.0",
+  "name": "Gridea Pro v1.2.0",
+  "published_at": "2026-05-18T02:21:25Z",
+  "prerelease": false,
+  "draft": false,
+  "html_url": "https://github.com/Gridea-Pro/gridea-pro/releases/tag/v1.2.0",
+  "body": "## 🎉 亮点速览\r\n\r\n1. **AI 中转站支持** — 可接入任意 OpenAI / Anthropic 兼容的中转站。\r\n2. **部署完成系统通知** — macOS / Windows / Linux 三端原生通知，切走应用也不漏掉结果。\r\n3. **部署过程可取消** — 部署时可一键取消，不影响已部署的站点。\r\n4. **闪念可改发布时间** — 编辑时支持修改，列表自动按时间倒序。\r\n5. **编辑器日期选择器优化** — 年份双箭头、固定 6 周高度、日期时间合并输入。\r\n6. **部署链路多项稳定性加固** — CDN / Git / Vercel / Netlify / SFTP 全面修复。\r\n\r\n---\r\n\r\n## ✨ 新功能\r\n\r\n- **AI 中转站**:新增「自定义 OpenAI / Anthropic 兼容(中转站)」厂商选项,可填自己的 Base URL + Key\r\n- **部署完成系统通知**:成功 / 失败 / 取消都会推送到系统通知中心,常驻可查,偏好设置可关\r\n- **部署可取消**:部署进行中支持一键中断(PR #93)\r\n- **闪念可改发布时间** + 添加Markdown 提示图标\r\n- **评论回复**添加 Markdown 提示图标\r\n- **日期选择器优化**:年份双箭头跳转、固定 6 周高度、日期时间合并(#105)\r\n- **检查更新若已最新**显式 toast 提示(PR #69)\r\n\r\n---\r\n\r\n## 🐛 BUG 修复\r\n\r\n#### 部署稳定性\r\n- CDN 配置加载失败 / 失败率过高时直接阻断,避免图片大面积 404 上线\r\n- CDN manifest 缓存,重复部署 0 API 调用(PR #95)\r\n- CDN 部署后清理远端孤儿文件(PR #96)\r\n- Git / Vercel / Netlify / HTTP 多平台稳定性修复(PR #90 / #91 / #92 / #94)\r\n- 部署取消时各阶段尽快退出,Git 阶段自动回滚已产生的本地 commit\r\n\r\n#### 配置与启动\r\n- 保存配置后 OAuth 已连接平台被降级为「已配置」\r\n- 配置读取失败现在区分「文件不存在」和「读盘错误」,后者不再被静默吞掉(#107)\r\n- 主窗口启动加保险栓,前端 mount 失败也能正确显示(#102)\r\n\r\n#### 其他\r\n- 部署失败 toast 显示具体错误信息\r\n- 预览页切主题后样式残留失效\r\n\r\n---\r\n\r\n## ❤️ 贡献者\r\n\r\n感谢本次版本的所有贡献者:\r\n\r\n- @kev1nweng\r\n- @youaremywind\r\n\r\n欢迎为 Gridea Pro 提交代码、主题或翻译 — 任何 Issue / PR 都可能成为下一个 Release 的一部分。\r\n\r\n---\r\n\r\n**Full Changelog**: https://github.com/Gridea-Pro/gridea-pro/compare/v1.1.1...v1.2.0-beta.1\r\n",
+  "assets": [
+   {
+    "name": "Gridea.Pro_v1.2.0_linux_amd64.AppImage",
+    "size": 34501824,
+    "browser_download_url": "https://github.com/Gridea-Pro/gridea-pro/releases/download/v1.2.0/Gridea.Pro_v1.2.0_linux_amd64.AppImage"
+   },
+   {
+    "name": "Gridea.Pro_v1.2.0_linux_amd64.deb",
+    "size": 34676394,
+    "browser_download_url": "https://github.com/Gridea-Pro/gridea-pro/releases/download/v1.2.0/Gridea.Pro_v1.2.0_linux_amd64.deb"
+   },
+   {
+    "name": "Gridea.Pro_v1.2.0_linux_amd64.rpm",
+    "size": 34624941,
+    "browser_download_url": "https://github.com/Gridea-Pro/gridea-pro/releases/download/v1.2.0/Gridea.Pro_v1.2.0_linux_amd64.rpm"
+   },
+   {
+    "name": "Gridea.Pro_v1.2.0_macos_amd64.dmg",
+    "size": 32771645,
+    "browser_download_url": "https://github.com/Gridea-Pro/gridea-pro/releases/download/v1.2.0/Gridea.Pro_v1.2.0_macos_amd64.dmg"
+   },
+   {
+    "name": "Gridea.Pro_v1.2.0_macos_amd64.zip",
+    "size": 32782942,
+    "browser_download_url": "https://github.com/Gridea-Pro/gridea-pro/releases/download/v1.2.0/Gridea.Pro_v1.2.0_macos_amd64.zip"
+   },
+   {
+    "name": "Gridea.Pro_v1.2.0_macos_arm64.dmg",
+    "size": 31099041,
+    "browser_download_url": "https://github.com/Gridea-Pro/gridea-pro/releases/download/v1.2.0/Gridea.Pro_v1.2.0_macos_arm64.dmg"
+   },
+   {
+    "name": "Gridea.Pro_v1.2.0_macos_arm64.zip",
+    "size": 31100973,
+    "browser_download_url": "https://github.com/Gridea-Pro/gridea-pro/releases/download/v1.2.0/Gridea.Pro_v1.2.0_macos_arm64.zip"
+   },
+   {
+    "name": "Gridea.Pro_v1.2.0_windows_amd64_portable.exe",
+    "size": 59163648,
+    "browser_download_url": "https://github.com/Gridea-Pro/gridea-pro/releases/download/v1.2.0/Gridea.Pro_v1.2.0_windows_amd64_portable.exe"
+   },
+   {
+    "name": "Gridea.Pro_v1.2.0_windows_amd64_setup.exe",
+    "size": 27754975,
+    "browser_download_url": "https://github.com/Gridea-Pro/gridea-pro/releases/download/v1.2.0/Gridea.Pro_v1.2.0_windows_amd64_setup.exe"
+   },
+   {
+    "name": "Gridea.Pro_v1.2.0_windows_arm64_portable.exe",
+    "size": 56894976,
+    "browser_download_url": "https://github.com/Gridea-Pro/gridea-pro/releases/download/v1.2.0/Gridea.Pro_v1.2.0_windows_arm64_portable.exe"
+   },
+   {
+    "name": "Gridea.Pro_v1.2.0_windows_arm64_setup.exe",
+    "size": 26107673,
+    "browser_download_url": "https://github.com/Gridea-Pro/gridea-pro/releases/download/v1.2.0/Gridea.Pro_v1.2.0_windows_arm64_setup.exe"
+   },
+   {
+    "name": "SHA256SUMS",
+    "size": 1143,
+    "browser_download_url": "https://github.com/Gridea-Pro/gridea-pro/releases/download/v1.2.0/SHA256SUMS"
+   }
+  ]
+ },
+ {
+  "tag_name": "v1.2.0-beta.1",
+  "name": "Gridea Pro v1.2.0-beta.1",
+  "published_at": "2026-05-15T10:32:13Z",
+  "prerelease": true,
+  "draft": false,
+  "html_url": "https://github.com/Gridea-Pro/gridea-pro/releases/tag/v1.2.0-beta.1",
+  "body": "> 🧪 **本版本是 v1.2.0 的 beta 预览版**，自上次 v1.1.1 累计 97 个提交，先发 beta 收集反馈，没问题再发正式版。\r\n\r\n---\r\n\r\n## 🎉 亮点速览\r\n\r\n1. **AI 中转站支持** — 可接入任意 OpenAI / Anthropic 兼容的中转站。\r\n2. **部署完成系统通知** — macOS / Windows / Linux 三端原生通知，切走应用也不漏掉结果。\r\n3. **部署过程可见 + 可取消** — 实时日志面板 + 一键中断。\r\n4. **闪念可改发布时间** — 编辑时支持修改，列表自动按时间倒序。\r\n5. **编辑器日期选择器优化** — 年份双箭头、固定 6 周高度、日期时间合并输入。\r\n6. **部署链路多项稳定性加固** — CDN / Git / Vercel / Netlify / SFTP 全面修复。\r\n\r\n---\r\n\r\n## ✨ 新功能\r\n\r\n- **AI 中转站**:新增「自定义 OpenAI / Anthropic 兼容(中转站)」厂商选项,可填自己的 Base URL + Key\r\n- **部署完成系统通知**:成功 / 失败 / 取消都会推送到系统通知中心,常驻可查,偏好设置可关\r\n- **部署可取消**:部署进行中支持一键中断(PR #93)\r\n- **闪念可改发布时间** + 添加Markdown 提示图标\r\n- **评论回复**添加 Markdown 提示图标\r\n- **日期选择器优化**:年份双箭头跳转、固定 6 周高度、日期时间合并(#105)\r\n- **检查更新若已最新**显式 toast 提示(PR #69)\r\n\r\n---\r\n\r\n## 🐛 BUG 修复\r\n\r\n#### 部署稳定性\r\n- CDN 配置加载失败 / 失败率过高时直接阻断,避免图片大面积 404 上线\r\n- CDN manifest 缓存,重复部署 0 API 调用(PR #95)\r\n- CDN 部署后清理远端孤儿文件(PR #96)\r\n- Git / Vercel / Netlify / HTTP 多平台稳定性修复(PR #90 / #91 / #92 / #94)\r\n- 部署取消时各阶段尽快退出,Git 阶段自动回滚已产生的本地 commit\r\n\r\n#### 配置与启动\r\n- 保存配置后 OAuth 已连接平台被降级为「已配置」\r\n- 配置读取失败现在区分「文件不存在」和「读盘错误」,后者不再被静默吞掉(#107)\r\n- 主窗口启动加保险栓,前端 mount 失败也能正确显示(#102)\r\n\r\n#### 其他\r\n- 部署失败 toast 显示具体错误信息\r\n- 预览页切主题后样式残留失效\r\n\r\n---\r\n\r\n## ❤️ 贡献者\r\n\r\n感谢本次版本的所有贡献者:\r\n\r\n- @kev1nweng\r\n- @youaremywind\r\n\r\n欢迎为 Gridea Pro 提交代码、主题或翻译 — 任何 Issue / PR 都可能成为下一个 Release 的一部分。\r\n\r\n---\r\n\r\n**Full Changelog**: https://github.com/Gridea-Pro/gridea-pro/compare/v1.1.1...v1.2.0-beta.1\r\n",
+  "assets": [
+   {
+    "name": "Gridea.Pro_v1.2.0-beta.1_linux_amd64.AppImage",
+    "size": 34501824,
+    "browser_download_url": "https://github.com/Gridea-Pro/gridea-pro/releases/download/v1.2.0-beta.1/Gridea.Pro_v1.2.0-beta.1_linux_amd64.AppImage"
+   },
+   {
+    "name": "Gridea.Pro_v1.2.0-beta.1_linux_amd64.deb",
+    "size": 34676272,
+    "browser_download_url": "https://github.com/Gridea-Pro/gridea-pro/releases/download/v1.2.0-beta.1/Gridea.Pro_v1.2.0-beta.1_linux_amd64.deb"
+   },
+   {
+    "name": "Gridea.Pro_v1.2.0-beta.1_linux_amd64.rpm",
+    "size": 34625098,
+    "browser_download_url": "https://github.com/Gridea-Pro/gridea-pro/releases/download/v1.2.0-beta.1/Gridea.Pro_v1.2.0-beta.1_linux_amd64.rpm"
+   },
+   {
+    "name": "Gridea.Pro_v1.2.0-beta.1_macos_amd64.dmg",
+    "size": 32771583,
+    "browser_download_url": "https://github.com/Gridea-Pro/gridea-pro/releases/download/v1.2.0-beta.1/Gridea.Pro_v1.2.0-beta.1_macos_amd64.dmg"
+   },
+   {
+    "name": "Gridea.Pro_v1.2.0-beta.1_macos_amd64.zip",
+    "size": 32783020,
+    "browser_download_url": "https://github.com/Gridea-Pro/gridea-pro/releases/download/v1.2.0-beta.1/Gridea.Pro_v1.2.0-beta.1_macos_amd64.zip"
+   },
+   {
+    "name": "Gridea.Pro_v1.2.0-beta.1_macos_arm64.dmg",
+    "size": 31099224,
+    "browser_download_url": "https://github.com/Gridea-Pro/gridea-pro/releases/download/v1.2.0-beta.1/Gridea.Pro_v1.2.0-beta.1_macos_arm64.dmg"
+   },
+   {
+    "name": "Gridea.Pro_v1.2.0-beta.1_macos_arm64.zip",
+    "size": 31101070,
+    "browser_download_url": "https://github.com/Gridea-Pro/gridea-pro/releases/download/v1.2.0-beta.1/Gridea.Pro_v1.2.0-beta.1_macos_arm64.zip"
+   },
+   {
+    "name": "Gridea.Pro_v1.2.0-beta.1_windows_amd64_portable.exe",
+    "size": 59163648,
+    "browser_download_url": "https://github.com/Gridea-Pro/gridea-pro/releases/download/v1.2.0-beta.1/Gridea.Pro_v1.2.0-beta.1_windows_amd64_portable.exe"
+   },
+   {
+    "name": "Gridea.Pro_v1.2.0-beta.1_windows_amd64_setup.exe",
+    "size": 27753413,
+    "browser_download_url": "https://github.com/Gridea-Pro/gridea-pro/releases/download/v1.2.0-beta.1/Gridea.Pro_v1.2.0-beta.1_windows_amd64_setup.exe"
+   },
+   {
+    "name": "Gridea.Pro_v1.2.0-beta.1_windows_arm64_portable.exe",
+    "size": 56894976,
+    "browser_download_url": "https://github.com/Gridea-Pro/gridea-pro/releases/download/v1.2.0-beta.1/Gridea.Pro_v1.2.0-beta.1_windows_arm64_portable.exe"
+   },
+   {
+    "name": "Gridea.Pro_v1.2.0-beta.1_windows_arm64_setup.exe",
+    "size": 26104947,
+    "browser_download_url": "https://github.com/Gridea-Pro/gridea-pro/releases/download/v1.2.0-beta.1/Gridea.Pro_v1.2.0-beta.1_windows_arm64_setup.exe"
+   },
+   {
+    "name": "SHA256SUMS",
+    "size": 1220,
+    "browser_download_url": "https://github.com/Gridea-Pro/gridea-pro/releases/download/v1.2.0-beta.1/SHA256SUMS"
+   }
+  ]
+ },
+ {
+  "tag_name": "v1.1.1",
+  "name": "Gridea Pro v1.1.1",
+  "published_at": "2026-04-19T17:15:53Z",
+  "prerelease": false,
+  "draft": false,
+  "html_url": "https://github.com/Gridea-Pro/gridea-pro/releases/tag/v1.1.1",
+  "body": "  > 🚨 **本版本是对 v1.1.0 的紧急修复**，强烈建议所有 v1.1.0 用户立即升级。             \r\n                                               \r\n  ## 🐛 BUG 修复                                                                        \r\n                                                                                        \r\n  - 修复 SEO Tab 栏点击后程序崩溃问题（ vue-i18n 解析崩溃 ）                              \r\n  - 修复部署平台全部提示 OAuth 尚未配置的问题（ldflags 失效导致 Release 凭证全空）\r\n  - 修复自更新反复弹窗 （统一版本号真源）                                                 \r\n                                                                                        \r\n  ## 🎨 UI 调整                                                                         \r\n                                                                                        \r\n  - 更新弹窗 UI 微调\r\n\r\n---\r\n**Full Changelog**: https://github.com/Gridea-Pro/gridea-pro/compare/v1.1.0...v1.1.1",
+  "assets": [
+   {
+    "name": "Gridea.Pro_v1.1.1_linux_amd64.AppImage",
+    "size": 31216832,
+    "browser_download_url": "https://github.com/Gridea-Pro/gridea-pro/releases/download/v1.1.1/Gridea.Pro_v1.1.1_linux_amd64.AppImage"
+   },
+   {
+    "name": "Gridea.Pro_v1.1.1_linux_amd64.deb",
+    "size": 31379474,
+    "browser_download_url": "https://github.com/Gridea-Pro/gridea-pro/releases/download/v1.1.1/Gridea.Pro_v1.1.1_linux_amd64.deb"
+   },
+   {
+    "name": "Gridea.Pro_v1.1.1_linux_amd64.rpm",
+    "size": 31344758,
+    "browser_download_url": "https://github.com/Gridea-Pro/gridea-pro/releases/download/v1.1.1/Gridea.Pro_v1.1.1_linux_amd64.rpm"
+   },
+   {
+    "name": "Gridea.Pro_v1.1.1_macos_amd64.dmg",
+    "size": 30493861,
+    "browser_download_url": "https://github.com/Gridea-Pro/gridea-pro/releases/download/v1.1.1/Gridea.Pro_v1.1.1_macos_amd64.dmg"
+   },
+   {
+    "name": "Gridea.Pro_v1.1.1_macos_amd64.zip",
+    "size": 30512470,
+    "browser_download_url": "https://github.com/Gridea-Pro/gridea-pro/releases/download/v1.1.1/Gridea.Pro_v1.1.1_macos_amd64.zip"
+   },
+   {
+    "name": "Gridea.Pro_v1.1.1_macos_arm64.dmg",
+    "size": 28965853,
+    "browser_download_url": "https://github.com/Gridea-Pro/gridea-pro/releases/download/v1.1.1/Gridea.Pro_v1.1.1_macos_arm64.dmg"
+   },
+   {
+    "name": "Gridea.Pro_v1.1.1_macos_arm64.zip",
+    "size": 28931909,
+    "browser_download_url": "https://github.com/Gridea-Pro/gridea-pro/releases/download/v1.1.1/Gridea.Pro_v1.1.1_macos_arm64.zip"
+   },
+   {
+    "name": "Gridea.Pro_v1.1.1_windows_amd64_portable.exe",
+    "size": 54875136,
+    "browser_download_url": "https://github.com/Gridea-Pro/gridea-pro/releases/download/v1.1.1/Gridea.Pro_v1.1.1_windows_amd64_portable.exe"
+   },
+   {
+    "name": "Gridea.Pro_v1.1.1_windows_amd64_setup.exe",
+    "size": 25169970,
+    "browser_download_url": "https://github.com/Gridea-Pro/gridea-pro/releases/download/v1.1.1/Gridea.Pro_v1.1.1_windows_amd64_setup.exe"
+   },
+   {
+    "name": "Gridea.Pro_v1.1.1_windows_arm64_portable.exe",
+    "size": 52821504,
+    "browser_download_url": "https://github.com/Gridea-Pro/gridea-pro/releases/download/v1.1.1/Gridea.Pro_v1.1.1_windows_arm64_portable.exe"
+   },
+   {
+    "name": "Gridea.Pro_v1.1.1_windows_arm64_setup.exe",
+    "size": 23649287,
+    "browser_download_url": "https://github.com/Gridea-Pro/gridea-pro/releases/download/v1.1.1/Gridea.Pro_v1.1.1_windows_arm64_setup.exe"
+   }
+  ]
+ },
+ {
+  "tag_name": "v1.1.0",
+  "name": "Gridea Pro v1.1.0",
+  "published_at": "2026-04-19T13:31:40Z",
+  "prerelease": false,
+  "draft": false,
+  "html_url": "https://github.com/Gridea-Pro/gridea-pro/releases/tag/v1.1.0",
+  "body": "  > 🚨 本版本 OAuth 授权不可用，SEO 功能存在崩溃问题，强烈建议所有用户立即升级 v1.1.1 版本。   \r\n\r\n---                                                                                \r\n\r\n  本次更新覆盖部署平台 OAuth 授权 + Keychain 凭证管理、内置主题深度优化、SEO配置调整、自动更新等核心模块。\r\n                                                                                        \r\n  ## 🎉 亮点速览                                                                           \r\n                                               \r\n  1. OAuth + Keychain — GitHub / Gitee / Vercel / Netlify 全部支持一键 OAuth；Token / 密码 / 私钥统一存入系统 Keychain，不再明文落盘。\r\n  2. 一键自更新 — 启动自动检查 GitHub Release，有新版自动弹窗；一键完成下载 → 安装 → 重启。                                                                                \r\n  3. SEO 设置页重构为 7 组分组表单 —  新增多平台站长验证、分析工具、索引控制、社交分享图上传。    \r\n  4. flavor  主题支持深浅双模式 + 闪念热力图 + 归档页、404 页面布局样式优化。                          \r\n  5. amore / amore-jinja2 主题深度优化 — 修复渲染 bug 并将 CSS 从 8800 行精简到 1000 行，重构配色与自定义能力。                                                            \r\n  6. 渲染引擎优化 — 基于 manifest 精确删孤儿文件，保护 output/ 下用户自定义文件与.git/。                                                                               \r\n                                               \r\n  ---                                                                                   \r\n ## ✨ 新功能                                    \r\n                                                                                        \r\n #### 一、部署平台与 OAuth 授权 + Keychain 凭证存储 \r\n                                                                                        \r\n  - 重构部署平台配置页，支持 OAuth 授权与系统 Keychain 凭证存储，同时保留手动配置功能                        \r\n  - GitHub / Gitee / Vercel / Netlify 四个平台的 OAuth 授权\r\n    - Vercel 授权后自动填充项目名与域名                                                 \r\n    - Netlify 授权后自动创建 Site 并获取 Site ID / 域名\r\n    - Gitee 单独调用 /api/v5/emails 补邮箱                                              \r\n  - 授权成功后自动填充平台默认配置与部署仓库                                            \r\n  - 授权流程支持取消与超时自动复位                                                      \r\n  - 区分 OAuth 已连接（绿色）与手动已配置（黄色）状态                                   \r\n  - OAuth 回调页重新设计：深色主题、展示平台名与 Gridea Pro 品牌信息                    \r\n  - 代理设置从全局移入每个平台的抽屉配置（不同平台可独立配置）                          \r\n                                                                                        \r\n  #### 二、支持自动更新\r\n                                               \r\n  - 启动自动检查 GitHub Release，有新版且未被\"跳过\"时自动弹窗提示更新                           \r\n  - 一键完成下载 → 安装 → 重启                 \r\n    - macOS：辅助脚本 detach 替换 .app 并重新 ad-hoc 代签\r\n    - Windows / Linux：atomic rename + 失败自动回滚                                     \r\n  - 下载进度 / 就绪 / 错误状态实时推送前端，带进度条、取消、重试                        \r\n  - 支持\"跳过此版本\"                                                                    \r\n                                                           \r\n  ---\r\n  ## 🔧 功能优化                                                                           \r\n                                                                                        \r\n  #### 一、编辑器优化                                                                      \r\n                                               \r\n  - Markdown 编辑器支持自定义字体 (#18)\r\n  - 编辑器标题下方显示文章日期、分类、标签和发布状态\r\n  -  居中显示 Monaco 命令面板 (#16)\r\n  - 移除 ShowPreferences 中多余的 WindowCenter 调用 (#17)                                     \r\n                                                                                        \r\n  #### 二、SEO 功能和布局优化                                                                                  \r\n                                                                                        \r\n  - SEO 设置页重构为 7 组分组表单              \r\n  - 默认社交分享图支持上传（复用主题自定义配置的图片上传控件）\r\n  - 扩展字段：Open Graph 默认图、Twitter 账号、Bing / Baidu / 360 / Yandex              \r\n  验证码、Plausible / Umami 域名等                                                      \r\n  - sitemap 补全博客列表、闪念、友链页，并按重要性设优先级（首页 1.0 → 友链 0.3）       \r\n  - HTML 注入 <meta name=\"generator\"> 标识 Gridea Pro                                   \r\n  - 控制台输出 Gridea Pro 徽标与主题版本       \r\n\r\n  #### 三、其他调整                                                                                  \r\n                                               \r\n  - RSS 支持配置开关，关闭时自动隐藏格式和数量子配置项\r\n  - 禁用非输入区域的文字选中，更接近原生桌面应用体验\r\n                                                                                                                  \r\n  ---                                                                                   \r\n  ## 🎭 内置主题深度优化        \r\n                                                                   \r\n  - flavor：新增浅色模式与深/浅切换、闪念页增加热力图、归档页、404 页面布局样式优化。\r\n  - amore / amore-jinja2：新增「默认主题」配置项（深/浅，默认深色）             \r\n                                               \r\n  ---                                                                                   \r\n ## 🐛 BUG 修复                                  \r\n                                                                                        \r\n  #### 一、渲染引擎优化\r\n                                                                                        \r\n  - 摘要截取按 rune 避免切断 UTF-8 字符（中文摘要偶现乱码）                             \r\n  - 重名分类不再隐式覆盖 categoryByName\r\n  - 删除文章后清理旧输出文件并触发重新渲染 (#26)                                        \r\n  - 标签和分类更名 / 删除后级联更新关联文章 (#19)\r\n  - 非默认 DateFormat 下闪念热力图数据失效                                              \r\n  - 修复归档页重构引入的 pongo2 v6 空指针崩溃                                           \r\n  - 支持旧版 Gridea 主题的 LESS 样式编译 (#15)                                          \r\n  - 完善 Go 模板渲染字段兼容（PaginationView 别名、iNotes 支持）                        \r\n  - 修复主题模板多处问题（路径、CDN、模板变量、footer 等）\r\n\r\n  #### 二、部署与平台\r\n\r\n  - SFTP 自定义端口无法生效\r\n  - Linux：RPM 依赖命名不兼容 & AppImage 缺少 FUSE (#35)\r\n                                                                     \r\n  #### 三、UI问题修复                                                                                                                          \r\n                              \r\n  - 修复站点列表项溢出对话框                                                            \r\n   \r\n  ---                                                                                   \r\n ##  🛠 其他                                       \r\n        \r\n  - 重写中英文 README，修复 LICENSE 格式识别为 GPL-3.0                                  \r\n  - 忽略自动生成的 wailsjs 文件                                                         \r\n                                                                                        \r\n  --- \r\n  ## New Contributors\r\n                                                                          \r\n  感谢贡献者：https://github.com/kev1nweng 提交的 #15 #16 #17 #18 #19 #21 #26 #35 等 issue 修复与功能 PR。\r\n                                                                                        \r\n  完整 changelog：https://github.com/Gridea-Pro/edia-pro/compare/v1.0.7...v1.1.0        \r\n   \r\n  ---                                                       ",
+  "assets": [
+   {
+    "name": "Gridea.Pro_v1.1.0_linux_amd64.AppImage",
+    "size": 31212736,
+    "browser_download_url": "https://github.com/Gridea-Pro/gridea-pro/releases/download/v1.1.0/Gridea.Pro_v1.1.0_linux_amd64.AppImage"
+   },
+   {
+    "name": "Gridea.Pro_v1.1.0_linux_amd64.deb",
+    "size": 31375604,
+    "browser_download_url": "https://github.com/Gridea-Pro/gridea-pro/releases/download/v1.1.0/Gridea.Pro_v1.1.0_linux_amd64.deb"
+   },
+   {
+    "name": "Gridea.Pro_v1.1.0_linux_amd64.rpm",
+    "size": 31342403,
+    "browser_download_url": "https://github.com/Gridea-Pro/gridea-pro/releases/download/v1.1.0/Gridea.Pro_v1.1.0_linux_amd64.rpm"
+   },
+   {
+    "name": "Gridea.Pro_v1.1.0_macos_amd64.dmg",
+    "size": 30489167,
+    "browser_download_url": "https://github.com/Gridea-Pro/gridea-pro/releases/download/v1.1.0/Gridea.Pro_v1.1.0_macos_amd64.dmg"
+   },
+   {
+    "name": "Gridea.Pro_v1.1.0_macos_amd64.zip",
+    "size": 30511780,
+    "browser_download_url": "https://github.com/Gridea-Pro/gridea-pro/releases/download/v1.1.0/Gridea.Pro_v1.1.0_macos_amd64.zip"
+   },
+   {
+    "name": "Gridea.Pro_v1.1.0_macos_arm64.dmg",
+    "size": 28963289,
+    "browser_download_url": "https://github.com/Gridea-Pro/gridea-pro/releases/download/v1.1.0/Gridea.Pro_v1.1.0_macos_arm64.dmg"
+   },
+   {
+    "name": "Gridea.Pro_v1.1.0_macos_arm64.zip",
+    "size": 28931364,
+    "browser_download_url": "https://github.com/Gridea-Pro/gridea-pro/releases/download/v1.1.0/Gridea.Pro_v1.1.0_macos_arm64.zip"
+   },
+   {
+    "name": "Gridea.Pro_v1.1.0_windows_amd64_portable.exe",
+    "size": 54872576,
+    "browser_download_url": "https://github.com/Gridea-Pro/gridea-pro/releases/download/v1.1.0/Gridea.Pro_v1.1.0_windows_amd64_portable.exe"
+   },
+   {
+    "name": "Gridea.Pro_v1.1.0_windows_amd64_setup.exe",
+    "size": 25173076,
+    "browser_download_url": "https://github.com/Gridea-Pro/gridea-pro/releases/download/v1.1.0/Gridea.Pro_v1.1.0_windows_amd64_setup.exe"
+   },
+   {
+    "name": "Gridea.Pro_v1.1.0_windows_arm64_portable.exe",
+    "size": 52819456,
+    "browser_download_url": "https://github.com/Gridea-Pro/gridea-pro/releases/download/v1.1.0/Gridea.Pro_v1.1.0_windows_arm64_portable.exe"
+   },
+   {
+    "name": "Gridea.Pro_v1.1.0_windows_arm64_setup.exe",
+    "size": 23648926,
+    "browser_download_url": "https://github.com/Gridea-Pro/gridea-pro/releases/download/v1.1.0/Gridea.Pro_v1.1.0_windows_arm64_setup.exe"
+   }
+  ]
+ },
+ {
+  "tag_name": "v1.0.7",
+  "name": "Gridea Pro v1.0.7",
+  "published_at": "2026-04-10T00:20:54Z",
+  "prerelease": false,
+  "draft": false,
+  "html_url": "https://github.com/Gridea-Pro/gridea-pro/releases/tag/v1.0.7",
+  "body": "## 新功能发布\r\n\r\n  - 集成智谱 GLM 免费 AI 模型，支持一键生成 SEO 友好的文章 Slug（有每日限额）\r\n  - 支持自定义 AI 模型配置（支持选择 13 家常见模型厂商）\r\n\r\n---\r\n\r\n## 功能完善\r\n\r\n  - macOS DMG 安装包构建优化：自定义 retina 背景图 + Applications 拖拽快捷方式 +\r\n  精致布局\r\n\r\n---\r\n\r\n## BUG 修复\r\n\r\n  - 修复打包发布后程序版本号始终显示 1.0.0、不随 git tag 更新的问题",
+  "assets": [
+   {
+    "name": "Gridea.Pro_v1.0.7_linux_amd64.AppImage",
+    "size": 30618816,
+    "browser_download_url": "https://github.com/Gridea-Pro/gridea-pro/releases/download/v1.0.7/Gridea.Pro_v1.0.7_linux_amd64.AppImage"
+   },
+   {
+    "name": "Gridea.Pro_v1.0.7_linux_amd64.deb",
+    "size": 30778800,
+    "browser_download_url": "https://github.com/Gridea-Pro/gridea-pro/releases/download/v1.0.7/Gridea.Pro_v1.0.7_linux_amd64.deb"
+   },
+   {
+    "name": "Gridea.Pro_v1.0.7_linux_amd64.rpm",
+    "size": 30732577,
+    "browser_download_url": "https://github.com/Gridea-Pro/gridea-pro/releases/download/v1.0.7/Gridea.Pro_v1.0.7_linux_amd64.rpm"
+   },
+   {
+    "name": "Gridea.Pro_v1.0.7_macos_amd64.dmg",
+    "size": 29996255,
+    "browser_download_url": "https://github.com/Gridea-Pro/gridea-pro/releases/download/v1.0.7/Gridea.Pro_v1.0.7_macos_amd64.dmg"
+   },
+   {
+    "name": "Gridea.Pro_v1.0.7_macos_arm64.dmg",
+    "size": 28464332,
+    "browser_download_url": "https://github.com/Gridea-Pro/gridea-pro/releases/download/v1.0.7/Gridea.Pro_v1.0.7_macos_arm64.dmg"
+   },
+   {
+    "name": "Gridea.Pro_v1.0.7_windows_amd64_setup.exe",
+    "size": 24818555,
+    "browser_download_url": "https://github.com/Gridea-Pro/gridea-pro/releases/download/v1.0.7/Gridea.Pro_v1.0.7_windows_amd64_setup.exe"
+   },
+   {
+    "name": "Gridea.Pro_v1.0.7_windows_arm64_setup.exe",
+    "size": 23316709,
+    "browser_download_url": "https://github.com/Gridea-Pro/gridea-pro/releases/download/v1.0.7/Gridea.Pro_v1.0.7_windows_arm64_setup.exe"
+   }
+  ]
+ },
+ {
+  "tag_name": "v1.0.6",
+  "name": "Gridea Pro v1.0.6",
+  "published_at": "2026-04-08T16:58:37Z",
+  "prerelease": false,
+  "draft": false,
+  "html_url": "https://github.com/Gridea-Pro/gridea-pro/releases/tag/v1.0.6",
+  "body": "### 功能完善                                                                              \r\n                                                                                        \r\n  - 菜单管理支持二级子菜单，子菜单支持展开 / 折叠式显示，支持拖拽排序                                     \r\n\r\n---\r\n                                                                                        \r\n ### BUG 修复                                     \r\n                                                                                       \r\n  - 修复菜单、分类、标签、友链页面卡片按钮缺少 cursor-pointer 的问题                    \r\n  - 修复菜单、分类、标签页 icon 按钮悬浮背景色不一致（统一为主题色 primary/10）\r\n  - 修复抽屉弹窗标题字体偏大的问题 ",
+  "assets": [
+   {
+    "name": "Gridea.Pro_v1.0.6_linux_amd64.AppImage",
+    "size": 30586048,
+    "browser_download_url": "https://github.com/Gridea-Pro/gridea-pro/releases/download/v1.0.6/Gridea.Pro_v1.0.6_linux_amd64.AppImage"
+   },
+   {
+    "name": "Gridea.Pro_v1.0.6_linux_amd64.deb",
+    "size": 30738154,
+    "browser_download_url": "https://github.com/Gridea-Pro/gridea-pro/releases/download/v1.0.6/Gridea.Pro_v1.0.6_linux_amd64.deb"
+   },
+   {
+    "name": "Gridea.Pro_v1.0.6_linux_amd64.rpm",
+    "size": 30705814,
+    "browser_download_url": "https://github.com/Gridea-Pro/gridea-pro/releases/download/v1.0.6/Gridea.Pro_v1.0.6_linux_amd64.rpm"
+   },
+   {
+    "name": "Gridea.Pro_v1.0.6_macos_amd64.dmg",
+    "size": 34669002,
+    "browser_download_url": "https://github.com/Gridea-Pro/gridea-pro/releases/download/v1.0.6/Gridea.Pro_v1.0.6_macos_amd64.dmg"
+   },
+   {
+    "name": "Gridea.Pro_v1.0.6_macos_arm64.dmg",
+    "size": 32109439,
+    "browser_download_url": "https://github.com/Gridea-Pro/gridea-pro/releases/download/v1.0.6/Gridea.Pro_v1.0.6_macos_arm64.dmg"
+   },
+   {
+    "name": "Gridea.Pro_v1.0.6_windows_amd64_setup.exe",
+    "size": 24795470,
+    "browser_download_url": "https://github.com/Gridea-Pro/gridea-pro/releases/download/v1.0.6/Gridea.Pro_v1.0.6_windows_amd64_setup.exe"
+   },
+   {
+    "name": "Gridea.Pro_v1.0.6_windows_arm64_setup.exe",
+    "size": 23296587,
+    "browser_download_url": "https://github.com/Gridea-Pro/gridea-pro/releases/download/v1.0.6/Gridea.Pro_v1.0.6_windows_arm64_setup.exe"
+   }
+  ]
+ },
+ {
+  "tag_name": "v1.0.5",
+  "name": "Gridea Pro v1.0.5",
+  "published_at": "2026-04-08T02:51:01Z",
+  "prerelease": false,
+  "draft": false,
+  "html_url": "https://github.com/Gridea-Pro/gridea-pro/releases/tag/v1.0.5",
+  "body": "## 功能完善                                                                                                 \r\n                                                                                                           \r\n  - 新增多站点管理功能：支持添加、编辑、切换、拖拽排序、删除站点                                                         \r\n  - 新增 FTP 协议支持，与 SFTP 合并为同一平台选项                                                       \r\n  - 闪念输入框新增打字机效果 placeholder\r\n \r\n---\r\n\r\n ## BUG 修复\r\n                                                                                                           \r\n  - 修复 Netlify Access Token 输入框误用 SFTP 条件控制的问题                                               \r\n  - 闪念打字机聚焦时自动暂停，优化切换间隔体验",
+  "assets": [
+   {
+    "name": "Gridea.Pro_v1.0.5_linux_amd64.AppImage",
+    "size": 30569664,
+    "browser_download_url": "https://github.com/Gridea-Pro/gridea-pro/releases/download/v1.0.5/Gridea.Pro_v1.0.5_linux_amd64.AppImage"
+   },
+   {
+    "name": "Gridea.Pro_v1.0.5_linux_amd64.deb",
+    "size": 30732294,
+    "browser_download_url": "https://github.com/Gridea-Pro/gridea-pro/releases/download/v1.0.5/Gridea.Pro_v1.0.5_linux_amd64.deb"
+   },
+   {
+    "name": "Gridea.Pro_v1.0.5_linux_amd64.rpm",
+    "size": 30698049,
+    "browser_download_url": "https://github.com/Gridea-Pro/gridea-pro/releases/download/v1.0.5/Gridea.Pro_v1.0.5_linux_amd64.rpm"
+   },
+   {
+    "name": "Gridea.Pro_v1.0.5_macos_amd64.dmg",
+    "size": 34657635,
+    "browser_download_url": "https://github.com/Gridea-Pro/gridea-pro/releases/download/v1.0.5/Gridea.Pro_v1.0.5_macos_amd64.dmg"
+   },
+   {
+    "name": "Gridea.Pro_v1.0.5_macos_arm64.dmg",
+    "size": 32105897,
+    "browser_download_url": "https://github.com/Gridea-Pro/gridea-pro/releases/download/v1.0.5/Gridea.Pro_v1.0.5_macos_arm64.dmg"
+   },
+   {
+    "name": "Gridea.Pro_v1.0.5_windows_amd64_setup.exe",
+    "size": 24785125,
+    "browser_download_url": "https://github.com/Gridea-Pro/gridea-pro/releases/download/v1.0.5/Gridea.Pro_v1.0.5_windows_amd64_setup.exe"
+   },
+   {
+    "name": "Gridea.Pro_v1.0.5_windows_arm64_setup.exe",
+    "size": 23286555,
+    "browser_download_url": "https://github.com/Gridea-Pro/gridea-pro/releases/download/v1.0.5/Gridea.Pro_v1.0.5_windows_arm64_setup.exe"
+   }
+  ]
+ },
+ {
+  "tag_name": "v1.0.4",
+  "name": "Gridea Pro v1.0.4",
+  "published_at": "2026-04-06T17:23:11Z",
+  "prerelease": false,
+  "draft": false,
+  "html_url": "https://github.com/Gridea-Pro/gridea-pro/releases/tag/v1.0.4",
+  "body": "## 功能完善\r\n\r\n  - 支持 Coding Pages、Netlify、SFTP 三个部署平台配置\r\n\r\n---\r\n\r\n## BUG 修复\r\n\r\n  - 解决默认文章、闪念等删除后重启，会重复初始化的问题\r\n\r\n---\r\n\r\n## 技术优化\r\n\r\n  - 友链页面 slug / 模板 / CSS class 统一为 links\r\n  - 域名配置简化，固定 https:// 前缀，自动去除尾部斜杠\r\n  - 菜单内部链接自动补全 / 前缀\r\n  - GitHub 分支默认值改为 main\r\n  - 全局 placeholder 颜色调浅，区分度更好\r\n  - 补全代理设置等缺失的多语言翻译",
+  "assets": [
+   {
+    "name": "Gridea.Pro_v1.0.4_linux_amd64.AppImage",
+    "size": 30414016,
+    "browser_download_url": "https://github.com/Gridea-Pro/gridea-pro/releases/download/v1.0.4/Gridea.Pro_v1.0.4_linux_amd64.AppImage"
+   },
+   {
+    "name": "Gridea.Pro_v1.0.4_linux_amd64.deb",
+    "size": 30573740,
+    "browser_download_url": "https://github.com/Gridea-Pro/gridea-pro/releases/download/v1.0.4/Gridea.Pro_v1.0.4_linux_amd64.deb"
+   },
+   {
+    "name": "Gridea.Pro_v1.0.4_linux_amd64.rpm",
+    "size": 30535264,
+    "browser_download_url": "https://github.com/Gridea-Pro/gridea-pro/releases/download/v1.0.4/Gridea.Pro_v1.0.4_linux_amd64.rpm"
+   },
+   {
+    "name": "Gridea.Pro_v1.0.4_macos_amd64.dmg",
+    "size": 34350007,
+    "browser_download_url": "https://github.com/Gridea-Pro/gridea-pro/releases/download/v1.0.4/Gridea.Pro_v1.0.4_macos_amd64.dmg"
+   },
+   {
+    "name": "Gridea.Pro_v1.0.4_macos_arm64.dmg",
+    "size": 31945334,
+    "browser_download_url": "https://github.com/Gridea-Pro/gridea-pro/releases/download/v1.0.4/Gridea.Pro_v1.0.4_macos_arm64.dmg"
+   },
+   {
+    "name": "Gridea.Pro_v1.0.4_windows_amd64_setup.exe",
+    "size": 24691778,
+    "browser_download_url": "https://github.com/Gridea-Pro/gridea-pro/releases/download/v1.0.4/Gridea.Pro_v1.0.4_windows_amd64_setup.exe"
+   },
+   {
+    "name": "Gridea.Pro_v1.0.4_windows_arm64_setup.exe",
+    "size": 23202239,
+    "browser_download_url": "https://github.com/Gridea-Pro/gridea-pro/releases/download/v1.0.4/Gridea.Pro_v1.0.4_windows_arm64_setup.exe"
+   }
+  ]
+ },
+ {
+  "tag_name": "v1.0.3",
+  "name": "Gridea Pro v1.0.3",
+  "published_at": "2026-04-05T17:54:53Z",
+  "prerelease": false,
+  "draft": false,
+  "html_url": "https://github.com/Gridea-Pro/gridea-pro/releases/tag/v1.0.3",
+  "body": "## ✨ 更新预置的博客文章、闪念、友链等\r\n\r\n重新设计了首次安装后的默认内容体系，让新用户从打开客户端的第一秒开始就能感受到 Gridea Pro 的温度。\r\n\r\n---\r\n\r\n## 🔧 技术改进\r\n\r\n   - _id → id 统一化：Go domain struct、前端 models、默认 JSON 文件全部统一为 id，移除 normalizeId\r\n  兼容函数。DataMigrator 自动迁移旧版用户数据\r\n   - 动态日期填充：默认文章和闪念不再使用硬编码日期，初始化时用占位符自动替换为当前时间\r\n   - 移除 frontend/dist/ 版本控制：构建产物不再提交到 git，仓库瘦身 110,000+ 行\r\n\r\n--- \r\n\r\n## New Contributors\r\n\r\n@gkd2323c\r\n  - 添加代理功能\r\n  - 修复深色模式 ",
+  "assets": [
+   {
+    "name": "Gridea.Pro_v1.0.3_linux_amd64.AppImage",
+    "size": 30176448,
+    "browser_download_url": "https://github.com/Gridea-Pro/gridea-pro/releases/download/v1.0.3/Gridea.Pro_v1.0.3_linux_amd64.AppImage"
+   },
+   {
+    "name": "Gridea.Pro_v1.0.3_linux_amd64.deb",
+    "size": 30351414,
+    "browser_download_url": "https://github.com/Gridea-Pro/gridea-pro/releases/download/v1.0.3/Gridea.Pro_v1.0.3_linux_amd64.deb"
+   },
+   {
+    "name": "Gridea.Pro_v1.0.3_linux_amd64.rpm",
+    "size": 30302589,
+    "browser_download_url": "https://github.com/Gridea-Pro/gridea-pro/releases/download/v1.0.3/Gridea.Pro_v1.0.3_linux_amd64.rpm"
+   },
+   {
+    "name": "Gridea.Pro_v1.0.3_macos_amd64.dmg",
+    "size": 34096117,
+    "browser_download_url": "https://github.com/Gridea-Pro/gridea-pro/releases/download/v1.0.3/Gridea.Pro_v1.0.3_macos_amd64.dmg"
+   },
+   {
+    "name": "Gridea.Pro_v1.0.3_macos_arm64.dmg",
+    "size": 31697076,
+    "browser_download_url": "https://github.com/Gridea-Pro/gridea-pro/releases/download/v1.0.3/Gridea.Pro_v1.0.3_macos_arm64.dmg"
+   },
+   {
+    "name": "Gridea.Pro_v1.0.3_windows_amd64_setup.exe",
+    "size": 24533580,
+    "browser_download_url": "https://github.com/Gridea-Pro/gridea-pro/releases/download/v1.0.3/Gridea.Pro_v1.0.3_windows_amd64_setup.exe"
+   },
+   {
+    "name": "Gridea.Pro_v1.0.3_windows_arm64_setup.exe",
+    "size": 23060527,
+    "browser_download_url": "https://github.com/Gridea-Pro/gridea-pro/releases/download/v1.0.3/Gridea.Pro_v1.0.3_windows_arm64_setup.exe"
+   }
+  ]
+ },
+ {
+  "tag_name": "v1.0.2",
+  "name": "Gridea Pro v1.0.2",
+  "published_at": "2026-04-02T02:10:06Z",
+  "prerelease": false,
+  "draft": false,
+  "html_url": "https://github.com/Gridea-Pro/gridea-pro/releases/tag/v1.0.2",
+  "body": "1. 新增 PWA 支持，一键开启 PWA\r\n2. 修复主题自定义配置页面 map is not a function 运行时错误",
+  "assets": [
+   {
+    "name": "Gridea.Pro_v1.0.2_linux_amd64.AppImage",
+    "size": 30176448,
+    "browser_download_url": "https://github.com/Gridea-Pro/gridea-pro/releases/download/v1.0.2/Gridea.Pro_v1.0.2_linux_amd64.AppImage"
+   },
+   {
+    "name": "Gridea.Pro_v1.0.2_linux_amd64.deb",
+    "size": 30346752,
+    "browser_download_url": "https://github.com/Gridea-Pro/gridea-pro/releases/download/v1.0.2/Gridea.Pro_v1.0.2_linux_amd64.deb"
+   },
+   {
+    "name": "Gridea.Pro_v1.0.2_linux_amd64.rpm",
+    "size": 30296702,
+    "browser_download_url": "https://github.com/Gridea-Pro/gridea-pro/releases/download/v1.0.2/Gridea.Pro_v1.0.2_linux_amd64.rpm"
+   },
+   {
+    "name": "Gridea.Pro_v1.0.2_macos_amd64.dmg",
+    "size": 34091203,
+    "browser_download_url": "https://github.com/Gridea-Pro/gridea-pro/releases/download/v1.0.2/Gridea.Pro_v1.0.2_macos_amd64.dmg"
+   },
+   {
+    "name": "Gridea.Pro_v1.0.2_macos_arm64.dmg",
+    "size": 31698874,
+    "browser_download_url": "https://github.com/Gridea-Pro/gridea-pro/releases/download/v1.0.2/Gridea.Pro_v1.0.2_macos_arm64.dmg"
+   },
+   {
+    "name": "Gridea.Pro_v1.0.2_windows_amd64_setup.exe",
+    "size": 24541009,
+    "browser_download_url": "https://github.com/Gridea-Pro/gridea-pro/releases/download/v1.0.2/Gridea.Pro_v1.0.2_windows_amd64_setup.exe"
+   },
+   {
+    "name": "Gridea.Pro_v1.0.2_windows_arm64_setup.exe",
+    "size": 23062530,
+    "browser_download_url": "https://github.com/Gridea-Pro/gridea-pro/releases/download/v1.0.2/Gridea.Pro_v1.0.2_windows_arm64_setup.exe"
+   }
+  ]
+ },
+ {
+  "tag_name": "v1.0.1",
+  "name": "Gridea Pro v1.0.1",
+  "published_at": "2026-03-23T02:01:31Z",
+  "prerelease": false,
+  "draft": false,
+  "html_url": "https://github.com/Gridea-Pro/gridea-pro/releases/tag/v1.0.1",
+  "body": "---                                                                                                                                        \r\n  v1.0.1                                                                                                                                     \r\n                                                                                                                                             \r\n  ✨ UI 优化                                                                                                                                  \r\n                                                                                                                                             \r\n  - 统一窗口控制按钮样式 — Windows/Linux 窗口控制按钮改为左上角红绿灯样式，参考 macOS 交通灯设计，所有平台视觉风格统一                       \r\n                                                                                                                                             \r\n  🐛 Bug 修复                                                                                                                                \r\n                                                                                                                                             \r\n  - 修复日语/韩语下站点路径显示异常 — CJK 字体中反斜杠 \\ 会被渲染为日元 ￥ 或韩元 ₩ 符号，现已统一替换为 / 显示                              \r\n   \r\n  🔧 构建与安装                                                                                                                              \r\n                                                                                                                                           \r\n  - 内置 MCP 支持 — 各平台安装包现已同时包含 MCP 二进制文件，开箱即用                                                                        \r\n  - Windows 安装方式简化 — 移除便携版（Portable），统一使用 Inno Setup 安装版\r\n  - Linux 升级到 WebKit2GTK 4.1 — 构建环境升级到 Ubuntu 24.04+，AppImage 仍兼容旧系统                                                        \r\n                                                                                                                                             \r\n  ---                                                     ",
+  "assets": [
+   {
+    "name": "Gridea.Pro_v1.0.1_linux_amd64.AppImage",
+    "size": 30094528,
+    "browser_download_url": "https://github.com/Gridea-Pro/gridea-pro/releases/download/v1.0.1/Gridea.Pro_v1.0.1_linux_amd64.AppImage"
+   },
+   {
+    "name": "Gridea.Pro_v1.0.1_linux_amd64.deb",
+    "size": 30257454,
+    "browser_download_url": "https://github.com/Gridea-Pro/gridea-pro/releases/download/v1.0.1/Gridea.Pro_v1.0.1_linux_amd64.deb"
+   },
+   {
+    "name": "Gridea.Pro_v1.0.1_linux_amd64.rpm",
+    "size": 30220206,
+    "browser_download_url": "https://github.com/Gridea-Pro/gridea-pro/releases/download/v1.0.1/Gridea.Pro_v1.0.1_linux_amd64.rpm"
+   },
+   {
+    "name": "Gridea.Pro_v1.0.1_macos_amd64.dmg",
+    "size": 33616861,
+    "browser_download_url": "https://github.com/Gridea-Pro/gridea-pro/releases/download/v1.0.1/Gridea.Pro_v1.0.1_macos_amd64.dmg"
+   },
+   {
+    "name": "Gridea.Pro_v1.0.1_macos_arm64.dmg",
+    "size": 32247494,
+    "browser_download_url": "https://github.com/Gridea-Pro/gridea-pro/releases/download/v1.0.1/Gridea.Pro_v1.0.1_macos_arm64.dmg"
+   },
+   {
+    "name": "Gridea.Pro_v1.0.1_windows_amd64_setup.exe",
+    "size": 24510623,
+    "browser_download_url": "https://github.com/Gridea-Pro/gridea-pro/releases/download/v1.0.1/Gridea.Pro_v1.0.1_windows_amd64_setup.exe"
+   },
+   {
+    "name": "Gridea.Pro_v1.0.1_windows_arm64_setup.exe",
+    "size": 23091751,
+    "browser_download_url": "https://github.com/Gridea-Pro/gridea-pro/releases/download/v1.0.1/Gridea.Pro_v1.0.1_windows_arm64_setup.exe"
+   }
+  ]
+ },
+ {
+  "tag_name": "v1.0.0",
+  "name": "Gridea Pro v1.0.0",
+  "published_at": "2026-03-14T17:36:16Z",
+  "prerelease": false,
+  "draft": false,
+  "html_url": "https://github.com/Gridea-Pro/gridea-pro/releases/tag/v1.0.0",
+  "body": "                                                                                                       \r\n  🚀 Gridea Pro 首版发布 🎉 🎊\r\n  \r\n  简单而强大的静态博客写作客户端 / A simple yet powerful static blog writing client                            \r\n                                                                                                               \r\n  Built with Go + Wails + Vue 3, Gridea Pro 是 https://github.com/getgridea/gridea                             \r\n  的全新重构版本，提供零命令行的写作、主题定制和一键部署体验。                                                 \r\n                                                                                                               \r\n  ---                                                                                                          \r\n  ✨ 核心特性 / Key Features                                                                                   \r\n                                                                                                               \r\n  📝 写作体验 / Writing                                                                                        \r\n  - 基于 Monaco Editor 的 Markdown 编辑器，支持实时预览\r\n  - KaTeX 数学公式支持\r\n  - 文章分类、标签、置顶管理\r\n  - 图片上传与管理\r\n\r\n  💡 Memos 速记 / Quick Memos\r\n  - 轻量级速记功能，随时记录灵感\r\n\r\n  💬 评论管理 / Comments\r\n  - 内置评论管理面板，支持 Gitalk、Disqus 等评论系统\r\n  - 未读评论实时提醒\r\n\r\n  🎨 主题系统 / Themes\r\n  - 多模板引擎支持：Jinja2 (Pongo2)、EJS、Go Templates\r\n  - 主题热切换，可视化配置\r\n\r\n  🚀 多平台部署 / Deployment\r\n  - 6 大部署平台：GitHub Pages、Gitee Pages、Coding Pages、Netlify、Vercel、SFTP\r\n  - 一键预览 & 发布\r\n\r\n  🔍 SEO 优化 / SEO\r\n  - 自动生成 sitemap.xml、robots.txt、RSS/Atom Feed\r\n  - Open Graph 标签支持\r\n  - 可自定义 SEO 设置\r\n\r\n  🌍 国际化 / i18n\r\n  - 11 种语言：简体中文、繁体中文、English、日本語、한국어、Deutsch、Français、Español、Italiano、Português、Русский\r\n\r\n  🤖 AI 集成 / AI Integration\r\n  - 内置 MCP Server，支持通过 AI 工具管理博客内容\r\n",
+  "assets": [
+   {
+    "name": "Gridea.Pro_v1.0.0_linux_amd64.AppImage",
+    "size": 21525696,
+    "browser_download_url": "https://github.com/Gridea-Pro/gridea-pro/releases/download/v1.0.0/Gridea.Pro_v1.0.0_linux_amd64.AppImage"
+   },
+   {
+    "name": "Gridea.Pro_v1.0.0_linux_amd64.deb",
+    "size": 21465462,
+    "browser_download_url": "https://github.com/Gridea-Pro/gridea-pro/releases/download/v1.0.0/Gridea.Pro_v1.0.0_linux_amd64.deb"
+   },
+   {
+    "name": "Gridea.Pro_v1.0.0_linux_amd64.rpm",
+    "size": 21434265,
+    "browser_download_url": "https://github.com/Gridea-Pro/gridea-pro/releases/download/v1.0.0/Gridea.Pro_v1.0.0_linux_amd64.rpm"
+   },
+   {
+    "name": "Gridea.Pro_v1.0.0_macos_amd64.dmg",
+    "size": 23421200,
+    "browser_download_url": "https://github.com/Gridea-Pro/gridea-pro/releases/download/v1.0.0/Gridea.Pro_v1.0.0_macos_amd64.dmg"
+   },
+   {
+    "name": "Gridea.Pro_v1.0.0_macos_arm64.dmg",
+    "size": 22814341,
+    "browser_download_url": "https://github.com/Gridea-Pro/gridea-pro/releases/download/v1.0.0/Gridea.Pro_v1.0.0_macos_arm64.dmg"
+   },
+   {
+    "name": "Gridea.Pro_v1.0.0_windows_amd64.exe",
+    "size": 53123072,
+    "browser_download_url": "https://github.com/Gridea-Pro/gridea-pro/releases/download/v1.0.0/Gridea.Pro_v1.0.0_windows_amd64.exe"
+   },
+   {
+    "name": "Gridea.Pro_v1.0.0_windows_amd64_setup.exe",
+    "size": 18340683,
+    "browser_download_url": "https://github.com/Gridea-Pro/gridea-pro/releases/download/v1.0.0/Gridea.Pro_v1.0.0_windows_amd64_setup.exe"
+   },
+   {
+    "name": "Gridea.Pro_v1.0.0_windows_arm64.exe",
+    "size": 51208192,
+    "browser_download_url": "https://github.com/Gridea-Pro/gridea-pro/releases/download/v1.0.0/Gridea.Pro_v1.0.0_windows_arm64.exe"
+   },
+   {
+    "name": "Gridea.Pro_v1.0.0_windows_arm64_setup.exe",
+    "size": 17602918,
+    "browser_download_url": "https://github.com/Gridea-Pro/gridea-pro/releases/download/v1.0.0/Gridea.Pro_v1.0.0_windows_arm64_setup.exe"
+   }
+  ]
+ }
+]

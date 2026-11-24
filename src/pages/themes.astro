@@ -1,27 +1,34 @@
 ---
 import MobileMenu from '../components/MobileMenu.astro';
+import SiteHead from '../components/SiteHead.astro';
+import { getImage } from 'astro:assets';
+import { SITE_URL, WEBSITE_ID, SOFTWARE_ID, STATEMENT, THEMES_REPO_URL } from '../data/site';
+import { getThemes } from '../data/themes';
+
+const themes = await getThemes();
+const cards = await Promise.all(themes.map(async (t) => {
+  if (!t.preview) return { ...t, img: undefined };
+  try {
+    const img = await getImage({ src: t.preview, inferSize: true, width: 720, format: 'webp', quality: 78 });
+    return { ...t, img };
+  } catch (err) {
+    console.warn(`[themes] 预览图处理失败 ${t.dir}: ${(err as Error).message}`);
+    return { ...t, img: undefined };
+  }
+}));
+const engines = ['Jinja2', 'Go Templates', 'EJS'];
+const title = `Gridea Pro 主题画廊 — ${themes.length} 款开源博客主题`;
+const description = `浏览 Gridea Pro 官方主题仓库收录的 ${themes.length} 款开源博客主题，支持 Jinja2、Go Templates 与 EJS 三种模板引擎，下载后放入站点目录即可在应用内切换。`;
+const pageNode = {
+  '@type': 'CollectionPage', '@id': `${SITE_URL}/themes/#webpage`, url: `${SITE_URL}/themes/`, name: title, inLanguage: 'zh-CN',
+  isPartOf: { '@id': WEBSITE_ID }, about: { '@id': SOFTWARE_ID },
+  mainEntity: { '@type': 'ItemList', numberOfItems: themes.length, itemListElement: themes.map((t, i) => ({ '@type': 'ListItem', position: i + 1, name: t.name, url: t.url })) },
+};
 ---
 <!DOCTYPE html>
 <html lang="zh-CN">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<link rel="icon" href="/favicon.ico">
-<title>主题画廊 — Gridea Pro</title>
-<meta name="description" content="浏览 Gridea Pro 主题画廊，精选多款精美博客主题，一键切换，支持自定义开发。">
-<meta name="keywords" content="Gridea Pro主题,博客主题,静态博客模板,主题画廊,自定义主题">
-<link rel="canonical" href="https://gridea.pro/themes.html">
-<meta property="og:type" content="website">
-<meta property="og:title" content="主题画廊 — Gridea Pro">
-<meta property="og:description" content="浏览 Gridea Pro 主题画廊，精选多款精美博客主题，一键切换，支持自定义开发。">
-<meta property="og:url" content="https://gridea.pro/themes.html">
-<meta property="og:image" content="https://gridea.pro/appicon.png">
-<meta property="og:site_name" content="Gridea Pro">
-<meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="主题画廊 — Gridea Pro">
-<meta name="twitter:description" content="浏览 Gridea Pro 主题画廊，精选多款精美博客主题，一键切换，支持自定义开发。">
-<meta name="twitter:image" content="https://gridea.pro/appicon.png">
-<script type="application/ld+json" set:html={JSON.stringify({"@context":"https://schema.org","@type":"CollectionPage","name":"主题画廊 — Gridea Pro","description":"浏览 Gridea Pro 主题画廊，精选多款精美博客主题，一键切换，支持自定义开发。","url":"https://gridea.pro/themes.html","isPartOf":{"@type":"WebSite","name":"Gridea Pro","url":"https://gridea.pro/"}})}></script>
+<SiteHead lang="zh-CN" title={title} description={description} path="/themes/" graph={[pageNode]} />
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Figtree:wght@400;500;600&family=JetBrains+Mono&family=Plus+Jakarta+Sans:wght@500;600;700;800&display=swap" rel="stylesheet">
@@ -153,6 +160,12 @@ a{color:inherit;text-decoration:none}
 @media(max-width:900px){.theme-grid{grid-template-columns:repeat(2,1fr);gap:20px}.create-inner{grid-template-columns:1fr;gap:40px}.footer-grid{grid-template-columns:1fr 1fr;gap:32px}h1{font-size:36px}h2{font-size:26px}}
 @media(max-width:768px){.header-nav{display:none}.btn-download-sm{display:none}.mobile-menu-btn{display:flex}}
 @media(max-width:600px){.theme-grid{grid-template-columns:1fr}.footer-grid{grid-template-columns:1fr;gap:28px}.page-header{padding-top:110px;padding-bottom:40px}h1{font-size:30px}.filter-bar{overflow-x:auto;-webkit-overflow-scrolling:touch}.filter-tab{white-space:nowrap;padding:10px 14px;font-size:13px}.create-section{padding:48px 0;margin-top:48px}}
+.page-subtitle a{color:var(--accent)}
+a.theme-card{display:block;color:inherit}
+.theme-preview img{width:100%;height:100%;object-fit:cover;object-position:top center;display:block}
+.theme-preview-empty{width:100%;height:100%;display:flex;align-items:center;justify-content:center;background:var(--bg-subtle);color:var(--text-muted);font-family:'Plus Jakarta Sans',sans-serif;font-size:22px;font-weight:600}
+.theme-meta-builtin{font-size:12px;color:var(--accent)}
+.theme-desc{display:-webkit-box;-webkit-line-clamp:3;-webkit-box-orient:vertical;overflow:hidden}
 </style>
 </head>
 <body>
@@ -185,45 +198,35 @@ a{color:inherit;text-decoration:none}
     <div class="container">
       <span class="page-label fade-in">主题画廊</span>
       <h1 class="fade-in fade-in-d1">为你的博客挑选一件外衣</h1>
-      <p class="page-subtitle fade-in fade-in-d2">所有主题都是免费开源的。你也可以创建自己的主题。</p>
+      <p class="page-subtitle fade-in fade-in-d2">官方主题仓库已收录 {themes.length} 款主题，全部免费开源。下载主题目录放入站点的 themes 文件夹，即可在应用内切换；也欢迎<a href={THEMES_REPO_URL} rel="noopener">提交你的主题</a>。</p>
     </div>
   </section>
 
   <section class="container">
-    <div class="filter-bar fade-in fade-in-d3">
-      <button class="filter-tab is-active">全部</button>
-      <button class="filter-tab">浅色</button>
-      <button class="filter-tab">深色</button>
-      <button class="filter-tab">极简</button>
-      <button class="filter-tab">博客</button>
-      <button class="filter-tab">文档</button>
+    <div class="filter-bar fade-in fade-in-d3" role="tablist">
+      <button class="filter-tab is-active" data-filter="all">全部</button>
+      <button class="filter-tab" data-filter="builtin">随应用内置</button>
+      {engines.map((e) => <button class="filter-tab" data-filter={e}>{e}</button>)}
     </div>
 
     <div class="theme-grid">
-      <div class="theme-card fade-in fade-in-d1">
-        <div class="theme-preview"><div class="preview-flavor"><div class="pf-header"><div class="pf-logo"></div><div class="pf-nav"><span></span><span></span><span></span></div></div><div class="pf-body"><div class="pf-accent-bar"></div><div class="pf-title"></div><div class="pf-text"></div><div class="pf-text"></div><div class="pf-text"></div></div></div></div>
-        <div class="theme-info"><div class="theme-name">Flavor</div><div class="theme-desc">暖色调的深色编辑主题，适合夜间写作</div><div class="theme-meta"><span class="theme-meta-author">EvanYou</span><span class="theme-meta-stars">&#9733; 256</span><span class="theme-meta-engine">Jinja2</span></div></div>
-      </div>
-      <div class="theme-card fade-in fade-in-d2">
-        <div class="theme-preview"><div class="preview-letters"><div class="pl-header"><div class="pl-logo">LETTERS</div><div class="pl-rule"></div></div><div class="pl-body"><div class="pl-title"></div><div class="pl-date"></div><div class="pl-text"></div><div class="pl-text"></div><div class="pl-text"></div></div></div></div>
-        <div class="theme-info"><div class="theme-name">Letters</div><div class="theme-desc">干净的极简主题，衬线字体标题</div><div class="theme-meta"><span class="theme-meta-author">fehey</span><span class="theme-meta-stars">&#9733; 189</span><span class="theme-meta-engine">EJS</span></div></div>
-      </div>
-      <div class="theme-card fade-in fade-in-d3">
-        <div class="theme-preview"><div class="preview-starter"><div class="ps-topbar"><span></span><span></span><span></span><span></span></div><div class="ps-content"><div class="ps-sidebar"><div class="ps-sidebar-item active"></div><div class="ps-sidebar-item"></div><div class="ps-sidebar-item"></div></div><div class="ps-main"><div class="ps-main-title"></div><div class="ps-main-text"></div><div class="ps-main-text"></div><div class="ps-main-text"></div></div></div></div></div>
-        <div class="theme-info"><div class="theme-name">Starter</div><div class="theme-desc">默认主题，简洁的侧边栏布局</div><div class="theme-meta"><span class="theme-meta-author">Gridea</span><span class="theme-meta-stars">&#9733; 412</span><span class="theme-meta-engine">Jinja2</span></div></div>
-      </div>
-      <div class="theme-card fade-in fade-in-d4">
-        <div class="theme-preview"><div class="preview-moonlight"><div class="pm-nav"><div class="pm-logo"></div><div class="pm-links"><span></span><span></span><span></span></div></div><div class="pm-body"><div class="pm-title"></div><div class="pm-text"></div><div class="pm-text"></div><div class="pm-text"></div><div class="pm-tag"></div></div></div></div>
-        <div class="theme-info"><div class="theme-name">Moonlight</div><div class="theme-desc">优雅的深紫色主题，适合个人博客</div><div class="theme-meta"><span class="theme-meta-author">jinyaoMa</span><span class="theme-meta-stars">&#9733; 128</span><span class="theme-meta-engine">Go Templates</span></div></div>
-      </div>
-      <div class="theme-card fade-in fade-in-d5">
-        <div class="theme-preview"><div class="preview-paper"><div class="pp-page"><div class="pp-h"></div><div class="pp-rule"></div><div class="pp-line"></div><div class="pp-line"></div><div class="pp-line"></div><div class="pp-line"></div></div></div></div>
-        <div class="theme-info"><div class="theme-name">Paper</div><div class="theme-desc">专注阅读体验，仿纸张质感</div><div class="theme-meta"><span class="theme-meta-author">ColdStone</span><span class="theme-meta-stars">&#9733; 203</span><span class="theme-meta-engine">Jinja2</span></div></div>
-      </div>
-      <div class="theme-card fade-in fade-in-d6">
-        <div class="theme-preview"><div class="preview-zhihu"><div class="pz-header"><span></span><span></span><span></span><span></span></div><div class="pz-body"><div class="pz-card"><div class="pz-card-title"></div><div class="pz-card-text"></div><div class="pz-card-text"></div><div class="pz-meta"><span></span><span></span></div></div><div class="pz-card"><div class="pz-card-title"></div><div class="pz-card-text"></div><div class="pz-card-text"></div></div></div></div></div>
-        <div class="theme-info"><div class="theme-name">Zhihu</div><div class="theme-desc">知乎风格主题，卡片式内容流</div><div class="theme-meta"><span class="theme-meta-author">moeKiwiSAMA</span><span class="theme-meta-stars">&#9733; 167</span><span class="theme-meta-engine">EJS</span></div></div>
-      </div>
+      {cards.map((t) => (
+        <a class="theme-card" href={t.url} rel="noopener" data-engine={t.engine} data-builtin={t.builtIn ? 'true' : 'false'}>
+          <div class="theme-preview">
+            {t.img
+              ? <img src={t.img.src} width={t.img.attributes.width} height={t.img.attributes.height} alt={`${t.name} 主题预览`} loading="lazy" decoding="async" />
+              : <div class="theme-preview-empty">{t.name}</div>}
+          </div>
+          <div class="theme-info">
+            <div class="theme-name">{t.name}</div>
+            <div class="theme-desc">{t.description}</div>
+            <div class="theme-meta">
+              <span class="theme-meta-engine">{t.engine}</span>
+              {t.builtIn && <span class="theme-meta-builtin">随应用内置</span>}
+            </div>
+          </div>
+        </a>
+      ))}
     </div>
   </section>
 
@@ -259,17 +262,17 @@ a{color:inherit;text-decoration:none}
 <footer class="site-footer">
   <div class="container">
     <div class="footer-grid">
-      <div class="footer-brand"><div class="footer-brand-text"><img src="/appicon.png" alt="Gridea Pro" class="brand-mark"> Gridea Pro</div><p class="footer-brand-desc">一个简洁的桌面端静态博客写作客户端</p></div>
+      <div class="footer-brand"><div class="footer-brand-text"><img src="/appicon.png" alt="Gridea Pro" class="brand-mark"> Gridea Pro</div><p class="footer-brand-desc">开源的桌面端静态博客写作客户端</p></div>
       <div class="footer-col"><div class="footer-col-title">产品</div><ul><li><a href="/docs/features/">功能特性</a></li><li><a href="/themes/">主题画廊</a></li><li><a href="/download/">下载</a></li><li><a href="/changelog/">更新日志</a></li></ul></div>
       <div class="footer-col"><div class="footer-col-title">资源</div><ul><li><a href="/docs/">使用文档</a></li><li><a href="/docs/themes/">主题开发</a></li><li><a href="/docs/getting-started/migration/">迁移指南</a></li><li><a href="/docs/faq/">常见问题</a></li></ul></div>
-      <div class="footer-col"><div class="footer-col-title">社区</div><ul><li><a href="https://github.com/Gridea-Pro/gridea-pro" target="_blank">GitHub</a></li><li><a href="https://github.com/Gridea-Pro/gridea-pro/discussions" target="_blank">Discussions</a></li><li><a href="https://github.com/Gridea-Pro/gridea-pro/issues" target="_blank">反馈建议</a></li><li><a href="https://are.ink/" target="_blank" rel="noopener">作者博客</a></li></ul></div>
+      <div class="footer-col"><div class="footer-col-title">社区</div><ul><li><a href="https://github.com/Gridea-Pro/gridea-pro" target="_blank">GitHub</a></li><li><a href="https://github.com/Gridea-Pro/gridea-pro/discussions" target="_blank">Discussions</a></li><li><a href="https://github.com/Gridea-Pro/gridea-pro/issues" target="_blank">反馈建议</a></li><li><a href="/about/">关于 Gridea Pro</a></li><li><a href="https://are.ink/" target="_blank" rel="noopener">作者博客</a></li></ul></div>
     </div>
-    <div class="footer-bottom">&copy; 2026 Gridea Pro Contributors. Open source under GPL-3.0.</div>
+    <div class="footer-bottom">{STATEMENT["zh-CN"].copyright}</div>
   </div>
 </footer>
 
 <script is:inline>
-document.querySelectorAll('.filter-tab').forEach(function(tab){tab.addEventListener('click',function(){document.querySelectorAll('.filter-tab').forEach(function(t){t.classList.remove('is-active')});this.classList.add('is-active')})});
+document.querySelectorAll('.filter-tab').forEach(function(tab){tab.addEventListener('click',function(){var f=this.dataset.filter;document.querySelectorAll('.filter-tab').forEach(function(t){t.classList.remove('is-active')});this.classList.add('is-active');document.querySelectorAll('.theme-card').forEach(function(c){var show=f==='all'||(f==='builtin'?c.dataset.builtin==='true':c.dataset.engine===f);c.style.display=show?'':'none'})})});
 </script>
 </body>
 </html>

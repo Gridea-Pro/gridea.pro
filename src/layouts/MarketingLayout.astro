@@ -1,0 +1,104 @@
+---
+/**
+ * 首页与「关于」页共用的布局（中英文）。样式沿用原首页设计，见 src/styles/marketing.css。
+ */
+import '../styles/marketing.css';
+import SiteHead from '../components/SiteHead.astro';
+import MobileMenu from '../components/MobileMenu.astro';
+import { STATEMENT, REPO_URL, AUTHOR_BLOG, type Lang } from '../data/site';
+
+interface Props {
+  lang: Lang;
+  title: string;
+  description: string;
+  path: string;
+  alternates?: Partial<Record<Lang, string>>;
+  graph?: Record<string, unknown>[];
+  ogType?: 'website' | 'article';
+}
+
+const props = Astro.props;
+const { lang, alternates } = props;
+const en = lang === 'en';
+const home = en ? '/en/' : '/';
+const otherLang = en ? alternates?.['zh-CN'] : alternates?.en;
+
+const t = en
+  ? {
+      docs: 'Docs', themes: 'Themes', changelog: 'Changelog', download: 'Download', menu: 'Menu',
+      tagline: 'An open-source desktop client for writing static blogs.',
+      product: 'Product', resources: 'Resources', about: 'About',
+      productLinks: [['/docs/features/', 'Features'], ['/themes/', 'Themes'], ['/download/', 'Download'], ['/changelog/', 'Changelog']],
+      resourceLinks: [['/docs/', 'Documentation (Chinese)'], ['/docs/themes/', 'Theme development'], ['/docs/getting-started/migration/', 'Migrating from Gridea'], ['/docs/faq/', 'FAQ']],
+      aboutLinks: [['/en/about/', 'About Gridea Pro'], [REPO_URL, 'GitHub'], [`${REPO_URL}/discussions`, 'Discussions'], [`${REPO_URL}/issues`, 'Feedback'], [AUTHOR_BLOG, "Author's blog"]],
+      switchLabel: '简体中文',
+    }
+  : {
+      docs: '文档', themes: '主题', changelog: '更新日志', download: '下载', menu: '菜单',
+      tagline: '开源的桌面端静态博客写作客户端',
+      product: '产品', resources: '资源', about: '关于',
+      productLinks: [['/docs/features/', '功能介绍'], ['/themes/', '主题画廊'], ['/download/', '下载'], ['/changelog/', '更新日志']],
+      resourceLinks: [['/docs/', '使用文档'], ['/docs/themes/', '主题开发'], ['/docs/getting-started/migration/', '从 Gridea 迁移'], ['/docs/faq/', '常见问题']],
+      aboutLinks: [['/about/', '关于 Gridea Pro'], [REPO_URL, 'GitHub'], [`${REPO_URL}/discussions`, 'Discussions'], [`${REPO_URL}/issues`, '反馈建议'], [AUTHOR_BLOG, '作者博客']],
+      switchLabel: 'English',
+    };
+const external = (href: string) => href.startsWith('http');
+---
+<!DOCTYPE html>
+<html lang={lang}>
+<head>
+<SiteHead {...props} />
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@500;600;700;800&family=Figtree:wght@400;500;600&family=JetBrains+Mono:wght@400&display=swap" rel="stylesheet">
+</head>
+<body>
+
+<header class="header">
+  <div class="container">
+    <a href={home} class="header-logo">
+      <img src="/appicon.png" alt="Gridea Pro" class="header-logo-mark">
+      <span class="header-logo-text">Gridea Pro</span>
+    </a>
+    <nav class="header-nav">
+      <a href="/docs/">{t.docs}</a>
+      <a href="/themes/">{t.themes}</a>
+      <a href="/changelog/">{t.changelog}</a>
+      <a href={REPO_URL} class="header-github" aria-label="GitHub" target="_blank" rel="noopener">
+        <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 2C6.477 2 2 6.484 2 12.017c0 4.425 2.865 8.18 6.839 9.504.5.092.682-.217.682-.483 0-.237-.008-.868-.013-1.703-2.782.605-3.369-1.343-3.369-1.343-.454-1.158-1.11-1.466-1.11-1.466-.908-.62.069-.608.069-.608 1.003.07 1.531 1.032 1.531 1.032.892 1.53 2.341 1.088 2.91.832.092-.647.35-1.088.636-1.338-2.22-.253-4.555-1.113-4.555-4.951 0-1.093.39-1.988 1.029-2.688-.103-.253-.446-1.272.098-2.65 0 0 .84-.27 2.75 1.026A9.564 9.564 0 0112 6.844c.85.004 1.705.115 2.504.337 1.909-1.296 2.747-1.027 2.747-1.027.546 1.379.202 2.398.1 2.651.64.7 1.028 1.595 1.028 2.688 0 3.848-2.339 4.695-4.566 4.943.359.309.678.92.678 1.855 0 1.338-.012 2.419-.012 2.747 0 .268.18.58.688.482A10.019 10.019 0 0022 12.017C22 6.484 17.522 2 12 2z"/></svg>
+      </a>
+    </nav>
+    <div class="header-actions">
+      <a href="/download/" class="btn-download-header">{t.download}</a>
+      <button class="mobile-menu-btn" id="menuToggle" aria-label={t.menu} aria-expanded="false">
+        <span class="hamburger-line" style="display:block;width:16px;height:1.5px"></span>
+        <span class="hamburger-line" style="display:block;width:16px;height:1.5px"></span>
+      </button>
+    </div>
+  </div>
+</header>
+
+<MobileMenu lang={lang} />
+
+<slot />
+
+<footer class="footer">
+  <div class="container">
+    <div class="footer-grid">
+      <div><a href={home} class="header-logo"><img src="/appicon.png" alt="Gridea Pro" class="header-logo-mark"><span class="header-logo-text">Gridea Pro</span></a><p class="footer-brand-desc">{t.tagline}</p></div>
+      <div><div class="footer-col-title">{t.product}</div><ul class="footer-links">{t.productLinks.map(([h, l]) => <li><a href={h}>{l}</a></li>)}</ul></div>
+      <div><div class="footer-col-title">{t.resources}</div><ul class="footer-links">{t.resourceLinks.map(([h, l]) => <li><a href={h}>{l}</a></li>)}</ul></div>
+      <div><div class="footer-col-title">{t.about}</div><ul class="footer-links">{t.aboutLinks.map(([h, l]) => <li><a href={h} {...(external(h) ? { target: '_blank', rel: 'noopener' } : {})}>{l}</a></li>)}</ul></div>
+    </div>
+    <div class="footer-bottom">
+      <span>{STATEMENT[lang].copyright}</span>
+      {otherLang && <a href={otherLang} hreflang={en ? 'zh-CN' : 'en'} lang={en ? 'zh-CN' : 'en'}>{t.switchLabel}</a>}
+    </div>
+  </div>
+</footer>
+
+<script is:inline>
+(function(){var reveals=document.querySelectorAll('.reveal');function checkReveal(){var wh=window.innerHeight;for(var i=0;i<reveals.length;i++){if(reveals[i].getBoundingClientRect().top<wh-60){reveals[i].classList.add('visible')}}}checkReveal();var ticking=false;window.addEventListener('scroll',function(){if(!ticking){window.requestAnimationFrame(function(){checkReveal();ticking=false});ticking=true}},{passive:true})})();
+</script>
+</body>
+</html>
