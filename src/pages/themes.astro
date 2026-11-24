@@ -7,10 +7,16 @@ import { SITE_URL, WEBSITE_ID, SOFTWARE_ID, STATEMENT, THEMES_REPO_URL } from '.
 import { getThemes } from '../data/themes';
 
 const themes = await getThemes();
+// 预览图统一裁成 4:3 并保留顶部：截图的导航与首屏、插画的标题都在上部；输出 480/800 两档宽度
 const cards = await Promise.all(themes.map(async (t) => {
   if (!t.preview) return { ...t, img: undefined };
   try {
-    const img = await getImage({ src: t.preview, inferSize: true, width: 720, format: 'webp', quality: 78 });
+    const img = await getImage({
+      src: t.preview, width: 800, height: 600, widths: [480, 800],
+      fit: 'cover', position: 'top',
+      format: 'webp', quality: 80,
+      sizes: '(max-width: 600px) calc(100vw - 48px), (max-width: 900px) calc(50vw - 44px), 344px',
+    });
     return { ...t, img };
   } catch (err) {
     console.warn(`[themes] 预览图处理失败 ${t.dir}: ${(err as Error).message}`);
@@ -69,7 +75,7 @@ a{color:inherit;text-decoration:none}
 .theme-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:24px;padding-bottom:40px}
 .theme-card{transition:transform .2s ease}.theme-card:hover{transform:translateY(-2px)}
 .theme-card:hover .theme-preview{border-color:var(--border-dark)}
-.theme-preview{aspect-ratio:16/10;border-radius:8px;overflow:hidden;border:1px solid var(--border);margin-bottom:16px;position:relative;transition:border-color .2s ease}
+.theme-preview{aspect-ratio:4/3;border-radius:8px;overflow:hidden;border:1px solid var(--border);margin-bottom:16px;position:relative;transition:border-color .2s ease}
 .theme-info{padding:0 2px}
 .theme-name{font-family:'Plus Jakarta Sans',sans-serif;font-size:18px;font-weight:600;color:var(--text-primary);line-height:1.3;margin-bottom:4px}
 .theme-desc{font-size:14px;color:var(--text-secondary);line-height:1.5;margin-bottom:10px}
@@ -163,7 +169,7 @@ a{color:inherit;text-decoration:none}
 @media(max-width:600px){.theme-grid{grid-template-columns:1fr}.footer-grid{grid-template-columns:1fr;gap:28px}.page-header{padding-top:110px;padding-bottom:40px}h1{font-size:30px}.filter-bar{overflow-x:auto;-webkit-overflow-scrolling:touch}.filter-tab{white-space:nowrap;padding:10px 14px;font-size:13px}.create-section{padding:48px 0;margin-top:48px}}
 .page-subtitle a{color:var(--accent)}
 a.theme-card{display:block;color:inherit}
-.theme-preview img{width:100%;height:100%;object-fit:cover;object-position:top center;display:block}
+.theme-preview img{width:100%;height:100%;object-fit:cover;display:block}
 .theme-preview-empty{width:100%;height:100%;display:flex;align-items:center;justify-content:center;background:var(--bg-subtle);color:var(--text-muted);font-family:'Plus Jakarta Sans',sans-serif;font-size:22px;font-weight:600}
 .theme-meta-builtin{font-size:12px;color:var(--accent)}
 .theme-desc{display:-webkit-box;-webkit-line-clamp:3;-webkit-box-orient:vertical;overflow:hidden}
@@ -217,7 +223,7 @@ a.theme-card{display:block;color:inherit}
         <a class="theme-card" href={t.url} rel="noopener" data-engine={t.engine} data-builtin={t.builtIn ? 'true' : 'false'}>
           <div class="theme-preview">
             {t.img
-              ? <img src={t.img.src} width={t.img.attributes.width} height={t.img.attributes.height} alt={`${t.name} 主题预览`} loading="lazy" decoding="async" />
+              ? <img src={t.img.src} srcset={t.img.srcSet.attribute} sizes={t.img.attributes.sizes} width="800" height="600" alt={`${t.name} 主题预览`} loading="lazy" decoding="async" />
               : <div class="theme-preview-empty">{t.name}</div>}
           </div>
           <div class="theme-info">
