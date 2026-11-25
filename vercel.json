@@ -1,13 +1,13 @@
 {
   "redirects": [
     {
-      "source": "/en/docs",
-      "destination": "/docs/",
+      "source": "/en/docs/(.*)",
+      "destination": "/docs/$1",
       "permanent": true
     },
     {
-      "source": "/en/docs/:path+",
-      "destination": "/docs/:path+/",
+      "source": "/en/docs",
+      "destination": "/docs/",
       "permanent": true
     }
   ],
