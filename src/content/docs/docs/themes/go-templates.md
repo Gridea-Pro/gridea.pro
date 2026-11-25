@@ -168,4 +168,4 @@ Go Templates 的比较运算符是函数形式：
 | `gt` | 大于 |
 | `ge` | 大于等于 |
 
-完整变量列表请查阅[模板变量参考](./variables/)，从 Jinja2 迁移请参考[Jinja2 指南](./jinja2/)中的语法对照。
+完整变量列表请查阅[模板变量参考](/docs/themes/variables/)，从 Jinja2 迁移请参考[Jinja2 指南](/docs/themes/jinja2/)中的语法对照。

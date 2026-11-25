@@ -4,7 +4,7 @@ description: Gridea Pro 中 EJS 模板引擎的使用指南，主要用于旧版
 ---
 
 :::caution
-EJS 引擎主要用于兼容旧版 Gridea 主题。**新主题强烈推荐使用 [Jinja2 (Pongo2)](./jinja2/)**，它拥有更强大的模板继承、更丰富的过滤器和更安全的沙箱环境。
+EJS 引擎主要用于兼容旧版 Gridea 主题。**新主题强烈推荐使用 [Jinja2 (Pongo2)](/docs/themes/jinja2/)**，它拥有更强大的模板继承、更丰富的过滤器和更安全的沙箱环境。
 :::
 
 ## 引擎声明
@@ -132,4 +132,4 @@ Gridea Pro 中的 EJS 运行时不支持 Node.js 的 `require()` 函数。你无
 3. 将 `include` 组装升级为 `extends` + `block` 继承
 4. 使用预览功能验证每个页面
 
-完整变量列表请查阅[模板变量参考](./variables/)。
+完整变量列表请查阅[模板变量参考](/docs/themes/variables/)。

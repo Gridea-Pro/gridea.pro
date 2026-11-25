@@ -9,15 +9,15 @@ Gridea Pro 生成的是纯静态 HTML 文件，可以部署到任何支持静态
 
 | 平台 | 费用 | OAuth 一键授权 | 自定义域名 | HTTPS | 全球 CDN | 配置复杂度 |
 |------|------|---------------|-----------|-------|----------|-----------|
-| [GitHub Pages](./github-pages/) | 免费 | 支持 | 支持 | 自动 | 有限 | 低 |
-| [Vercel](./vercel/) | 免费套餐 | 支持 | 支持 | 自动 | 全球 | 低 |
-| [Netlify](./netlify/) | 免费套餐 | 支持 | 支持 | 自动 | 全球 | 低 |
-| [Gitee Pages](./gitee/) | 免费 | 支持 | 支持 | 手动 | 国内 | 低 |
-| [Coding Pages](./coding/) | 免费 | 不支持 | 支持 | 自动 | 国内 | 中 |
-| [自定义服务器](./custom-server/) | 取决于服务器 | 不适用 | 完全掌控 | 需配置 | 需配置 | 中-高 |
+| [GitHub Pages](/docs/deployment/github-pages/) | 免费 | 支持 | 支持 | 自动 | 有限 | 低 |
+| [Vercel](/docs/deployment/vercel/) | 免费套餐 | 支持 | 支持 | 自动 | 全球 | 低 |
+| [Netlify](/docs/deployment/netlify/) | 免费套餐 | 支持 | 支持 | 自动 | 全球 | 低 |
+| [Gitee Pages](/docs/deployment/gitee/) | 免费 | 支持 | 支持 | 手动 | 国内 | 低 |
+| [Coding Pages](/docs/deployment/coding/) | 免费 | 不支持 | 支持 | 自动 | 国内 | 中 |
+| [自定义服务器](/docs/deployment/custom-server/) | 取决于服务器 | 不适用 | 完全掌控 | 需配置 | 需配置 | 中-高 |
 
 :::tip
-GitHub / Gitee / Netlify / Vercel 四个平台都支持 **OAuth 一键授权**，免去了手动创建 Token、复制粘贴的环节。推荐首次配置时直接走 OAuth，详见 [OAuth 授权总览](./oauth/)。
+GitHub / Gitee / Netlify / Vercel 四个平台都支持 **OAuth 一键授权**，免去了手动创建 Token、复制粘贴的环节。推荐首次配置时直接走 OAuth，详见 [OAuth 授权总览](/docs/deployment/oauth/)。
 :::
 
 :::tip

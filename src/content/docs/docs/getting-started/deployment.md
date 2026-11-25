@@ -7,7 +7,7 @@ description: 将 Gridea Pro 生成的静态博客一键部署到 GitHub Pages、
 
 ## 一键部署流程
 
-1. 确保已在[基础配置](./configuration/)中设置好远程仓库信息
+1. 确保已在[基础配置](/docs/getting-started/configuration/)中设置好远程仓库信息
 2. 点击左侧边栏底部的 **同步** 按钮
 3. Gridea Pro 会自动执行以下步骤：
    - 渲染所有文章和页面为静态 HTML

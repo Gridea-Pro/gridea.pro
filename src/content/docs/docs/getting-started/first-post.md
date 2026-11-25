@@ -3,7 +3,7 @@ title: 写第一篇文章
 description: 使用 Gridea Pro 内置编辑器创建、编辑和预览你的第一篇博客文章。
 ---
 
-完成[基础配置](./configuration/)后，现在来创建你的第一篇文章。
+完成[基础配置](/docs/getting-started/configuration/)后，现在来创建你的第一篇文章。
 
 ## 创建文章
 
@@ -82,4 +82,4 @@ console.log('Hello, Gridea Pro!');
 - 在文章列表中可以搜索、排序和批量管理文章
 - 支持将文章设为草稿状态，草稿不会出现在生成的静态站点中
 
-完成第一篇文章后，前往[发布部署](./deployment/)将博客发布到线上。
+完成第一篇文章后，前往[发布部署](/docs/getting-started/deployment/)将博客发布到线上。

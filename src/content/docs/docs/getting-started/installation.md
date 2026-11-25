@@ -88,7 +88,7 @@ yay -S gridea-pro-bin
 
 ## 验证安装
 
-安装完成后，启动 Gridea Pro，你应该能看到欢迎界面。如果一切正常，接下来前往[基础配置](./configuration/)设置你的博客信息。
+安装完成后，启动 Gridea Pro，你应该能看到欢迎界面。如果一切正常，接下来前往[基础配置](/docs/getting-started/configuration/)设置你的博客信息。
 
 ## 常见安装问题
 

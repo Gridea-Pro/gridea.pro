@@ -17,10 +17,10 @@ Gridea Pro 是一款跨平台桌面静态博客客户端，基于 **Go + Wails v
 
 按照以下顺序阅读文档，你将在最短时间内搭建好自己的博客：
 
-1. [安装 Gridea Pro](./installation/) -- 下载并安装到你的操作系统
-2. [基础配置](./configuration/) -- 设置站点名称、描述、头像等基本信息
-3. [写第一篇文章](./first-post/) -- 使用内置编辑器创建并预览文章
-4. [发布部署](./deployment/) -- 将博客部署到线上
+1. [安装 Gridea Pro](/docs/getting-started/installation/) -- 下载并安装到你的操作系统
+2. [基础配置](/docs/getting-started/configuration/) -- 设置站点名称、描述、头像等基本信息
+3. [写第一篇文章](/docs/getting-started/first-post/) -- 使用内置编辑器创建并预览文章
+4. [发布部署](/docs/getting-started/deployment/) -- 将博客部署到线上
 
 :::tip
 如果你是主题开发者，完成基础上手后可以直接前往[主题开发文档](/docs/themes/)深入了解三引擎架构。
@@ -35,7 +35,7 @@ Gridea Pro 是一款跨平台桌面静态博客客户端，基于 **Go + Wails v
 | Linux | Ubuntu 22.04+ | 需安装 WebKit2GTK 依赖 |
 
 :::caution
-Linux 用户请务必阅读[安装指南](./installation/)中的依赖安装部分，缺少 WebKit2GTK 库将导致应用无法启动。
+Linux 用户请务必阅读[安装指南](/docs/getting-started/installation/)中的依赖安装部分，缺少 WebKit2GTK 库将导致应用无法启动。
 :::
 
 ## 技术架构

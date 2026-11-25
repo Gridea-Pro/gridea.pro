@@ -80,7 +80,7 @@ Vercel Integration 的 Token 属于账户级 API Token，能操作账户下所�
 
 这种方式利用 Vercel 与 GitHub 的集成，每次 Gridea Pro 同步推送后自动触发部署。
 
-1. 先按照 [GitHub Pages 部署](./github-pages/)的步骤创建 GitHub 仓库并配置 Gridea Pro
+1. 先按照 [GitHub Pages 部署](/docs/deployment/github-pages/)的步骤创建 GitHub 仓库并配置 Gridea Pro
 2. 登录 [Vercel](https://vercel.com)，点击 **Import Project**
 3. 选择你的博客仓库
 4. Framework Preset 选择 **Other**
@@ -152,4 +152,4 @@ Vercel 免费套餐包含：
 }
 ```
 
-关于 OAuth 的整体机制、令牌存储位置、固定端口冲突排查等，请参阅 [OAuth 授权总览](./oauth/)。如遇其它问题，请查阅[常见问题](/docs/faq/)或[部署概述](./index.md)中的通用排查步骤。
+关于 OAuth 的整体机制、令牌存储位置、固定端口冲突排查等，请参阅 [OAuth 授权总览](/docs/deployment/oauth/)。如遇其它问题，请查阅[常见问题](/docs/faq/)或[部署概述](/docs/deployment/)中的通用排查步骤。

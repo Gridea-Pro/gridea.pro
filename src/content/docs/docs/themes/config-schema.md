@@ -121,7 +121,7 @@ description: Gridea Pro 主题 config.json 的完整格式规范，包括元信�
 ```
 
 :::tip
-`code` 和 `textarea` 类型的值若包含 HTML/JS，在 Jinja2 中输出时必须加 `|safe` 过滤器，否则会被转义为纯文本。详见 [Jinja2 指南](./jinja2/)。
+`code` 和 `textarea` 类型的值若包含 HTML/JS，在 Jinja2 中输出时必须加 `|safe` 过滤器，否则会被转义为纯文本。详见 [Jinja2 指南](/docs/themes/jinja2/)。
 :::
 
 ## 最佳实践

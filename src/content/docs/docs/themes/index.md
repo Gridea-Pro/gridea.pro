@@ -72,11 +72,11 @@ Gridea Pro 构建博客时按以下流程执行：
 
 选择你的引擎，阅读对应的详细指南：
 
-- [Jinja2 (Pongo2) 指南](./jinja2/) -- 推荐首选
-- [Go Templates 指南](./go-templates/) -- 适合 Go 开发者
-- [EJS 指南](./ejs/) -- 旧版兼容
+- [Jinja2 (Pongo2) 指南](/docs/themes/jinja2/) -- 推荐首选
+- [Go Templates 指南](/docs/themes/go-templates/) -- 适合 Go 开发者
+- [EJS 指南](/docs/themes/ejs/) -- 旧版兼容
 
 通用参考资料：
 
-- [模板变量参考](./variables/) -- 所有可用变量一览
-- [主题配置 Schema](./config-schema/) -- config.json 完整规范
+- [模板变量参考](/docs/themes/variables/) -- 所有可用变量一览
+- [主题配置 Schema](/docs/themes/config-schema/) -- config.json 完整规范

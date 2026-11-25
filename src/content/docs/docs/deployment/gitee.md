@@ -150,4 +150,4 @@ Gitee Pages 是国内 Git 平台 Gitee 提供的静态页面托管服务，国�
 - Gitee 默认分支为 `master`，注意与 GitHub 的 `main` 区分
 - OAuth 的 53682 端口占用问题是最常见的授权失败原因，排查时优先检查这里
 
-关于 OAuth 的整体机制、令牌存储、在平台侧彻底撤销的意义等，请参阅 [OAuth 授权总览](./oauth/)。
+关于 OAuth 的整体机制、令牌存储、在平台侧彻底撤销的意义等，请参阅 [OAuth 授权总览](/docs/deployment/oauth/)。
