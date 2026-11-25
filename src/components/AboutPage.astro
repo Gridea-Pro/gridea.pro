@@ -1,0 +1,198 @@
+---
+/**
+ * 「关于 Gridea Pro」页（中英文共用）：产品定位、作者、与 Gridea 的关系、事实一览、相关链接。
+ * 介绍性文字取自 src/data/site.ts 的标准说法。
+ */
+import MarketingLayout from '../layouts/MarketingLayout.astro';
+import {
+  STATEMENT, SITE_URL, REPO_URL, THEMES_REPO_URL, AUTHOR_BLOG, AUTHOR_GITHUB, CONTACT_EMAIL,
+  softwareNode, PERSON_ID, SOFTWARE_ID, WEBSITE_ID, type Lang,
+} from '../data/site';
+import { getReleases, getLatestStable, getLatestPrerelease, version, formatDate } from '../data/releases';
+
+interface Props { lang: Lang }
+const { lang } = Astro.props;
+const en = lang === 'en';
+
+const releases = await getReleases();
+const first = releases[releases.length - 1];
+const stable = await getLatestStable();
+const pre = await getLatestPrerelease();
+
+/** 作者在博客发表的 Gridea Pro 相关文章，标题与博客原文一致。 */
+const presetArticles = [
+  ['https://are.ink/post/hello-gridea-pro/', '念念不忘，必有回响 —— Gridea Pro，我们回来了'],
+  ['https://are.ink/post/quick-start/', 'Gridea Pro 完全上手指南 —— 从写作到发布，一篇搞定'],
+  ['https://are.ink/post/why-i-revived-gridea/', '我为什么复活了 Gridea —— 每个想写点什么的人，都值得一个更简单的开始'],
+  ['https://are.ink/post/why-we-write/', '都 2026 年了，我们为什么还要写博客'],
+  ['https://are.ink/post/indie-blog-is-not-dead/', '独立博客没有死，正在死的是平庸的博客'],
+];
+const designArticles = [
+  ['https://are.ink/post/gridea-pro-backend-architecture-deep-dive/', 'Gridea Pro 后端架构深度解析：一个桌面端静态博客系统的工程哲学'],
+  ['https://are.ink/post/gridea-pro-mcp-design-philosophy/', 'Gridea Pro MCP 的设计理念与技术取舍'],
+  ['https://are.ink/post/gridea-pro-cdn/', '从零实现 CDN 图床：Gridea Pro 如何让图片管理彻底自动化'],
+  ['https://are.ink/post/gridea-pro-vs-hexo-vs-hugo/', 'Gridea Pro vs Hexo vs Hugo — 深度对比分析报告'],
+  ['https://are.ink/post/migrating-from-gridea-to-gridea-pro/', '从 Gridea 迁移到 Gridea Pro：零风险完整指南'],
+];
+
+const t = en ? {
+  title: 'About Gridea Pro — the project and its author',
+  description: 'Gridea Pro is an open-source desktop client for writing static blogs, created and maintained by Eliauk as a ground-up rewrite of Gridea. Learn about the project, its author, its relationship to Gridea and key facts.',
+  h1: 'About Gridea Pro',
+  sections: {
+    positioning: 'What it is for',
+    positioningBody: [
+      'Gridea Pro is for writers who want a blog of their own without dealing with command lines or configuration files. It brings writing, content management, theme settings and publishing together in one desktop app: you write in Markdown on your own computer, Gridea Pro generates a static website, and publishes it to GitHub Pages, Netlify, Vercel or your own server in one click.',
+      'All site data stays on your computer and belongs to you. The generated site is plain static HTML that can be hosted anywhere.',
+    ],
+    author: 'The author',
+    gridea: 'Relationship to Gridea',
+    grideaBody: [
+      'Gridea is an open-source static blog client created by EryouHao, built on Electron and released under the MIT license. It earned more than 10,000 stars on GitHub and stopped receiving updates after v0.9.3 in May 2022.',
+      'Gridea Pro is an independent, ground-up rewrite of Gridea and is not made by the original Gridea team. It moves to Go, Wails and Vue 3 while remaining compatible with Gridea site data and themes, so existing Gridea users can migrate directly.',
+    ],
+    facts: 'Key facts',
+    links: 'Links',
+    contact: 'Contact',
+  },
+  facts: [
+    ['Category', 'Desktop client for writing static blogs'],
+    ['Created and maintained by', 'Eliauk (GitHub: <a href="https://github.com/Tespera" rel="noopener">@Tespera</a>), with community contributors'],
+    ['First commit', '2026-02-05'],
+    ['First stable release', `v${version(first)}, ${formatDate(first.published_at)}`],
+    ['Latest stable release', `<a href="/changelog/">v${version(stable)}</a>, ${formatDate(stable.published_at)}`],
+    ...(pre ? [['Latest pre-release', `<a href="/changelog/">v${version(pre)}</a>, ${formatDate(pre.published_at)}`]] : []),
+    ['Technology', 'Go, Wails v2, Vue 3'],
+    ['Platforms', 'macOS (Apple silicon, Intel), Windows (x64, ARM64), Linux (AppImage, deb, rpm)'],
+    ['License', 'GPL-3.0'],
+    ['Based on', '<a href="https://github.com/getgridea/gridea" rel="noopener">Gridea</a> by EryouHao'],
+  ],
+  linkList: [
+    [REPO_URL, 'Source code on GitHub'],
+    [THEMES_REPO_URL, 'Official theme repository'],
+    ['https://github.com/Gridea-Pro/theme-builder-skill', 'Theme builder skill for AI agents'],
+    [`${REPO_URL}/discussions`, 'GitHub Discussions'],
+    [AUTHOR_BLOG, "Author's blog: Shu'er (in Chinese), with articles on Gridea Pro's design and architecture"],
+  ],
+  contactBody: `For questions and bug reports, please open an issue on <a href="${REPO_URL}/issues" rel="noopener">GitHub</a>. For other enquiries, email <a href="mailto:${CONTACT_EMAIL}">${CONTACT_EMAIL}</a>.`,
+} : {
+  title: '关于 Gridea Pro — 项目与作者',
+  description: 'Gridea Pro 是一款开源的桌面端静态博客写作客户端，由 Eliauk 创建并维护，是 Gridea 的从零重写版本。了解 Gridea Pro 的定位、作者、与 Gridea 的关系及基本信息。',
+  h1: '关于 Gridea Pro',
+  sections: {
+    positioning: '产品定位',
+    positioningBody: [
+      'Gridea Pro 面向希望拥有独立博客、但不愿与命令行和配置文件打交道的写作者。它把写作、内容管理、主题配置与发布集中在一个桌面应用中：在本地以 Markdown 写作，由 Gridea Pro 生成静态网站，并一键发布到 GitHub Pages、Netlify、Vercel 或自有服务器。',
+      '站点的全部数据保存在本地，归用户所有；生成的网站是标准的静态 HTML，可部署在任意托管服务上。',
+    ],
+    author: '作者',
+    gridea: '与 Gridea 的关系',
+    grideaBody: [
+      'Gridea 是由 EryouHao 创建的开源静态博客写作客户端，基于 Electron 构建，采用 MIT 协议，在 GitHub 上获得超过 10,000 颗星，于 2022 年 5 月发布 v0.9.3 后停止更新。',
+      'Gridea Pro 是 Gridea 的从零重写版本，独立开发，并非 Gridea 原团队出品。技术栈改为 Go、Wails 与 Vue 3，同时保留对 Gridea 站点数据与主题的兼容，原有用户可以直接迁移。',
+    ],
+    facts: '基本信息',
+    links: '相关链接',
+    contact: '联系方式',
+  },
+  facts: [
+    ['类别', '桌面端静态博客写作客户端'],
+    ['创建与维护', 'Eliauk（GitHub：<a href="https://github.com/Tespera" rel="noopener">@Tespera</a>），社区贡献者共同参与'],
+    ['首次提交', '2026-02-05'],
+    ['首个正式版', `v${version(first)}，${formatDate(first.published_at)}`],
+    ['最新正式版', `<a href="/changelog/">v${version(stable)}</a>，${formatDate(stable.published_at)}`],
+    ...(pre ? [['最新测试版', `<a href="/changelog/">v${version(pre)}</a>，${formatDate(pre.published_at)}`]] : []),
+    ['技术栈', 'Go、Wails v2、Vue 3'],
+    ['支持平台', 'macOS（Apple 芯片、Intel）、Windows（x64、ARM64）、Linux（AppImage、deb、rpm）'],
+    ['开源协议', 'GPL-3.0'],
+    ['重写自', '<a href="https://github.com/getgridea/gridea" rel="noopener">Gridea</a>（原作者 EryouHao）'],
+  ],
+  linkList: [
+    [REPO_URL, 'GitHub 源代码仓库'],
+    [THEMES_REPO_URL, '官方主题仓库'],
+    ['https://github.com/Gridea-Pro/theme-builder-skill', '主题开发 Skill（供 AI Agent 使用）'],
+    [`${REPO_URL}/discussions`, 'GitHub Discussions 社区讨论'],
+  ],
+  contactBody: `问题反馈与功能建议请提交至 <a href="${REPO_URL}/issues" rel="noopener">GitHub Issues</a>；其他事宜请发送邮件至 <a href="mailto:${CONTACT_EMAIL}">${CONTACT_EMAIL}</a>。`,
+};
+
+const path = en ? '/en/about/' : '/about/';
+const aboutNode = {
+  '@type': 'AboutPage',
+  '@id': `${SITE_URL}${path}#webpage`,
+  url: SITE_URL + path,
+  name: t.title,
+  inLanguage: lang,
+  isPartOf: { '@id': WEBSITE_ID },
+  about: { '@id': SOFTWARE_ID },
+  mentions: { '@id': PERSON_ID },
+};
+---
+<MarketingLayout
+  lang={lang}
+  title={t.title}
+  description={t.description}
+  path={path}
+  alternates={{ 'zh-CN': '/about/', en: '/en/about/' }}
+  graph={[softwareNode(lang, version(stable)), aboutNode]}
+>
+<section class="about-hero">
+  <div class="container">
+    <h1>{t.h1}</h1>
+    <p>{STATEMENT[lang].standard}</p>
+  </div>
+</section>
+
+<section class="about-body">
+  <div class="container">
+    <div class="about-section">
+      <h2>{t.sections.positioning}</h2>
+      {t.sections.positioningBody.map((p) => <p>{p}</p>)}
+    </div>
+
+    <div class="about-section" id="author">
+      <h2>{t.sections.author}</h2>
+      <p>{STATEMENT[lang].author}</p>
+      {en ? (
+        <p>Eliauk on the web: <a href={AUTHOR_GITHUB} rel="noopener">GitHub @Tespera</a> · <a href={AUTHOR_BLOG} rel="noopener">Blog: Shu'er (are.ink)</a></p>
+      ) : (
+        <p>作者主页：<a href={AUTHOR_GITHUB} rel="noopener">GitHub @Tespera</a> · <a href={AUTHOR_BLOG} rel="noopener">博客「述尔」（are.ink）</a></p>
+      )}
+      <h3 class="about-subhead">{en ? 'Articles bundled with the app (in Chinese)' : '随客户端预置的文章'}</h3>
+      <ul class="about-links">
+        {presetArticles.map(([href, title]) => <li><a href={href} rel="noopener" lang="zh-CN">{title}</a></li>)}
+      </ul>
+      <h3 class="about-subhead">{en ? 'Design and implementation notes (in Chinese)' : '设计与实现记录'}</h3>
+      <ul class="about-links">
+        {designArticles.map(([href, title]) => <li><a href={href} rel="noopener" lang="zh-CN">{title}</a></li>)}
+      </ul>
+    </div>
+
+    <div class="about-section">
+      <h2>{t.sections.gridea}</h2>
+      {t.sections.grideaBody.map((p) => <p>{p}</p>)}
+    </div>
+
+    <div class="about-section">
+      <h2>{t.sections.facts}</h2>
+      <table class="about-facts">
+        <tbody>
+          {t.facts.map(([k, v]) => <tr><th scope="row">{k}</th><td set:html={v} /></tr>)}
+        </tbody>
+      </table>
+    </div>
+
+    <div class="about-section">
+      <h2>{t.sections.links}</h2>
+      <ul class="about-links">
+        {t.linkList.map(([href, label]) => <li><a href={href} rel="noopener">{label}</a></li>)}
+      </ul>
+    </div>
+
+    <div class="about-section">
+      <h2>{t.sections.contact}</h2>
+      <p set:html={t.contactBody} />
+    </div>
+  </div>
+</section>
+</MarketingLayout>

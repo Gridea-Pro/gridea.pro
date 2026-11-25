@@ -1,0 +1,300 @@
+---
+/**
+ * 官网首页（中英文共用）。文案集中在下方字典里，介绍性文字取自 src/data/site.ts 的标准说法。
+ */
+import MarketingLayout from '../layouts/MarketingLayout.astro';
+import { STATEMENT, SITE_URL, softwareNode, type Lang } from '../data/site';
+import { getLatestStable, version } from '../data/releases';
+import { getThemes } from '../data/themes';
+
+interface Props { lang: Lang }
+const { lang } = Astro.props;
+const en = lang === 'en';
+
+const latest = await getLatestStable();
+const themes = await getThemes();
+const themeCount = `${Math.floor(themes.length / 10) * 10}+`;
+const v = version(latest);
+const about = en ? '/en/about/' : '/about/';
+
+const t = en ? {
+  title: 'Gridea Pro — Open-source desktop client for writing static blogs',
+  description: `Gridea Pro is a free, open-source desktop client for writing static blogs on macOS, Windows and Linux. Write in Markdown, choose from ${themeCount} themes and publish to GitHub Pages, Vercel or Netlify in one click. Created and maintained by Eliauk as a modern rewrite of Gridea.`,
+  h1: 'Writing should be<br>simple and enjoyable',
+  subtitle: 'Gridea Pro is an open-source desktop client for writing static blogs. Manage posts, memos, categories, tags and comments in one place, then publish in one click and stay focused on what you write.',
+  download: 'Download for free', docs: 'Read the docs',
+  version: `Current version <a href="/changelog/">v${v}</a> · macOS · Windows · Linux`,
+  mock: { window: 'Gridea Pro — My Blog', posts: 'Posts', p1: 'Why we write', p2: 'First post of spring', h: 'Why we write', b1: 'Writing is a way of thinking. Once an idea is written down, a vague thought becomes a clear statement.', b2a: 'Write in ', b2b: ' and keep formatting simple and your thinking fluent.' },
+  proof: [['Free', 'and open source'], ['3', 'platforms'], [themeCount, 'themes'], ['Gridea', 'compatible']],
+  featuresLabel: 'Features', featuresH2: 'Every detail,<br>designed for writers',
+  featuresP: 'No command line and no configuration files. Open Gridea Pro and start writing; publishing takes a single click.',
+  f1h: 'Markdown editor with live preview',
+  f1p: 'A built-in Markdown editor powered by Monaco, the engine behind VS Code, with live preview as you type. It supports syntax highlighting, KaTeX math, footnotes, task lists and an automatic table of contents.',
+  f1tabs: ['Edit', 'Preview', 'Split'],
+  f2h: 'Three template engines, a growing theme library',
+  f2p: `Themes can be written in Jinja2 (Pongo2), Go Templates or EJS. Several themes ship with the app and switch in one click; each theme declares its own settings, which appear as a visual form in the app. The official theme repository already offers ${themeCount} themes.`,
+  f3h: 'One-click publishing to multiple platforms',
+  f3p: 'Build and publish your site with one click to GitHub Pages, Netlify, Vercel, Coding Pages or your own server over SFTP / FTP, and enable several targets at once. A Git engine written in pure Go means no system Git is required. GitHub, Netlify and Vercel sign in with OAuth, and credentials are stored in the system keychain.',
+  deploy: [['Build static files', '23 pages generated in 328.26 ms'], ['Push to GitHub', 'commit: update 3 posts'], ['Deployed', 'https://yourname.github.io']],
+  capLabel: 'More capabilities', capH2: 'Everything a personal blog needs',
+  capP: 'Beyond writing and publishing, Gridea Pro covers the rest of running a blog.',
+  caps: [
+    ['Memos', 'Capture ideas as short notes with #tags and image attachments, and review them on an activity heatmap.'],
+    ['AI and MCP', 'A built-in MCP server with 36 tools lets AI assistants such as Claude and Cursor manage your blog. You can also connect OpenAI, Anthropic, Gemini, DeepSeek and other model providers.'],
+    ['SEO built in', 'Generates sitemap.xml, RSS / Atom feeds and robots.txt, with Open Graph, Twitter Card and JSON-LD structured data.'],
+    ['Comments', 'Enable Gitalk, Giscus, Disqus, Valine, Waline, Twikoo or Cusdis with a checkbox, and reply to comments inside the app.'],
+    ['Image CDN', 'Uploads images to a CDN on publish, keeping your site repository small and pages fast.'],
+    ['Migrating from Gridea', 'Point Gridea Pro at an existing Gridea site and its data is migrated automatically on launch. Legacy LESS themes are supported.'],
+  ],
+  cmpH2: 'How it compares', cmpP: 'Every tool has its place. Here is a brief comparison to show where Gridea Pro fits.',
+  cmpHead: ['Feature', 'Gridea Pro', 'Hugo', 'Hexo'],
+  cmpRows: [
+    ['Graphical interface', '✓', '—', '—'],
+    ['Built-in editor', '✓', '—', '—'],
+    ['Template engines', '✓ Jinja2 / Go / EJS', 'Go Templates', 'EJS / Pug / Nunjucks'],
+    ['One-click publishing', '✓', '— CLI or CI', '— CLI or CI'],
+    ['AI integration (MCP)', '✓', '—', '—'],
+    ['Learning curve', 'Low', 'Medium–high', 'Medium'],
+    ['License', 'GPL-3.0', 'Apache-2.0', 'MIT'],
+  ],
+  cmpNote: 'Hugo and Hexo are excellent command-line tools for developers comfortable with terminals and code. Gridea Pro is built for writers who would rather not touch the command line.',
+  legacyH2: 'Standing on the shoulders of giants',
+  legacy: [
+    '<strong>Gridea</strong> is an open-source static blog client created by EryouHao. It earned more than 10,000 stars on GitHub and helped a great many people start their own blogs.',
+    'Gridea stopped receiving updates after v0.9.3 in May 2022, yet the idea it stands for, making writing and publishing simple, still holds.',
+    'Gridea Pro, started by Eliauk, rewrites Gridea from scratch with Go, Wails and Vue 3: a new editor, three template engines, a more reliable publishing pipeline and AI integration, while staying compatible with Gridea sites and themes.',
+    'With thanks to the original author, <strong>@EryouHao</strong>, for the pioneering work.',
+  ],
+  legacyLink: 'Visit the original Gridea repository', aboutLink: 'About Gridea Pro and its author',
+  faqH2: 'Frequently asked questions',
+  faq: [
+    ['What is Gridea Pro?', STATEMENT.en.standard],
+    ['Who develops Gridea Pro?', `Gridea Pro is created and maintained by Eliauk (GitHub: <a href="https://github.com/Tespera" rel="noopener">@Tespera</a>), with contributions from the community. See <a href="/en/about/">About</a> for more.`],
+    ['How is Gridea Pro related to Gridea?', 'Gridea Pro is an independent, ground-up rewrite of Gridea; it is not made by the original Gridea team. It carries on Gridea’s goal of making it easy for anyone to run a blog, is compatible with Gridea sites and themes, and can migrate an existing Gridea site directly.'],
+    ['Is Gridea Pro free?', 'Yes. Gridea Pro is completely free and its source code is available on GitHub under GPL-3.0. The built-in free AI model allows 20 requests per day; connecting your own model provider removes this limit.'],
+  ],
+  ctaH2: 'Start writing today', ctaP: 'Download Gridea Pro and have a blog of your own within minutes.',
+} : {
+  title: 'Gridea Pro — 开源的桌面端静态博客写作客户端',
+  description: `Gridea Pro 是一款开源、免费的桌面端静态博客写作客户端，支持 macOS、Windows 与 Linux。内置 Markdown 编辑器与 ${themeCount} 款主题，一键发布到 GitHub Pages、Vercel、Netlify 等平台。由 Eliauk 创建并维护，是 Gridea 的现代化重写版本。`,
+  h1: '写作，应该是<br>简单而美好的',
+  subtitle: 'Gridea Pro 是一款开源的桌面端静态博客写作客户端。文章、闪念、分类、标签与评论集中管理，写完一键发布，让你专注于内容本身。',
+  download: '免费下载', docs: '查看文档',
+  version: `当前版本 <a href="/changelog/">v${v}</a> · 支持 macOS · Windows · Linux`,
+  mock: { window: 'Gridea Pro — 我的博客', posts: '文章', p1: '关于写作的意义', p2: '春天的第一篇', h: '关于写作的意义', b1: '写作是一种思考方式。当你把想法写下来的时候，模糊的念头就变成了清晰的表达。', b2a: '用 ', b2b: ' 写作，让格式变得简单，让思维保持流畅。' },
+  proof: [['开源免费', 'GPL-3.0 协议'], ['三大平台', 'macOS · Windows · Linux'], [themeCount, '款主题'], ['源自 Gridea', '兼容原有站点与主题']],
+  featuresLabel: '功能特性', featuresH2: '为写作者精心打造的<br>每一个细节',
+  featuresP: '无需命令行，无需配置文件。打开 Gridea Pro 即可开始写作，发布只需一次点击。',
+  f1h: '实时预览的 Markdown 编辑器',
+  f1p: '内置基于 Monaco（VS Code 同款引擎）的 Markdown 编辑器，书写的同时实时预览。支持代码高亮、KaTeX 数学公式、脚注、任务列表与自动目录。',
+  f1tabs: ['编辑', '预览', '分屏'],
+  f2h: '三种模板引擎，持续扩充的主题库',
+  f2p: `主题可使用 Jinja2（Pongo2）、Go Templates 或 EJS 编写。客户端内置多款主题，一键切换；主题参数由主题自行声明，在应用内以表单形式可视化配置。官方主题仓库已收录 ${themeCount} 款主题。`,
+  f3h: '一键发布，多平台同时上线',
+  f3p: '写完文章，一次点击即可完成构建与发布。支持 GitHub Pages、Netlify、Vercel、Coding Pages 以及通过 SFTP / FTP 发布到自有服务器，可同时启用多个平台。内置纯 Go 实现的 Git 引擎，无需安装系统 Git；GitHub、Netlify、Vercel 支持 OAuth 授权登录，凭据保存在系统钥匙串中。',
+  deploy: [['构建静态文件', '已生成 23 个页面，耗时 328.26 ms'], ['推送至 GitHub', 'commit: update 3 posts'], ['部署完成', 'https://yourname.github.io']],
+  capLabel: '更多能力', capH2: '个人博客需要的，都已具备',
+  capP: '除了写作与发布，Gridea Pro 也覆盖了运营一个博客的其他环节。',
+  caps: [
+    ['闪念', '以短笔记随手记录灵感，支持 #标签与图片附件，并以热力图回顾记录频率。'],
+    ['AI 与 MCP', '内置 MCP 服务，提供 36 个工具，Claude、Cursor 等 AI 助手可直接管理博客；也可接入 OpenAI、Anthropic、Gemini、DeepSeek 等模型服务。'],
+    ['内置 SEO', '自动生成 sitemap.xml、RSS / Atom 订阅与 robots.txt，并输出 Open Graph、Twitter Card 与 JSON-LD 结构化数据。'],
+    ['评论系统', '勾选即可启用 Gitalk、Giscus、Disqus、Valine、Waline、Twikoo、Cusdis 七种评论系统，并在应用内回复评论。'],
+    ['CDN 图床', '发布时自动把图片上传至 CDN 图床，保持站点仓库轻量，页面加载更快。'],
+    ['从 Gridea 迁移', '将站点目录指向原有的 Gridea 数据，启动时自动完成迁移，并兼容旧版 LESS 主题。'],
+  ],
+  cmpH2: '和其他工具相比', cmpP: '每个工具都有自己的适用场景。以下对比帮助你了解 Gridea Pro 的定位。',
+  cmpHead: ['功能', 'Gridea Pro', 'Hugo', 'Hexo'],
+  cmpRows: [
+    ['图形界面', '✓', '—', '—'],
+    ['内置编辑器', '✓', '—', '—'],
+    ['模板引擎', '✓ Jinja2 / Go / EJS', 'Go Templates', 'EJS / Pug / Nunjucks'],
+    ['一键发布', '✓', '— 需命令行或 CI', '— 需命令行或 CI'],
+    ['AI 集成（MCP）', '✓', '—', '—'],
+    ['学习成本', '低', '中高', '中'],
+    ['开源协议', 'GPL-3.0', 'Apache-2.0', 'MIT'],
+  ],
+  cmpNote: 'Hugo 与 Hexo 是优秀的命令行工具，适合熟悉终端与代码的开发者；Gridea Pro 面向希望专注写作、不愿接触命令行的写作者。',
+  legacyH2: '站在巨人的肩膀上',
+  legacy: [
+    '<strong>Gridea</strong> 是由 EryouHao 创建的开源静态博客写作客户端，在 GitHub 上获得了超过 10,000 颗星，帮助大量用户建立了自己的博客。',
+    '2022 年 5 月发布 v0.9.3 之后，Gridea 停止了更新，但它所代表的理念——让写作与发布变得简单——依然成立。',
+    'Gridea Pro 由 Eliauk 发起，基于 Go、Wails 与 Vue 3 从零重写：全新的编辑器、三种模板引擎、更稳定的发布流程与 AI 集成，同时兼容 Gridea 的站点数据与主题。',
+    '致敬原作者 <strong>@EryouHao</strong> 的开创性工作。',
+  ],
+  legacyLink: '访问 Gridea 原始仓库', aboutLink: '了解 Gridea Pro 与作者',
+  faqH2: '常见问题',
+  faq: [
+    ['Gridea Pro 是什么？', STATEMENT['zh-CN'].standard],
+    ['Gridea Pro 由谁开发？', 'Gridea Pro 由 Eliauk（GitHub：<a href="https://github.com/Tespera" rel="noopener">@Tespera</a>）创建并主导维护，社区贡献者共同参与。详见<a href="/about/">关于 Gridea Pro</a>。'],
+    ['Gridea Pro 和 Gridea 是什么关系？', 'Gridea Pro 是 Gridea 的从零重写版本，独立开发，并非 Gridea 原团队出品。它延续了 Gridea「让每个人都能轻松拥有博客」的理念，兼容 Gridea 的站点数据与主题，可直接从 Gridea 迁移。'],
+    ['Gridea Pro 收费吗？', 'Gridea Pro 完全免费，源代码以 GPL-3.0 协议公开在 GitHub。客户端内置的免费 AI 模型每日可用 20 次，接入自有模型服务则不受此限制。'],
+  ],
+  ctaH2: '开始你的写作之旅', ctaP: '下载 Gridea Pro，几分钟内即可拥有属于自己的博客。',
+};
+
+const stripTags = (s: string) => s.replace(/<[^>]+>/g, '');
+const faqNode = {
+  '@type': 'FAQPage',
+  '@id': `${SITE_URL}${en ? '/en/' : '/'}#faq`,
+  inLanguage: lang,
+  mainEntity: t.faq.map(([q, a]) => ({ '@type': 'Question', name: q, acceptedAnswer: { '@type': 'Answer', text: stripTags(a) } })),
+};
+const showcase = [['Flavor', 'jinja2'], ['iNotes', 'go-template'], ['Amore', 'ejs'], ['Gazette', 'jinja2']];
+const downloadIcon = '<svg style="width:16px;height:16px;flex-shrink:0" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M8 2v8m0 0l-3-3m3 3l3-3M3 13h10"/></svg>';
+const arrow = '<svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M6 3h7v7"/><path d="M13 3L6 10"/></svg>';
+const check = '<svg width="12" height="12" viewBox="0 0 12 12" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="2 6 5 9 10 3"/></svg>';
+---
+<MarketingLayout
+  lang={lang}
+  title={t.title}
+  description={t.description}
+  path={en ? '/en/' : '/'}
+  alternates={{ 'zh-CN': '/', en: '/en/' }}
+  graph={[softwareNode(lang, v), faqNode]}
+>
+<section class="hero">
+  <div class="container">
+    <div class="hero-content">
+      <h1 class="reveal reveal-d1" set:html={t.h1} />
+      <p class="hero-subtitle reveal reveal-d2">{t.subtitle}</p>
+      <div class="hero-buttons reveal reveal-d3">
+        <a href="/download/" class="btn-primary"><Fragment set:html={downloadIcon} />{t.download}</a>
+        <a href="/docs/" class="btn-secondary btn-docs">{t.docs}</a>
+      </div>
+      <p class="hero-platforms reveal reveal-d4" set:html={t.version} />
+    </div>
+    <div class="hero-visual reveal reveal-d2">
+      <div class="editor-mockup">
+        <div class="editor-titlebar">
+          <div class="editor-dots"><span class="editor-dot"></span><span class="editor-dot"></span><span class="editor-dot"></span></div>
+          <span class="editor-title-text">{t.mock.window}</span>
+        </div>
+        <div class="editor-body">
+          <div class="editor-sidebar">
+            <div class="editor-sidebar-title">{t.mock.posts}</div>
+            <div class="editor-sidebar-item active">{t.mock.p1}<div class="editor-sidebar-item-date">2026-03-12</div></div>
+            <div class="editor-sidebar-item">{t.mock.p2}<div class="editor-sidebar-item-date">2026-03-08</div></div>
+            <div class="editor-sidebar-item">Hello Gridea Pro<div class="editor-sidebar-item-date">2026-03-01</div></div>
+          </div>
+          <div class="editor-content">
+            <div class="editor-content-toolbar">
+              <span class="toolbar-btn">B</span>
+              <span class="toolbar-btn" style="font-style:italic">I</span>
+              <span class="toolbar-btn" style="text-decoration:underline;font-weight:400">U</span>
+              <span class="toolbar-divider"></span>
+              <span class="toolbar-btn" style="font-weight:400">H1</span>
+              <span class="toolbar-btn" style="font-weight:400">H2</span>
+              <span class="toolbar-divider"></span>
+              <span class="toolbar-btn" style="font-weight:400;font-size:15px">"</span>
+              <span class="toolbar-btn" style="font-weight:400;font-family:'JetBrains Mono',monospace;font-size:11px">&lt;/&gt;</span>
+            </div>
+            <div class="editor-text">
+              <h4>{t.mock.h}</h4>
+              <p>{t.mock.b1}</p>
+              <p>{t.mock.b2a}<span class="code-inline">Markdown</span>{t.mock.b2b}</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="proof-bar">
+  <div class="container">
+    {t.proof.map(([strong, rest]) => <div class="proof-item"><strong>{strong}</strong> {rest}</div>)}
+  </div>
+</section>
+
+<section class="features" id="features">
+  <div class="container">
+    <div class="features-header reveal">
+      <div class="section-label">{t.featuresLabel}</div>
+      <h2 set:html={t.featuresH2} />
+      <p>{t.featuresP}</p>
+    </div>
+    <div class="feature-row reveal">
+      <div class="feature-text"><div class="feature-number">01</div><h3>{t.f1h}</h3><p>{t.f1p}</p></div>
+      <div class="feature-visual"><div class="feature-editor-mock"><div class="feature-editor-bar"><span class="feat-dot"></span><span class="feat-dot"></span><span class="feat-dot"></span></div><div class="feature-editor-body"><div class="feat-toolbar"><span class="feat-tool active">{t.f1tabs[0]}</span><span class="feat-tool">{t.f1tabs[1]}</span><span class="feat-tool">{t.f1tabs[2]}</span></div><div class="feat-line-h"></div><div class="feat-line-p"></div><div class="feat-line-p"></div><div class="feat-line-p"></div><div class="feat-line-p" style="width:45%"></div><div class="feat-line-code"><div class="feat-line-code-line"></div><div class="feat-line-code-line"></div><div class="feat-line-code-line"></div></div></div></div></div>
+    </div>
+    <div class="feature-row reverse reveal">
+      <div class="feature-text"><div class="feature-number">02</div><h3>{t.f2h}</h3><p>{t.f2p}</p></div>
+      <div class="feature-visual"><div class="feature-themes-mock">
+        {showcase.map(([name, engine]) => (
+          <div class="theme-card"><div class="theme-card-preview"><div class="theme-card-preview-lines"><div class="theme-preview-line"></div><div class="theme-preview-line"></div><div class="theme-preview-line"></div><div class="theme-preview-line"></div></div></div><div class="theme-card-info"><div class="theme-card-name">{name}</div><div class="theme-card-engine">{engine}</div></div></div>
+        ))}
+      </div></div>
+    </div>
+    <div class="feature-row reveal">
+      <div class="feature-text"><div class="feature-number">03</div><h3>{t.f3h}</h3><p>{t.f3p}</p></div>
+      <div class="feature-visual"><div class="feature-deploy-mock"><div class="deploy-bar"><span class="feat-dot"></span><span class="feat-dot"></span><span class="feat-dot"></span></div><div class="deploy-body">
+        <div class="deploy-step"><div class="deploy-step-icon done" set:html={check} /><div class="deploy-step-content"><div class="deploy-step-title">{t.deploy[0][0]}</div><div class="deploy-step-desc">{t.deploy[0][1]}</div></div></div>
+        <div class="deploy-step"><div class="deploy-step-icon done" set:html={check} /><div class="deploy-step-content"><div class="deploy-step-title">{t.deploy[1][0]}</div><div class="deploy-step-desc">{t.deploy[1][1]}</div></div></div>
+        <div class="deploy-step"><div class="deploy-step-icon active"><svg width="12" height="12" viewBox="0 0 12 12" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="6" cy="6" r="2"/></svg></div><div class="deploy-step-content"><div class="deploy-step-title">{t.deploy[2][0]}</div><div class="deploy-step-url">{t.deploy[2][1]}</div></div></div>
+      </div></div></div>
+    </div>
+  </div>
+</section>
+
+<section class="capabilities">
+  <div class="container">
+    <div class="capabilities-header reveal">
+      <div class="section-label">{t.capLabel}</div>
+      <h2>{t.capH2}</h2>
+      <p>{t.capP}</p>
+    </div>
+    <div class="capability-grid reveal">
+      {t.caps.map(([h, p]) => <div class="capability"><h3>{h}</h3><p>{p}</p></div>)}
+    </div>
+  </div>
+</section>
+
+<section class="comparison">
+  <div class="container">
+    <div class="comparison-header reveal"><h2>{t.cmpH2}</h2><p>{t.cmpP}</p></div>
+    <div class="comparison-table-wrap reveal">
+      <table class="comparison-table">
+        <thead><tr>{t.cmpHead.map((h, i) => <th class={i === 1 ? 'highlight' : undefined}>{h}</th>)}</tr></thead>
+        <tbody>
+          {t.cmpRows.map((row) => (
+            <tr>{row.map((c, i) => <td class={i === 1 ? 'highlight' : undefined}>{c.startsWith('✓') ? <><span class="check">&#10003;</span>{c.slice(1)}</> : c.startsWith('—') ? <><span class="dash">&mdash;</span>{c.slice(1)}</> : c}</td>)}</tr>
+          ))}
+        </tbody>
+      </table>
+    </div>
+    <p class="comparison-note reveal">{t.cmpNote}</p>
+  </div>
+</section>
+
+<section class="legacy">
+  <div class="container">
+    <div class="legacy-content reveal">
+      <h2>{t.legacyH2}</h2>
+      {t.legacy.map((p) => <p set:html={p} />)}
+      <a href="https://github.com/getgridea/gridea" class="legacy-link" target="_blank" rel="noopener">{t.legacyLink} <Fragment set:html={arrow} /></a>
+      &nbsp;&nbsp;
+      <a href={about} class="legacy-link">{t.aboutLink} <Fragment set:html={arrow} /></a>
+    </div>
+  </div>
+</section>
+
+<section class="faq" id="faq">
+  <div class="container">
+    <div class="faq-inner reveal">
+      <h2>{t.faqH2}</h2>
+      {t.faq.map(([q, a]) => <div class="faq-item"><h3>{q}</h3><p set:html={a} /></div>)}
+    </div>
+  </div>
+</section>
+
+<section class="cta" id="download">
+  <div class="container">
+    <div class="reveal">
+      <h2>{t.ctaH2}</h2>
+      <p>{t.ctaP}</p>
+      <a href="/download/" class="btn-primary"><Fragment set:html={downloadIcon} /> {t.download}</a>
+    </div>
+  </div>
+</section>
+</MarketingLayout>

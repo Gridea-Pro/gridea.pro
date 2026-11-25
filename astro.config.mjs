@@ -7,6 +7,8 @@ export default defineConfig({
   site: 'https://gridea.pro',
   output: 'static',
   adapter: vercel(),
+  // 主题页在构建时把主题仓库的预览图压缩为 webp 并托管在本站
+  image: { domains: ['cdn.jsdelivr.net'] },
 
   integrations: [
     starlight({
@@ -27,15 +29,12 @@ export default defineConfig({
         { tag: 'link', attrs: { rel: 'preconnect', href: 'https://fonts.gstatic.com', crossorigin: true } },
         { tag: 'link', attrs: { rel: 'stylesheet', href: 'https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@500;600;700;800&family=Figtree:wght@400;500;600&family=JetBrains+Mono:wght@400&display=swap' } },
       ],
+      // 文档目前只有中文版。英文文档写好之前不启用 en 语言，避免生成内容为中文、却标注为英文的回退页面。
       defaultLocale: 'root',
       locales: {
         root: {
           label: '简体中文',
           lang: 'zh-CN',
-        },
-        en: {
-          label: 'English',
-          lang: 'en',
         },
       },
       social: [

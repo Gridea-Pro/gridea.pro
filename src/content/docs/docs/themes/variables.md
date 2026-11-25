@@ -3,7 +3,7 @@ title: 模板变量参考
 description: Gridea Pro 主题开发中所有可用模板变量的快速参考，包含全局变量、Post 对象、Tag 对象和各页面变量表。
 ---
 
-本页是模板变量的快速参考。完整详细版本请查阅 [API 参考 > 模板变量表](/reference/template-variables/)。
+本页是模板变量的快速参考。完整详细版本请查阅 [API 参考 > 模板变量表](/docs/reference/template-variables/)。
 
 :::tip
 渲染出错 80% 的原因是变量名拼写错误。编写模板前，务必对照本页确认变量名。

@@ -154,4 +154,4 @@ Netlify 还提供表单处理和 Serverless Functions 等附加功能。虽然 G
 | HTTPS | 自动、免费 |
 | 表单提交 | 100 次 / 月 |
 
-关于 OAuth 的整体机制、令牌存储与撤销细节，请参阅 [OAuth 授权总览](./oauth/)。如遇其它问题，请查阅[常见问题](/faq/)。
+关于 OAuth 的整体机制、令牌存储与撤销细节，请参阅 [OAuth 授权总览](./oauth/)。如遇其它问题，请查阅[常见问题](/docs/faq/)。

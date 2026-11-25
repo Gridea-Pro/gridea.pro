@@ -22,10 +22,10 @@ description: 将 Gridea Pro 生成的静态博客一键部署到 GitHub Pages、
 
 | 平台 | 特点 | 详细指南 |
 |------|------|----------|
-| GitHub Pages | 免费、稳定、与 GitHub 深度集成 | [GitHub Pages 部署](/deployment/github-pages/) |
-| Vercel | 全球 CDN、自动 HTTPS、极速构建 | [Vercel 部署](/deployment/vercel/) |
-| Netlify | 持续部署、表单处理、函数支持 | [Netlify 部署](/deployment/netlify/) |
-| 自定义服务器 | 完全掌控、灵活配置 | [自定义服务器部署](/deployment/custom-server/) |
+| GitHub Pages | 免费、稳定、与 GitHub 深度集成 | [GitHub Pages 部署](/docs/deployment/github-pages/) |
+| Vercel | 全球 CDN、自动 HTTPS、极速构建 | [Vercel 部署](/docs/deployment/vercel/) |
+| Netlify | 持续部署、表单处理、函数支持 | [Netlify 部署](/docs/deployment/netlify/) |
+| 自定义服务器 | 完全掌控、灵活配置 | [自定义服务器部署](/docs/deployment/custom-server/) |
 
 ## 部署前检查
 
@@ -66,7 +66,7 @@ output/
 ```
 
 :::note
-静态资源路径中不包含 `assets/` 前缀。主题目录中的 `assets/styles/main.css` 在输出中变为 `/styles/main.css`。详见[主题架构文档](/themes/)。
+静态资源路径中不包含 `assets/` 前缀。主题目录中的 `assets/styles/main.css` 在输出中变为 `/styles/main.css`。详见[主题架构文档](/docs/themes/)。
 :::
 
-更多部署细节请查阅[部署方式概述](/deployment/)。
+更多部署细节请查阅[部署方式概述](/docs/deployment/)。

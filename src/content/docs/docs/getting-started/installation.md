@@ -98,4 +98,4 @@ yay -S gridea-pro-bin
 | Linux 启动白屏 | 确认已安装正确版本的 WebKit2GTK |
 | Windows 安装后无法启动 | 尝试以管理员权限运行 |
 
-如仍有问题，请查阅[常见问题](/faq/)页面。
+如仍有问题，请查阅[常见问题](/docs/faq/)页面。

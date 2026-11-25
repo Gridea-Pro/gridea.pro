@@ -1,0 +1,29 @@
+---
+/**
+ * 导航栏里的语言切换。目标页面有对应语言版本时直达，否则回到该语言的首页。
+ * 手机端隐藏，由移动菜单提供同样的入口。
+ */
+interface Props {
+  /** 切换后的页面路径 */
+  href: string;
+  /** 切换到的语言 */
+  to: 'zh-CN' | 'en';
+  variant?: 'site' | 'docs';
+}
+const { href, to, variant = 'site' } = Astro.props;
+const label = to === 'en' ? 'English' : '中文';
+const title = to === 'en' ? 'Switch to English' : '切换到简体中文';
+---
+<a class:list={['lang-switch', variant]} href={href} hreflang={to} lang={to} title={title} aria-label={title}>
+  <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.3" aria-hidden="true"><circle cx="8" cy="8" r="6.25"/><path d="M1.75 8h12.5M8 1.75c1.7 1.8 2.55 3.88 2.55 6.25S9.7 12.45 8 14.25C6.3 12.45 5.45 10.37 5.45 8S6.3 3.55 8 1.75z"/></svg>
+  <span>{label}</span>
+</a>
+
+<style>
+  .lang-switch{display:inline-flex;align-items:center;gap:6px;font-size:14px;font-weight:500;line-height:1;white-space:nowrap;text-decoration:none;color:var(--text-secondary,#6B6B6B);transition:color .2s ease}
+  .lang-switch:hover{color:var(--text-primary,#1A1A1A)}
+  .lang-switch svg{width:15px;height:15px;display:block;flex-shrink:0}
+  .lang-switch.docs{font-size:var(--sl-text-sm);color:var(--sl-color-gray-2)}
+  .lang-switch.docs:hover{color:var(--sl-color-white)}
+  @media (max-width:768px){.lang-switch.site{display:none}}
+</style>

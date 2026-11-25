@@ -1,0 +1,278 @@
+[
+ {
+  "dir": "flavor-theme",
+  "name": "flavor",
+  "engine": "Jinja2",
+  "description": "暗色编辑感主题，电影感 hero + 紧凑卡片 + Spectral 衬线，灵感来自现代 newsletter 平台",
+  "preview": "https://cdn.jsdelivr.net/gh/Gridea-Pro/gridea-pro-themes@main/themes/flavor-theme/assets/media/preview.png",
+  "url": "https://github.com/Gridea-Pro/gridea-pro-themes/tree/main/themes/flavor-theme",
+  "builtIn": true
+ },
+ {
+  "dir": "amore",
+  "name": "amore",
+  "engine": "EJS",
+  "description": "极简博客主题，聚焦阅读体验，支持明/暗双主题、阅读进度、闪念热力图",
+  "preview": "https://cdn.jsdelivr.net/gh/Gridea-Pro/gridea-pro-themes@main/themes/amore/assets/media/preview.png",
+  "url": "https://github.com/Gridea-Pro/gridea-pro-themes/tree/main/themes/amore",
+  "builtIn": true
+ },
+ {
+  "dir": "amore-jinja2",
+  "name": "amore-jinja2",
+  "engine": "Jinja2",
+  "description": "Amore 主题的 Jinja2 版，特性同 amore",
+  "preview": "https://cdn.jsdelivr.net/gh/Gridea-Pro/gridea-pro-themes@main/themes/amore-jinja2/assets/media/preview.png",
+  "url": "https://github.com/Gridea-Pro/gridea-pro-themes/tree/main/themes/amore-jinja2",
+  "builtIn": true
+ },
+ {
+  "dir": "amore-plus",
+  "name": "amore-plus",
+  "engine": "Jinja2",
+  "description": "极简博客主题，文章目录自动跟随、顶部阅读进度细线、Giscus / Gitalk / Valine / Waline / Disqus 五套评论适配",
+  "preview": "https://cdn.jsdelivr.net/gh/Gridea-Pro/gridea-pro-themes@main/themes/amore-plus/assets/media/preview.png",
+  "url": "https://github.com/Gridea-Pro/gridea-pro-themes/tree/main/themes/amore-plus",
+  "builtIn": false
+ },
+ {
+  "dir": "fly",
+  "name": "fly",
+  "engine": "EJS",
+  "description": "现代简洁的博客主题，响应式布局（EryouHao）",
+  "url": "https://github.com/Gridea-Pro/gridea-pro-themes/tree/main/themes/fly",
+  "builtIn": true
+ },
+ {
+  "dir": "inotes",
+  "name": "inotes",
+  "engine": "Go Templates",
+  "description": "Notes 主题升级版（Eliauk）",
+  "preview": "https://cdn.jsdelivr.net/gh/Gridea-Pro/gridea-pro-themes@main/themes/inotes/assets/media/preview.png",
+  "url": "https://github.com/Gridea-Pro/gridea-pro-themes/tree/main/themes/inotes",
+  "builtIn": true
+ },
+ {
+  "dir": "notes",
+  "name": "notes",
+  "engine": "EJS",
+  "description": "经典笔记风格主题，Gridea 社区老牌主题，简洁易读",
+  "url": "https://github.com/Gridea-Pro/gridea-pro-themes/tree/main/themes/notes",
+  "builtIn": true
+ },
+ {
+  "dir": "simple",
+  "name": "simple",
+  "engine": "EJS",
+  "description": "极简风格主题，专注阅读体验（EryouHao）",
+  "url": "https://github.com/Gridea-Pro/gridea-pro-themes/tree/main/themes/simple",
+  "builtIn": true
+ },
+ {
+  "dir": "hello-friend",
+  "name": "hello-friend",
+  "engine": "Jinja2",
+  "description": "Hugo hello-friend-ng 主题的 Jinja2 移植，Inter 字体 + Prism 高亮 + 深浅切换",
+  "preview": "https://cdn.jsdelivr.net/gh/Gridea-Pro/gridea-pro-themes@main/themes/hello-friend/assets/media/preview.png",
+  "url": "https://github.com/Gridea-Pro/gridea-pro-themes/tree/main/themes/hello-friend",
+  "builtIn": false
+ },
+ {
+  "dir": "paper",
+  "name": "paper",
+  "engine": "Jinja2",
+  "description": "Hugo Paper 主题的 Jinja2 移植，Tailwind CSS、排版优先、深浅模式",
+  "preview": "https://cdn.jsdelivr.net/gh/Gridea-Pro/gridea-pro-themes@main/themes/paper/assets/media/preview.png",
+  "url": "https://github.com/Gridea-Pro/gridea-pro-themes/tree/main/themes/paper",
+  "builtIn": false
+ },
+ {
+  "dir": "bitcron-pro",
+  "name": "bitcron-pro",
+  "engine": "Jinja2",
+  "description": "Bitcron 风格博客主题，支持博客/闪念/友链页面",
+  "preview": "https://cdn.jsdelivr.net/gh/Gridea-Pro/gridea-pro-themes@main/themes/bitcron-pro/assets/media/preview.png",
+  "url": "https://github.com/Gridea-Pro/gridea-pro-themes/tree/main/themes/bitcron-pro",
+  "builtIn": false
+ },
+ {
+  "dir": "gazette",
+  "name": "gazette",
+  "engine": "Jinja2",
+  "description": "Editorial 编辑感主题，全局衬线 + 暖奶油底 + 桑红重点 + 发丝分割线 + drop cap",
+  "preview": "https://cdn.jsdelivr.net/gh/Gridea-Pro/gridea-pro-themes@main/themes/gazette/assets/media/preview.png",
+  "url": "https://github.com/Gridea-Pro/gridea-pro-themes/tree/main/themes/gazette",
+  "builtIn": false
+ },
+ {
+  "dir": "nacre",
+  "name": "nacre",
+  "engine": "Jinja2",
+  "description": "温柔静谧的深色主题，如珍珠母在暗处生辉，支持 Swiper 头图与多内容面板",
+  "preview": "https://cdn.jsdelivr.net/gh/Gridea-Pro/gridea-pro-themes@main/themes/nacre/assets/media/preview.png",
+  "url": "https://github.com/Gridea-Pro/gridea-pro-themes/tree/main/themes/nacre",
+  "builtIn": false
+ },
+ {
+  "dir": "liushen",
+  "name": "liushen",
+  "engine": "Jinja2",
+  "description": "柳神（Butterfly 衍生）风格双栏粉蓝渐变主题，复刻自 willow-god/hexo-theme-liushen",
+  "preview": "https://cdn.jsdelivr.net/gh/Gridea-Pro/gridea-pro-themes@main/themes/liushen/assets/media/preview.png",
+  "url": "https://github.com/Gridea-Pro/gridea-pro-themes/tree/main/themes/liushen",
+  "builtIn": false
+ },
+ {
+  "dir": "jasmine",
+  "name": "jasmine",
+  "engine": "Jinja2",
+  "description": "Bootstrap 5 + Tabler Icons 三栏极简博客主题，复刻自 liaocp666/Jasmine（Typecho）",
+  "preview": "https://cdn.jsdelivr.net/gh/Gridea-Pro/gridea-pro-themes@main/themes/jasmine/assets/media/preview.png",
+  "url": "https://github.com/Gridea-Pro/gridea-pro-themes/tree/main/themes/jasmine",
+  "builtIn": false
+ },
+ {
+  "dir": "cactus",
+  "name": "cactus",
+  "engine": "Jinja2",
+  "description": "等宽极简文艺主题，#2bbc8a 招牌绿 + Menlo 字体 + 39rem 窄容器，复刻自 Seevil/cactus（Typecho）",
+  "preview": "https://cdn.jsdelivr.net/gh/Gridea-Pro/gridea-pro-themes@main/themes/cactus/assets/media/preview.png",
+  "url": "https://github.com/Gridea-Pro/gridea-pro-themes/tree/main/themes/cactus",
+  "builtIn": false
+ },
+ {
+  "dir": "initial",
+  "name": "initial",
+  "engine": "Jinja2",
+  "description": "「简约而不简单」双栏极简博客，1060px 容器 + #3354aa 蓝调，复刻自 jielive/initial（Typecho）",
+  "preview": "https://cdn.jsdelivr.net/gh/Gridea-Pro/gridea-pro-themes@main/themes/initial/assets/media/preview.png",
+  "url": "https://github.com/Gridea-Pro/gridea-pro-themes/tree/main/themes/initial",
+  "builtIn": false
+ },
+ {
+  "dir": "weibo",
+  "name": "weibo",
+  "engine": "Jinja2",
+  "description": "高仿新浪微博经典版「微言大艺」，#f76d24 橙 + 280px Banner 资料卡，复刻自 PomeloOfficial/Weibo（Typecho）",
+  "preview": "https://cdn.jsdelivr.net/gh/Gridea-Pro/gridea-pro-themes@main/themes/weibo/assets/media/preview.png",
+  "url": "https://github.com/Gridea-Pro/gridea-pro-themes/tree/main/themes/weibo",
+  "builtIn": false
+ },
+ {
+  "dir": "kehua",
+  "name": "kehua",
+  "engine": "Jinja2",
+  "description": "扁平卡片 + 双栏留白主题，朴素配色，不依赖 Bootstrap",
+  "preview": "https://cdn.jsdelivr.net/gh/Gridea-Pro/gridea-pro-themes@main/themes/kehua/assets/media/preview.png",
+  "url": "https://github.com/Gridea-Pro/gridea-pro-themes/tree/main/themes/kehua",
+  "builtIn": false
+ },
+ {
+  "dir": "printer",
+  "name": "printer",
+  "engine": "Jinja2",
+  "description": "打字机字体 + 文档风排版主题，复刻自 Ouxxxxxjoe/Printer-Typecho",
+  "preview": "https://cdn.jsdelivr.net/gh/Gridea-Pro/gridea-pro-themes@main/themes/printer/assets/media/preview.png",
+  "url": "https://github.com/Gridea-Pro/gridea-pro-themes/tree/main/themes/printer",
+  "builtIn": false
+ },
+ {
+  "dir": "memos",
+  "name": "memos",
+  "engine": "Jinja2",
+  "description": "Bootstrap 5 双栏博客主题，sticky 顶栏 + Offcanvas 汉堡 + 闪念页，复刻自 jkjoy/Typecho-Theme-Once",
+  "preview": "https://cdn.jsdelivr.net/gh/Gridea-Pro/gridea-pro-themes@main/themes/memos/assets/media/preview.png",
+  "url": "https://github.com/Gridea-Pro/gridea-pro-themes/tree/main/themes/memos",
+  "builtIn": false
+ },
+ {
+  "dir": "mango",
+  "name": "mango",
+  "engine": "Jinja2",
+  "description": "双栏明亮博客主题，推荐位轮播 + 多图九宫格卡片 + 闪念热力图，复刻自 jkjoy/Typecho-Theme-Mango",
+  "preview": "https://cdn.jsdelivr.net/gh/Gridea-Pro/gridea-pro-themes@main/themes/mango/assets/media/preview.png",
+  "url": "https://github.com/Gridea-Pro/gridea-pro-themes/tree/main/themes/mango",
+  "builtIn": false
+ },
+ {
+  "dir": "muse",
+  "name": "muse",
+  "engine": "Jinja2",
+  "description": "左侧栏导航 + Splash 全屏开场 + 浮动雪花特效 + 4 列封面卡片瀑布墙，复刻自 Miss/Xc-Three（Typecho）",
+  "preview": "https://cdn.jsdelivr.net/gh/Gridea-Pro/gridea-pro-themes@main/themes/muse/assets/media/preview.png",
+  "url": "https://github.com/Gridea-Pro/gridea-pro-themes/tree/main/themes/muse",
+  "builtIn": false
+ },
+ {
+  "dir": "writecho",
+  "name": "writecho",
+  "engine": "Jinja2",
+  "description": "听见笔尖回声。暖纸 #fcf9f3 + 霞鹜文楷 + 单栏 820px 极简手写感主题，复刻自 SkyWT/Writecho（Typecho）",
+  "preview": "https://cdn.jsdelivr.net/gh/Gridea-Pro/gridea-pro-themes@main/themes/writecho/assets/media/preview.png",
+  "url": "https://github.com/Gridea-Pro/gridea-pro-themes/tree/main/themes/writecho",
+  "builtIn": false
+ },
+ {
+  "dir": "chatgpt",
+  "name": "chatgpt",
+  "engine": "Jinja2",
+  "description": "ChatGPT 界面风格对话式主题：会话边栏 + 对话流 + 可用的对话式搜索，深浅双模式、打字机开场、闪念热力图、七大评论平台",
+  "preview": "https://cdn.jsdelivr.net/gh/Gridea-Pro/gridea-pro-themes@main/themes/chatgpt/assets/media/preview.png",
+  "url": "https://github.com/Gridea-Pro/gridea-pro-themes/tree/main/themes/chatgpt",
+  "builtIn": false
+ },
+ {
+  "dir": "vermillion",
+  "name": "vermillion",
+  "engine": "Jinja2",
+  "description": "朱砂。中式编辑美学纸面期刊主题：宣纸底 + 期刊刊头 + 卷首语 + 可自定四字朱砂印章 + 罗马数字目录 rail",
+  "preview": "https://cdn.jsdelivr.net/gh/Gridea-Pro/gridea-pro-themes@main/themes/vermillion/assets/media/preview.png",
+  "url": "https://github.com/Gridea-Pro/gridea-pro-themes/tree/main/themes/vermillion",
+  "builtIn": false
+ },
+ {
+  "dir": "meaword",
+  "name": "meaword",
+  "engine": "Jinja2",
+  "description": "文字美学极简主题，暖陶 #b95d40 + 米色亚麻底纹 + 巨型首字水印 + 粘贴白纸卡片 + macOS 红黄绿小圆点代码块，复刻自 Meayair/Typecho-Theme-MeaWord",
+  "preview": "https://cdn.jsdelivr.net/gh/Gridea-Pro/gridea-pro-themes@main/themes/meaword/assets/media/preview.png",
+  "url": "https://github.com/Gridea-Pro/gridea-pro-themes/tree/main/themes/meaword",
+  "builtIn": false
+ },
+ {
+  "dir": "fluid",
+  "name": "fluid",
+  "engine": "Jinja2",
+  "description": "Material Design 风的全屏 hero banner + typed 打字标题 + 透明转白固定顶栏 + jellybean 彩色标签主题，复刻自 fluid-dev/hexo-theme-fluid（Hexo）",
+  "preview": "https://cdn.jsdelivr.net/gh/Gridea-Pro/gridea-pro-themes@main/themes/fluid/assets/media/preview.png",
+  "url": "https://github.com/Gridea-Pro/gridea-pro-themes/tree/main/themes/fluid",
+  "builtIn": false
+ },
+ {
+  "dir": "simplecho",
+  "name": "simplecho",
+  "engine": "Jinja2",
+  "description": "Simple + Echo = 💖。1000px 卡片博客 + 4 套招牌配色（银光灰 / 简约白 / 墨草绿 / 暗夜黑）+ STAY VIBRANT 页脚，复刻自 yanranxiaoxi/Simplecho（Typecho）",
+  "preview": "https://cdn.jsdelivr.net/gh/Gridea-Pro/gridea-pro-themes@main/themes/simplecho/assets/media/preview.png",
+  "url": "https://github.com/Gridea-Pro/gridea-pro-themes/tree/main/themes/simplecho",
+  "builtIn": false
+ },
+ {
+  "dir": "webinar",
+  "name": "webinar",
+  "engine": "Jinja2",
+  "description": "把博客刷成一条微博时间线：顶部资料卡 + 微博式卡片流 + 统计侧栏 + 闪念热力图，灵感来自 Sagittarius",
+  "preview": "https://cdn.jsdelivr.net/gh/Gridea-Pro/gridea-pro-themes@main/themes/webinar/assets/media/preview.png",
+  "url": "https://github.com/Gridea-Pro/gridea-pro-themes/tree/main/themes/webinar",
+  "builtIn": false
+ },
+ {
+  "dir": "3x-ui",
+  "name": "3x-ui",
+  "engine": "Jinja2",
+  "description": "文档站气质的极简博客：暖白 / 暖黑 + 墨色直角 + 顶栏 / 左目录 / 正文 / 右目录三栏居中 + 可配置的推荐阅读卡片 + ⌘K 命令面板搜索（命中高亮）+ Lucide 图标 + 七种评论统一样式，复刻自 3x-ui 部署教程站 vps.xiaoxiaodong.ai",
+  "preview": "https://cdn.jsdelivr.net/gh/Gridea-Pro/gridea-pro-themes@main/themes/3x-ui/assets/media/preview.png",
+  "url": "https://github.com/Gridea-Pro/gridea-pro-themes/tree/main/themes/3x-ui",
+  "builtIn": false
+ }
+]

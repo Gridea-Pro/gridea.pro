@@ -88,7 +88,7 @@ GitHub Personal Access Token 需要勾选 `repo` 权限。Token 仅在创建时�
 每个主题可能有独立的配置选项（通过 `theme_config` 在模板中访问），切换主题后请检查主题设置面板，根据需要调整颜色、布局等选项。
 
 :::note
-主题配置与站点配置是独立的。`config` 对象存放站点级信息（域名、名称等），`theme_config` 存放主题自定义选项（主题色、布局开关等）。详见[模板变量参考](/reference/template-variables/)。
+主题配置与站点配置是独立的。`config` 对象存放站点级信息（域名、名称等），`theme_config` 存放主题自定义选项（主题色、布局开关等）。详见[模板变量参考](/docs/reference/template-variables/)。
 :::
 
 ## 数据存储位置

@@ -1,27 +1,28 @@
 ---
 import MobileMenu from '../components/MobileMenu.astro';
+import SiteHead from '../components/SiteHead.astro';
+import LangSwitch from '../components/LangSwitch.astro';
+import { SITE_URL, WEBSITE_ID, SOFTWARE_ID, STATEMENT, softwareNode } from '../data/site';
+import { getLatestStable, getLatestPrerelease, version, formatDate, formatSize, downloadItems } from '../data/releases';
+
+const stable = await getLatestStable();
+const pre = await getLatestPrerelease();
+const v = version(stable);
+const items = downloadItems(stable);
+const byOs = (os: string) => items.filter((i) => i.os === os && i.asset);
+const title = `下载 Gridea Pro ${v} — macOS、Windows、Linux 桌面客户端`;
+const description = `免费下载 Gridea Pro ${v}，开源的桌面端静态博客写作客户端，提供 macOS（Apple 芯片 / Intel）、Windows（x64 / ARM64）与 Linux（deb / rpm / AppImage）安装包。`;
+const pageNode = { '@type': 'WebPage', '@id': `${SITE_URL}/download/#webpage`, url: `${SITE_URL}/download/`, name: title, inLanguage: 'zh-CN', isPartOf: { '@id': WEBSITE_ID }, about: { '@id': SOFTWARE_ID } };
+const pick = (key: string) => items.find((i) => i.key === key && i.asset);
+const recommend = {
+  mac: pick('mac-arm64'), win: pick('win-x64-setup'), linux: pick('linux-appimage'),
+};
+const rec = Object.fromEntries(Object.entries(recommend).map(([k, i]) => [k, i ? { label: `${i.label}（${i.note}）`, size: formatSize(i.asset!.size), url: i.asset!.browser_download_url } : null]));
 ---
 <!DOCTYPE html>
 <html lang="zh-CN">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<link rel="icon" href="/favicon.ico">
-<title>下载 — Gridea Pro</title>
-<meta name="description" content="下载 Gridea Pro 桌面客户端，支持 macOS、Windows、Linux 三大平台。免费、开源、跨平台。">
-<meta name="keywords" content="Gridea Pro下载,macOS,Windows,Linux,静态博客客户端,免费下载">
-<link rel="canonical" href="https://gridea.pro/download.html">
-<meta property="og:type" content="website">
-<meta property="og:title" content="下载 — Gridea Pro">
-<meta property="og:description" content="下载 Gridea Pro 桌面客户端，支持 macOS、Windows、Linux 三大平台。免费、开源、跨平台。">
-<meta property="og:url" content="https://gridea.pro/download.html">
-<meta property="og:image" content="https://gridea.pro/appicon.png">
-<meta property="og:site_name" content="Gridea Pro">
-<meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="下载 — Gridea Pro">
-<meta name="twitter:description" content="下载 Gridea Pro 桌面客户端，支持 macOS、Windows、Linux 三大平台。免费、开源、跨平台。">
-<meta name="twitter:image" content="https://gridea.pro/appicon.png">
-<script type="application/ld+json" set:html={JSON.stringify({"@context":"https://schema.org","@type":"WebPage","name":"下载 — Gridea Pro","description":"下载 Gridea Pro 桌面客户端，支持 macOS、Windows、Linux 三大平台。免费、开源、跨平台。","url":"https://gridea.pro/download.html","isPartOf":{"@type":"WebSite","name":"Gridea Pro","url":"https://gridea.pro/"}})}></script>
+<SiteHead lang="zh-CN" title={title} description={description} path="/download/" graph={[softwareNode("zh-CN", v), pageNode]} />
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Figtree:wght@400;500;600&family=JetBrains+Mono&family=Plus+Jakarta+Sans:wght@500;600;700;800&display=swap" rel="stylesheet">
@@ -66,6 +67,7 @@ h3{font-size:20px;font-weight:600;line-height:1.3}
 .recommend-size{font-size:13px;color:var(--text-muted);margin-top:10px}
 .see-all-link{display:inline-block;font-size:14px;font-weight:500;color:var(--text-secondary);margin-bottom:60px;transition:color .15s ease}
 .see-all-link:hover{color:var(--accent)}
+.dl-more{margin-top:28px;text-align:center;font-size:14px;line-height:1.8;color:var(--text-secondary)}.dl-more a{color:var(--accent)}.dl-more a:hover{color:var(--accent-hover)}
 .dl-platforms{background:var(--bg-alt);padding:80px 0}
 .dl-platforms h2{text-align:center;margin-bottom:48px}
 .platforms-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:24px}
@@ -115,9 +117,11 @@ h3{font-size:20px;font-weight:600;line-height:1.3}
       <a href="/docs/">文档</a>
       <a href="/themes/">主题</a>
       <a href="/changelog/">更新日志</a>
+      <a href="/about/">关于</a>
       <a href="https://github.com/Gridea-Pro/gridea-pro" class="github-link" target="_blank" rel="noopener"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 2C6.477 2 2 6.484 2 12.017c0 4.425 2.865 8.18 6.839 9.504.5.092.682-.217.682-.483 0-.237-.008-.868-.013-1.703-2.782.605-3.369-1.343-3.369-1.343-.454-1.158-1.11-1.466-1.11-1.466-.908-.62.069-.608.069-.608 1.003.07 1.531 1.032 1.531 1.032.892 1.53 2.341 1.088 2.91.832.092-.647.35-1.088.636-1.338-2.22-.253-4.555-1.113-4.555-4.951 0-1.093.39-1.988 1.029-2.688-.103-.253-.446-1.272.098-2.65 0 0 .84-.27 2.75 1.026A9.564 9.564 0 0112 6.844c.85.004 1.705.115 2.504.337 1.909-1.296 2.747-1.027 2.747-1.027.546 1.379.202 2.398.1 2.651.64.7 1.028 1.595 1.028 2.688 0 3.848-2.339 4.695-4.566 4.943.359.309.678.92.678 1.855 0 1.338-.012 2.419-.012 2.747 0 .268.18.58.688.482A10.019 10.019 0 0022 12.017C22 6.484 17.522 2 12 2z"/></svg></a>
     </nav>
     <div class="header-actions">
+      <LangSwitch href="/en/" to="en" />
       <a href="/download/" class="btn-download-sm is-active">下载</a>
       <button class="mobile-menu-btn" id="menuToggle" aria-label="Menu" aria-expanded="false">
         <span class="hamburger-line" style="display:block;width:16px;height:1.5px"></span><span class="hamburger-line" style="display:block;width:16px;height:1.5px"></span>
@@ -125,14 +129,14 @@ h3{font-size:20px;font-weight:600;line-height:1.3}
     </div>
   </div>
 </header>
-<MobileMenu />
+<MobileMenu switchHref="/en/" />
 
 <main>
   <section class="dl-hero">
     <div class="container">
-      <div class="fade-in"><span class="version-badge">v1.0.0</span></div>
+      <div class="fade-in"><span class="version-badge">v{v} · {formatDate(stable.published_at)}</span></div>
       <h1 class="fade-in fade-in-d1">下载 Gridea Pro</h1>
-      <p class="dl-subtitle fade-in fade-in-d2">免费、开源、跨平台</p>
+      <p class="dl-subtitle fade-in fade-in-d2">免费、开源、跨平台的桌面端静态博客写作客户端</p>
     </div>
   </section>
 
@@ -151,8 +155,7 @@ h3{font-size:20px;font-weight:600;line-height:1.3}
             <span class="platform-name">macOS</span>
           </div>
           <ul class="file-list">
-            <li class="file-row"><span class="file-name">Apple Silicon <span class="file-ext">(.dmg)</span></span><span class="file-size">50.9 MB</span><a href="https://github.com/Gridea-Pro/gridea-pro/releases" class="file-dl" target="_blank" rel="noopener">下载</a></li>
-            <li class="file-row"><span class="file-name">Intel <span class="file-ext">(.dmg)</span></span><span class="file-size">50.9 MB</span><a href="https://github.com/Gridea-Pro/gridea-pro/releases" class="file-dl" target="_blank" rel="noopener">下载</a></li>
+            {byOs('macos').map((i) => <li class="file-row"><span class="file-name">{i.label} <span class="file-ext">({i.note})</span></span><span class="file-size">{formatSize(i.asset!.size)}</span><a href={i.asset!.browser_download_url} class="file-dl" rel="noopener">下载</a></li>)}
           </ul>
         </div>
         <div class="platform-card">
@@ -161,10 +164,7 @@ h3{font-size:20px;font-weight:600;line-height:1.3}
             <span class="platform-name">Windows</span>
           </div>
           <ul class="file-list">
-            <li class="file-row"><span class="file-name">64位 安装版 <span class="file-ext">(.exe)</span></span><span class="file-size">17.4 MB</span><a href="https://github.com/Gridea-Pro/gridea-pro/releases" class="file-dl" target="_blank" rel="noopener">下载</a></li>
-            <li class="file-row"><span class="file-name">64位 便携版 <span class="file-ext">(.exe)</span></span><span class="file-size">50.6 MB</span><a href="https://github.com/Gridea-Pro/gridea-pro/releases" class="file-dl" target="_blank" rel="noopener">下载</a></li>
-            <li class="file-row"><span class="file-name">AMD 安装版 <span class="file-ext">(.exe)</span></span><span class="file-size">17.4 MB</span><a href="https://github.com/Gridea-Pro/gridea-pro/releases" class="file-dl" target="_blank" rel="noopener">下载</a></li>
-            <li class="file-row"><span class="file-name">ARM 便携版 <span class="file-ext">(.exe)</span></span><span class="file-size">50.6 MB</span><a href="https://github.com/Gridea-Pro/gridea-pro/releases" class="file-dl" target="_blank" rel="noopener">下载</a></li>
+            {byOs('windows').map((i) => <li class="file-row"><span class="file-name">{i.label} <span class="file-ext">({i.note})</span></span><span class="file-size">{formatSize(i.asset!.size)}</span><a href={i.asset!.browser_download_url} class="file-dl" rel="noopener">下载</a></li>)}
           </ul>
         </div>
         <div class="platform-card">
@@ -173,12 +173,11 @@ h3{font-size:20px;font-weight:600;line-height:1.3}
             <span class="platform-name">Linux</span>
           </div>
           <ul class="file-list">
-            <li class="file-row"><span class="file-name">.deb <span class="file-ext">(Ubuntu/Debian)</span></span><span class="file-size">21.5 MB</span><a href="https://github.com/Gridea-Pro/gridea-pro/releases" class="file-dl" target="_blank" rel="noopener">下载</a></li>
-            <li class="file-row"><span class="file-name">.rpm <span class="file-ext">(Fedora/RHEL)</span></span><span class="file-size">21.5 MB</span><a href="https://github.com/Gridea-Pro/gridea-pro/releases" class="file-dl" target="_blank" rel="noopener">下载</a></li>
-            <li class="file-row"><span class="file-name">.AppImage <span class="file-ext">(通用)</span></span><span class="file-size">21.5 MB</span><a href="https://github.com/Gridea-Pro/gridea-pro/releases" class="file-dl" target="_blank" rel="noopener">下载</a></li>
+            {byOs('linux').map((i) => <li class="file-row"><span class="file-name">{i.label} <span class="file-ext">({i.note})</span></span><span class="file-size">{formatSize(i.asset!.size)}</span><a href={i.asset!.browser_download_url} class="file-dl" rel="noopener">下载</a></li>)}
           </ul>
         </div>
       </div>
+      <p class="dl-more">{pre && <>测试版 <a href="/changelog/">v{version(pre)}</a> 已发布，可在 <a href={pre.html_url} rel="noopener">GitHub</a> 下载试用。</>}所有历史版本与校验文件（SHA256SUMS）见 <a href="https://github.com/Gridea-Pro/gridea-pro/releases" rel="noopener">GitHub Releases</a>。macOS 与 Windows 安装包暂未签名，首次打开如遇系统拦截，请参阅<a href="/docs/faq/">常见问题</a>。</p>
     </div>
   </section>
 
@@ -186,9 +185,9 @@ h3{font-size:20px;font-weight:600;line-height:1.3}
     <div class="container">
       <h2>系统要求</h2>
       <div class="req-grid">
-        <div class="req-card"><div class="req-title">macOS</div><ul class="req-list"><li>macOS 10.15 (Catalina) 或更高</li><li>Apple Silicon 或 Intel 处理器</li><li>仅占用 50 MB 左右的磁盘空间</li></ul></div>
-        <div class="req-card"><div class="req-title">Windows</div><ul class="req-list"><li>Windows 10 (1803) 或更高</li><li>x64 或 ARM 处理器</li><li>仅占用 50 MB 左右的磁盘空间</li></ul></div>
-        <div class="req-card"><div class="req-title">Linux</div><ul class="req-list"><li>Ubuntu 20.04 / Fedora 36 或更高</li><li>amd 处理器</li><li>仅占用 50 MB 左右的磁盘空间</li></ul></div>
+        <div class="req-card"><div class="req-title">macOS</div><ul class="req-list"><li>macOS 12 Monterey 或更高版本</li><li>Apple 芯片或 Intel 处理器</li></ul></div>
+        <div class="req-card"><div class="req-title">Windows</div><ul class="req-list"><li>Windows 10 或更高版本</li><li>x64 或 ARM64 处理器</li><li>需要 Microsoft Edge WebView2 运行时（Windows 11 已内置）</li></ul></div>
+        <div class="req-card"><div class="req-title">Linux</div><ul class="req-list"><li>deb：Ubuntu 24.04 或更高版本</li><li>rpm：Fedora 39 或更高版本</li><li>AppImage：适用于其他主流发行版，需 WebKit2GTK 4.1</li><li>x86_64 处理器</li></ul></div>
       </div>
     </div>
   </section>
@@ -197,17 +196,17 @@ h3{font-size:20px;font-weight:600;line-height:1.3}
 <footer class="site-footer">
   <div class="container">
     <div class="footer-grid">
-      <div class="footer-brand"><div class="footer-brand-text"><img src="/appicon.png" alt="Gridea Pro" class="brand-mark"> Gridea Pro</div><p class="footer-brand-desc">一个简洁的桌面端静态博客写作客户端</p></div>
+      <div class="footer-brand"><div class="footer-brand-text"><img src="/appicon.png" alt="Gridea Pro" class="brand-mark"> Gridea Pro</div><p class="footer-brand-desc">开源的桌面端静态博客写作客户端</p></div>
       <div class="footer-col"><div class="footer-col-title">产品</div><ul><li><a href="/docs/features/">功能特性</a></li><li><a href="/themes/">主题画廊</a></li><li><a href="/download/">下载</a></li><li><a href="/changelog/">更新日志</a></li></ul></div>
       <div class="footer-col"><div class="footer-col-title">资源</div><ul><li><a href="/docs/">使用文档</a></li><li><a href="/docs/themes/">主题开发</a></li><li><a href="/docs/getting-started/migration/">迁移指南</a></li><li><a href="/docs/faq/">常见问题</a></li></ul></div>
-      <div class="footer-col"><div class="footer-col-title">社区</div><ul><li><a href="https://github.com/Gridea-Pro/gridea-pro" target="_blank">GitHub</a></li><li><a href="https://github.com/Gridea-Pro/gridea-pro/discussions" target="_blank">Discussions</a></li><li><a href="https://github.com/Gridea-Pro/gridea-pro/issues" target="_blank">反馈建议</a></li><li><a href="https://are.ink/" target="_blank" rel="noopener">作者博客</a></li></ul></div>
+      <div class="footer-col"><div class="footer-col-title">社区</div><ul><li><a href="https://github.com/Gridea-Pro/gridea-pro" target="_blank">GitHub</a></li><li><a href="https://github.com/Gridea-Pro/gridea-pro/discussions" target="_blank">Discussions</a></li><li><a href="https://github.com/Gridea-Pro/gridea-pro/issues" target="_blank">反馈建议</a></li><li><a href="/about/">关于 Gridea Pro</a></li><li><a href="https://are.ink/" target="_blank" rel="noopener">作者博客</a></li></ul></div>
     </div>
-    <div class="footer-bottom">&copy; 2026 Gridea Pro Contributors. Open source under GPL-3.0.</div>
+    <div class="footer-bottom">{STATEMENT["zh-CN"].copyright}</div>
   </div>
 </footer>
 
-<script is:inline>
-(function(){var ua=navigator.userAgent||navigator.platform||'';var os='unknown';var arch='';var fileSize='';var iconHTML='';if(/Mac|iPhone|iPad|iPod/.test(ua)){os='macOS';arch='Apple Silicon (.dmg)';fileSize='50.9 MB';iconHTML='<div class="icon-mac"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M12.152 6.896c-.948 0-2.415-1.078-3.96-1.04-2.04.027-3.91 1.183-4.961 3.014-2.117 3.675-.546 9.103 1.519 12.09 1.013 1.454 2.208 3.09 3.792 3.039 1.52-.065 2.09-.987 3.935-.987 1.831 0 2.35.987 3.96.948 1.637-.026 2.676-1.48 3.676-2.948 1.156-1.688 1.636-3.325 1.662-3.415-.039-.013-3.182-1.221-3.22-4.857-.026-3.04 2.48-4.494 2.597-4.559-1.429-2.09-3.623-2.324-4.39-2.376-2-.156-3.675 1.09-4.61 1.09zM15.53 3.83c.843-1.012 1.4-2.427 1.245-3.83-1.207.052-2.662.805-3.532 1.818-.78.896-1.454 2.338-1.273 3.714 1.338.104 2.715-.688 3.559-1.701"/></svg></div>'}else if(/Win/.test(ua)){os='Windows';arch='64位 安装版 (.exe)';fileSize='17.4 MB';iconHTML='<div class="icon-win"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M0,0H11.377V11.372H0ZM12.623,0H24V11.372H12.623ZM0,12.623H11.377V24H0Zm12.623,0H24V24H12.623"/></svg></div>'}else if(/Linux/.test(ua)){os='Linux';arch='.AppImage (通用)';fileSize='44.7 MB';iconHTML='<div class="icon-linux"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M12.504 0c-.155 0-.315.008-.48.021-4.226.333-3.105 4.807-3.17 6.298-.076 1.092-.3 1.953-1.05 3.02-.885 1.051-2.127 2.75-2.716 4.521-.278.832-.41 1.684-.287 2.489a.424.424 0 00-.11.135c-.26.268-.45.6-.663.839-.199.199-.485.267-.797.4-.313.136-.658.269-.864.68-.09.189-.136.394-.132.602 0 .199.027.4.055.536.058.399.116.728.04.97-.249.68-.28 1.145-.106 1.484.174.334.535.47.94.601.81.2 1.91.135 2.774.6.926.466 1.866.67 2.616.47.526-.116.97-.464 1.208-.946.587-.003 1.23-.269 2.26-.334.699-.058 1.574.267 2.577.2z"/></svg></div>'}var section=document.getElementById('recommend-section');if(os==='unknown'){section.style.display='none';return}section.innerHTML='<div class="recommend-card"><span class="recommend-badge">推荐</span><div class="recommend-os-icon">'+iconHTML+'</div><div class="recommend-platform">'+os+'</div><div class="recommend-arch">'+arch+' &mdash; '+fileSize+'</div><a href="https://github.com/Gridea-Pro/gridea-pro/releases" class="btn-primary" target="_blank" rel="noopener"><svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M8 2v9m0 0l3-3m-3 3L5 8M3 13h10"/></svg>下载 Gridea Pro</a><div class="recommend-size">'+fileSize+'</div></div>'})();
+<script is:inline define:vars={{ rec }}>
+(function(){var ua=navigator.userAgent||navigator.platform||'';var os='unknown';var r=null;var iconHTML='';if(/Mac|iPhone|iPad|iPod/.test(ua)){os='macOS';var r=rec.mac;iconHTML='<div class="icon-mac"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M12.152 6.896c-.948 0-2.415-1.078-3.96-1.04-2.04.027-3.91 1.183-4.961 3.014-2.117 3.675-.546 9.103 1.519 12.09 1.013 1.454 2.208 3.09 3.792 3.039 1.52-.065 2.09-.987 3.935-.987 1.831 0 2.35.987 3.96.948 1.637-.026 2.676-1.48 3.676-2.948 1.156-1.688 1.636-3.325 1.662-3.415-.039-.013-3.182-1.221-3.22-4.857-.026-3.04 2.48-4.494 2.597-4.559-1.429-2.09-3.623-2.324-4.39-2.376-2-.156-3.675 1.09-4.61 1.09zM15.53 3.83c.843-1.012 1.4-2.427 1.245-3.83-1.207.052-2.662.805-3.532 1.818-.78.896-1.454 2.338-1.273 3.714 1.338.104 2.715-.688 3.559-1.701"/></svg></div>'}else if(/Win/.test(ua)){os='Windows';var r=rec.win;iconHTML='<div class="icon-win"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M0,0H11.377V11.372H0ZM12.623,0H24V11.372H12.623ZM0,12.623H11.377V24H0Zm12.623,0H24V24H12.623"/></svg></div>'}else if(/Linux/.test(ua)){os='Linux';var r=rec.linux;iconHTML='<div class="icon-linux"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M12.504 0c-.155 0-.315.008-.48.021-4.226.333-3.105 4.807-3.17 6.298-.076 1.092-.3 1.953-1.05 3.02-.885 1.051-2.127 2.75-2.716 4.521-.278.832-.41 1.684-.287 2.489a.424.424 0 00-.11.135c-.26.268-.45.6-.663.839-.199.199-.485.267-.797.4-.313.136-.658.269-.864.68-.09.189-.136.394-.132.602 0 .199.027.4.055.536.058.399.116.728.04.97-.249.68-.28 1.145-.106 1.484.174.334.535.47.94.601.81.2 1.91.135 2.774.6.926.466 1.866.67 2.616.47.526-.116.97-.464 1.208-.946.587-.003 1.23-.269 2.26-.334.699-.058 1.574.267 2.577.2z"/></svg></div>'}var section=document.getElementById('recommend-section');if(os==='unknown'||!r){section.style.display='none';return}section.innerHTML='<div class="recommend-card"><span class="recommend-badge">推荐</span><div class="recommend-os-icon">'+iconHTML+'</div><div class="recommend-platform">'+os+'</div><div class="recommend-arch">'+r.label+'</div><a href="'+r.url+'" class="btn-primary" rel="noopener"><svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M8 2v9m0 0l3-3m-3 3L5 8M3 13h10"/></svg>下载 Gridea Pro</a><div class="recommend-size">'+r.size+'</div></div>'})();
 </script>
 </body>
 </html>
