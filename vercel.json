@@ -9,6 +9,21 @@
       "source": "/en/docs",
       "destination": "/docs/",
       "permanent": true
+    },
+    {
+      "source": "/index.html",
+      "destination": "/",
+      "permanent": true
+    },
+    {
+      "source": "/(download|themes|changelog|about)\\.html",
+      "destination": "/$1/",
+      "permanent": true
+    },
+    {
+      "source": "/(deployment|reference)/(.*)",
+      "destination": "/docs/$1/$2",
+      "permanent": true
     }
   ],
   "rewrites": [

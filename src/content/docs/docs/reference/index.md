@@ -9,9 +9,9 @@ description: Gridea Pro 的技术参考文档索引，包含模板变量、自�
 
 | 文档 | 说明 | 适用场景 |
 |------|------|----------|
-| [完整模板变量表](./template-variables/) | 所有模板变量的类型、说明和三引擎语法对照 | 编写主题模板时查阅 |
-| [自定义模板函数](./custom-functions/) | Gridea Pro 提供的额外模板函数和过滤器 | 需要数据处理和格式化时 |
-| [CLI 命令参考](./cli/) | 命令行工具的完整用法 | 自动化构建和部署时 |
+| [完整模板变量表](/docs/reference/template-variables/) | 所有模板变量的类型、说明和三引擎语法对照 | 编写主题模板时查阅 |
+| [自定义模板函数](/docs/reference/custom-functions/) | Gridea Pro 提供的额外模板函数和过滤器 | 需要数据处理和格式化时 |
+| [CLI 命令参考](/docs/reference/cli/) | 命令行工具的完整用法 | 自动化构建和部署时 |
 
 ## 快速导航
 
@@ -20,20 +20,20 @@ description: Gridea Pro 的技术参考文档索引，包含模板变量、自�
 如果你正在开发主题，以下是推荐的阅读顺序：
 
 1. [主题系统概述](/docs/themes/) -- 了解三引擎架构和目录结构
-2. **[完整模板变量表](./template-variables/)** -- 最重要的参考，80% 的渲染错误源于变量名拼写
+2. **[完整模板变量表](/docs/reference/template-variables/)** -- 最重要的参考，80% 的渲染错误源于变量名拼写
 3. 选择引擎指南 -- [Jinja2](/docs/themes/jinja2/)、[Go Templates](/docs/themes/go-templates/) 或 [EJS](/docs/themes/ejs/)
 4. [主题配置 Schema](/docs/themes/config-schema/) -- 定义 GUI 设置面板
-5. [自定义模板函数](./custom-functions/) -- 扩展模板能力
+5. [自定义模板函数](/docs/reference/custom-functions/) -- 扩展模板能力
 
 ### 自动化用户
 
 如果你需要将 Gridea Pro 集成到 CI/CD 流水线或自动化脚本中：
 
-1. [CLI 命令参考](./cli/) -- 命令行构建和部署
+1. [CLI 命令参考](/docs/reference/cli/) -- 命令行构建和部署
 2. [部署方式概述](/docs/deployment/) -- 各平台的部署配置
 
 :::tip
-在开发主题的过程中遇到问题？建议先检查[模板变量表](./template-variables/)中的"易错变量速查"部分，大部分问题都能在那里找到答案。
+在开发主题的过程中遇到问题？建议先检查[模板变量表](/docs/reference/template-variables/)中的"易错变量速查"部分，大部分问题都能在那里找到答案。
 :::
 
 ## 版本说明

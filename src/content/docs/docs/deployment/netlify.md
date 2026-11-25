@@ -60,7 +60,7 @@ Netlify 提供持续部署、全球 CDN、自动 HTTPS 等特性，是静态站�
 
 ### OAuth 权限
 
-Netlify OAuth 没有细粒度 scope，授权即获得账户级的 API 访问能力。`access_token` 等价于一个可以读写账号下所有 Site 的长期 Token，请小心保管——Gridea Pro 把它存放在系统 Keychain 中（键名 `netlify:netlifyAccessToken`），参见 [OAuth 授权总览](./oauth/#令牌存储在哪里)。
+Netlify OAuth 没有细粒度 scope，授权即获得账户级的 API 访问能力。`access_token` 等价于一个可以读写账号下所有 Site 的长期 Token，请小心保管——Gridea Pro 把它存放在系统 Keychain 中（键名 `netlify:netlifyAccessToken`），参见 [OAuth 授权总览](/docs/deployment/oauth/#令牌存储在哪里)。
 
 ### 取消 Netlify 授权
 
@@ -77,7 +77,7 @@ Netlify OAuth 没有细粒度 scope，授权即获得账户级的 API 访问能�
 
 如果你更喜欢"Gridea Pro 同步到 GitHub → Netlify 自动构建部署"的 CI 模式，可以继续使用原来的流程：
 
-1. 先将 Gridea Pro 配置为推送到 GitHub 仓库（参考 [GitHub Pages 部署](./github-pages/)）
+1. 先将 Gridea Pro 配置为推送到 GitHub 仓库（参考 [GitHub Pages 部署](/docs/deployment/github-pages/)）
 2. 登录 [Netlify](https://netlify.com)，点击 **Add new site > Import an existing project**
 3. 选择 GitHub，授权并选择博客仓库
 4. 配置构建设置：
@@ -154,4 +154,4 @@ Netlify 还提供表单处理和 Serverless Functions 等附加功能。虽然 G
 | HTTPS | 自动、免费 |
 | 表单提交 | 100 次 / 月 |
 
-关于 OAuth 的整体机制、令牌存储与撤销细节，请参阅 [OAuth 授权总览](./oauth/)。如遇其它问题，请查阅[常见问题](/docs/faq/)。
+关于 OAuth 的整体机制、令牌存储与撤销细节，请参阅 [OAuth 授权总览](/docs/deployment/oauth/)。如遇其它问题，请查阅[常见问题](/docs/faq/)。

@@ -7,10 +7,10 @@ description: Gridea Pro 在"设置 > 网络"中提供 OAuth 一键授权，自�
 
 本页先解释 OAuth 模式的整体工作机制，再给出各平台的差异对照。如果你只关心某个平台的操作步骤，也可以直接跳转到：
 
-- [GitHub Pages OAuth 授权](./github-pages/#使用-oauth-授权推荐)
-- [Gitee Pages OAuth 授权](./gitee/#使用-oauth-授权推荐)
-- [Netlify OAuth 授权](./netlify/#使用-oauth-授权)
-- [Vercel OAuth 授权](./vercel/#使用-oauth-授权)
+- [GitHub Pages OAuth 授权](/docs/deployment/github-pages/#使用-oauth-授权推荐)
+- [Gitee Pages OAuth 授权](/docs/deployment/gitee/#使用-oauth-授权推荐)
+- [Netlify OAuth 授权](/docs/deployment/netlify/#使用-oauth-授权)
+- [Vercel OAuth 授权](/docs/deployment/vercel/#使用-oauth-授权)
 
 ## 哪些平台支持 OAuth？
 
@@ -162,7 +162,7 @@ Gridea Pro 把 `access_token` 这类**敏感数据**放进操作系统的凭据�
 
 下一步，前往对应平台的部署文档查看完整操作截图与字段说明：
 
-- [GitHub Pages 部署](./github-pages/)
-- [Gitee Pages 部署](./gitee/)
-- [Netlify 部署](./netlify/)
-- [Vercel 部署](./vercel/)
+- [GitHub Pages 部署](/docs/deployment/github-pages/)
+- [Gitee Pages 部署](/docs/deployment/gitee/)
+- [Netlify 部署](/docs/deployment/netlify/)
+- [Vercel 部署](/docs/deployment/vercel/)

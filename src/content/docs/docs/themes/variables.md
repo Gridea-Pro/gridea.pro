@@ -80,4 +80,4 @@ description: Gridea Pro 主题开发中所有可用模板变量的快速参考�
 | 循环 | `{% for p in posts %}` | `{{ range .Posts }}` | `<% posts.forEach(function(p) { %>` |
 | 引入 | `{% include "partials/x.html" %}` | `{{ template "x" . }}` | `<%- include('partials/x') %>` |
 
-详细的三引擎语法差异请查阅各引擎专属指南：[Jinja2](./jinja2/)、[Go Templates](./go-templates/)、[EJS](./ejs/)。
+详细的三引擎语法差异请查阅各引擎专属指南：[Jinja2](/docs/themes/jinja2/)、[Go Templates](/docs/themes/go-templates/)、[EJS](/docs/themes/ejs/)。

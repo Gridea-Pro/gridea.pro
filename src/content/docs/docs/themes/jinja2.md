@@ -167,4 +167,4 @@ Pongo2 使用 `forloop.Counter0` 获取从零开始的索引，而非标准 Jinj
 {{ theme_config.headerScript|safe }}
 ```
 
-完整变量列表请查阅[模板变量参考](./variables/)。
+完整变量列表请查阅[模板变量参考](/docs/themes/variables/)。
