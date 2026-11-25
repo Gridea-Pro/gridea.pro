@@ -1,11 +1,31 @@
 {
+  "redirects": [
+    {
+      "source": "/en/docs",
+      "destination": "/docs/",
+      "permanent": true
+    },
+    {
+      "source": "/en/docs/:path+",
+      "destination": "/docs/:path+/",
+      "permanent": true
+    }
+  ],
   "rewrites": [
-    { "source": "/sitemap.xml", "destination": "/sitemap-index.xml" }
+    {
+      "source": "/sitemap.xml",
+      "destination": "/sitemap-index.xml"
+    }
   ],
   "headers": [
     {
       "source": "/(.*)\\.txt",
-      "headers": [{ "key": "Content-Type", "value": "text/plain; charset=utf-8" }]
+      "headers": [
+        {
+          "key": "Content-Type",
+          "value": "text/plain; charset=utf-8"
+        }
+      ]
     }
   ]
 }
